@@ -1,0 +1,9 @@
+:~
+  title+'phoenix'
+  info+'phoenix'
+  color+0x7a.ffff
+  version+[0 0 0]
+  website+'~'
+  license+'MIT'
+  site+/apps/phoenix
+==
