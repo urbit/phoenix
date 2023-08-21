@@ -194,7 +194,7 @@
     cor
   ~&  >  [%phoenix-put dude]
   =+  .^(=eggo %gv /[our]/[dude]/[now]/$)
-  =/  =path  /[dap.bowl]/[dude]/[now]
+  =/  =path  /[dap.bowl]/[dude]/[now]/'jam'
   =/  dat=@  (jam eggo)
   =/  =cage  [%drum-put !>([path dat])]
   %-  emit

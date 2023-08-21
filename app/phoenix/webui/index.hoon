@@ -41,6 +41,26 @@
           ;h2:"%phoenix"
         ==
         ;h4:"agent backup and restoration"
+      ::
+      ::
+        ;form(method "post", enctype "multipart/form-data")
+          ;label
+            ; upload:
+            ::;input(type "file", name "backup", accept "application/x-urb-jam");
+            ;input(type "file", name "backup");
+          ==
+          ;br;
+          ;button(type "submit"):"upload"
+        ==
+
+        ;br;
+
+        ;form(method "post", enctype "multipart/form-data")
+          ;input(type "hidden", name "image");
+          ;button(type "submit"):"remove"
+        ==
+      ::
+      ::
         ;table
           ;tr
             ;td(align "right"):"now: {<now.bowl>}"
@@ -73,7 +93,7 @@
       ;td(align "right"): {<dude>}
       ;td
         ;form(method "post")
-          ;button(type "submit", name "cmd", value "put-dude"):"put now"
+          ;button(type "submit", name "cmd", value "put-dude"):"backup"
           ;input(type "hidden", name "dude", value "{(scow %tas dude)}");
         ==
       ==
