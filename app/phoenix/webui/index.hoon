@@ -7,6 +7,11 @@
 ++  argue
   |=  [headers=header-list:http body=(unit octs)]
   ^-  $@(brief:rudder command)
+  ::  headers
+  ::
+  ::  [key='content-type' value='application/x-www-form-urlencoded']
+  ::  [key='content-type' value='multipart/form-data; boundary=---------------------------136138186512155966012568743125']
+  ::
   =/  args=(map @t @t)
     ?~(body ~ (frisk:rudder q.u.body))
   ?~  cmd=(~(get by args) 'cmd')  ~

@@ -141,6 +141,7 @@
   ++  on-agent
     |=  [=(pole knot) =sign:agent:gall]
     ?+    pole  (on-agent:def pole sign)
+        [%yeet ~]  `this
         [%sav dude=@ ~]
       =/  =dude:gall  (slav %tas dude.pole)
       ~&  >  [%phoenix-saved dude]
