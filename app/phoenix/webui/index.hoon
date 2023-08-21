@@ -37,7 +37,7 @@
       ==
       ;body
         ::  links
-        ;a/"/phoenix"
+        ;a/"/apps/phoenix"
           ;h2:"%phoenix"
         ==
         ;h4:"agent backup and restoration"
@@ -45,7 +45,7 @@
       ::
         ;form(method "post", enctype "multipart/form-data")
           ;label
-            ; upload:
+            ; restore:
             ::;input(type "file", name "backup", accept "application/x-urb-jam");
             ;input(type "file", name "backup");
           ==
@@ -73,9 +73,9 @@
         ;table
           ::  table header
           ;tr(style "font-weight: bold")
-            ;td(align "center"):"agent"
-            ;td(align "center"):"put"
-            ;td(align "center"):"more"
+            ;th(align "center"):"agent"
+            ;th(align "center"):"action"
+            ;th(align "center"):"last backup"
           ==
           ;*  work
         ==
@@ -102,7 +102,7 @@
   ++  style
     '''
 
-    * { margin: 0.2em; padding: 0.2em; font-family: monospace; }
+    * { margin: 0.0em; padding: 0.2em; font-family: monospace; }
 
     body {
       background-color: black;
@@ -121,7 +121,7 @@
     }
 
     button {
-      padding: 0.2em 0.5em;
+      padding: 0.0em 0.5em;
     }
 
     '''
