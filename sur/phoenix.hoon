@@ -1,7 +1,6 @@
 |%
 +$  records
-  $:  eggz=(map dude:gall eggo)
-      log=logs
+  $:  eggs=(map dude:gall egg-any)
       tmp=(map term dat=@)
   ==
 +$  command
@@ -14,11 +13,9 @@
     ::
       [%import-dat dat=@]
   ==
-+$  logs  ((mop @da log-entry) gth)
-+$  log-entry  [date=@da dap=term recipients=(set ship)]
 ::
-+$  eggo
-  $%  [%13 dap=term egg=egg-13]
++$  egg-any
+  $%  [%13 egg=egg-13]
   ==
 ::  ripped from %gall $egg plus dependencies
 ::
@@ -39,6 +36,7 @@
           sky=(map spur path-state)
           ken=(jug spar:ames wire)
   ==  ==
+::
 +$  stats  [change=@ud eny=@uvJ time=@da]
 +$  path-state
   $:  bob=(unit @ud)

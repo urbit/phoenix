@@ -88,11 +88,11 @@
     ==    ::  html
   ++  work
     ^-  (list manx)
-    ::%+  turn  (sort ~(tap in ~(key by eggz)) aor)
+    ::%+  turn  (sort ~(tap in ~(key by eggs)) aor)
     =/  phx  ~(. phoenix bowl)
     %+  turn  (sort ~(tap in all-live-dudes:phx) aor)
     |=  =dude:gall
-    =/  y=(unit eggo)  (~(get by eggz) dude)
+    =/  y=(unit egg-any)  (~(get by eggs) dude)
     ::=/  last=(unit @da)  (~(get by lash) dude)
     ;tr
       ;td(align "right"): {<dude>}

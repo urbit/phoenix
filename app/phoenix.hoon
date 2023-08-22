@@ -1,4 +1,4 @@
-::  :fleet &eggo ;;(eggo:s (cue j))
+::  :fleet &phoenix ;;(egg-any:s (cue j))
 ::
 ::  %phoenix
 ::
@@ -56,7 +56,7 @@
         %noun
       ?+    q.vase  !!
           %fleet
-        =/  =cage  [%eggo !>((~(got by eggz) %fleet))]
+        =/  =cage  [%phoenix !>((~(got by eggs) %fleet))]
         :_  this
         [%pass /yeet %agent [our.bowl %fleet] %poke cage]~
       ::
@@ -67,20 +67,20 @@
       ::
           %add-tmp
         =.  tmp
-          (~(put by tmp) %fleet (jam (~(got by eggz) %fleet)))
+          (~(put by tmp) %fleet (jam (~(got by eggs) %fleet)))
         [~ this]
       ==
   ::
         %phoenix-command
       =+  !<(cmd=command vase)
       ?-    -.cmd
-          %del-dude  `this(eggz (~(del by eggz) dude.cmd))
+          %del-dude  `this(eggs (~(del by eggs) dude.cmd))
           %get-dude
         =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
         ?.  .^(? %gu /[our]/[dude.cmd]/[now]/$)
           [~ this]
-        =+  .^(=eggo %gv /[our]/[dude.cmd]/[now]/$)
-        `this(eggz (~(put by eggz) dude.cmd eggo))
+        =+  .^(=egg-any %gv /[our]/[dude.cmd]/[now]/$)
+        `this(eggs (~(put by eggs) dude.cmd egg-any))
       ::
           ?(%put-all %put-desk %put-dude %import-dat)
         =^  cards  state
@@ -132,10 +132,10 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
-      [%x %eggz ~]         ``noun+!>(~(key by eggz))
-      [%x %eggo dude=@ ~]  ``noun+!>((~(got by eggz) dude.pole))
-      [%x %tmp dude=@ ~]   ``noun+!>((~(got by tmp) dude.pole))
-      [%x %tmps ~]         ``noun+!>(~(key by tmp))
+      [%x %eggs ~]        ``noun+!>(~(key by eggs))
+      [%x %egg dude=@ ~]  ``noun+!>((~(got by eggs) dude.pole))
+      [%x %tmp dude=@ ~]  ``noun+!>((~(got by tmp) dude.pole))
+      [%x %tmps ~]        ``noun+!>(~(key by tmp))
     ==
   ::
   ++  on-agent
@@ -194,9 +194,9 @@
     ~&  >>  [%phoenix-ignore dude]
     cor
   ~&  >  [%phoenix-put dude]
-  =+  .^(=eggo %gv /[our]/[dude]/[now]/$)
+  =+  .^(=egg-any %gv /[our]/[dude]/[now]/$)
   =/  =path  /[dap.bowl]/[dude]/[now]/'jam'
-  =/  dat=@  (jam eggo)
+  =/  dat=@  (jam egg-any)
   =/  =cage  [%drum-put !>([path dat])]
   %-  emit
   [%pass /sav/[dude] %agent [our.bowl %hood] %poke cage]
@@ -204,6 +204,6 @@
 ::
 ++  import-dat
   |=  dat=@
-  =/  res  ;;(eggo (cue dat))
+  =/  res  ;;(egg-any (cue dat))
   cor
 --
