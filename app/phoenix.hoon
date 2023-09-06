@@ -1,26 +1,8 @@
-::  :fleet &phoenix ;;(egg-any:s (cue j))
-::
 ::  %phoenix
 ::
-::  TODO
-::    +import-dat
-::      %mark?
-::
-::    +schedule
-::      time
-::      sub to a revision
-::
-::    +private-key-revisions
-::      +encrypt
-::      +decrypt
-::
-::    %grow / %keen
-::      track acks
-::
-::    +on-rift                                            ::  breadth first?
-::      ?:  (~(has by backups) ship)
-::        +offer
-::        %grow
+::  :phoenix|add-admin ~zod
+::  :phoenix|get-dude %pals
+::  :phoenix|send-egg our %pals
 ::
 /-  *phoenix
 /+  phoenix, default-agent, dbug, verb, rudder
@@ -53,42 +35,45 @@
     ^-  (quip card _this)
     ?>  =(our src):bowl
     ?+    mark  (on-poke:def mark vase)
-        %noun
-      ?+    q.vase  !!
-          %fleet
-        =/  =cage  [%phoenix !>((~(got by eggs) %fleet))]
-        :_  this
-        [%pass /yeet %agent [our.bowl %fleet] %poke cage]~
-      ::
-      ::    %import
-      ::  =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-      ::  =+  .^(dat=@ %cx /[our]/base/[now]/flt/jam)
-      ::  (on-poke %phoenix-command !>([%import-dat dat]))
-      ::
-          %add-tmp
-        =.  tmp
-          (~(put by tmp) %fleet (jam (~(got by eggs) %fleet)))
-        [~ this]
-      ==
-  ::
+        %phoenix
+      ?>  ?|  =(our src):bowl
+              (~(has in admins) src.bowl)
+          ==
+      =+  !<([=dude:gall egg-jam=@] vase)
+      =^  cards  state
+        abet:(on-phoenix:cor dude egg-jam)
+      [cards this]
+    ::
         %phoenix-command
+      ?>  =(our src):bowl
       =+  !<(cmd=command vase)
       ?-    -.cmd
-          %del-dude  `this(eggs (~(del by eggs) dude.cmd))
+          %add-admin  `this(admins (~(put in admins) ship.cmd))
+          %del-admin  `this(admins (~(del in admins) ship.cmd))
+          %del-dude   `this(eggs (~(del by eggs) dude.cmd))
           %get-dude
         =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
         ?.  .^(? %gu /[our]/[dude.cmd]/[now]/$)
           [~ this]
-        =+  .^(=egg-any %gv /[our]/[dude.cmd]/[now]/$)
-        `this(eggs (~(put by eggs) dude.cmd egg-any))
+        =+  .^(raw=egg-any %gv /[our]/[dude.cmd]/[now]/$)
+        =/  good-egg=egg-any  (cook-egg raw)
+        `this(eggs (~(put by eggs) dude.cmd good-egg))
+      ::
+          %send-egg
+        =/  maybe-egg  (~(get by eggs) dude.cmd)
+        ?~  maybe-egg
+          ~&  >>  [%phoenix 'dude not found']
+          `this
+        =/  good-egg=egg-any  (cook-egg u.maybe-egg)
+        =/  dat=@  (jam good-egg)
+        =/  =cage  [%phoenix !>([dude.cmd dat])]
+        :_  this
+        [%pass /yeet %agent [ship.cmd dude.cmd] %poke cage]~
       ::
           ?(%put-all %put-desk %put-dude %import-dat)
         =^  cards  state
           =<  abet
           ?-  -.cmd
-            ::  TODO
-            ::    (send-it ship @)
-            ::
             %put-all     put-all:cor
             %put-desk    (put-desk:cor desk.cmd)
             %put-dude    (put-dude:cor dude.cmd)
@@ -132,10 +117,9 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
+      [%x %admins ~]      ``noun+!>(admins)
       [%x %eggs ~]        ``noun+!>(~(key by eggs))
       [%x %egg dude=@ ~]  ``noun+!>((~(got by eggs) dude.pole))
-      [%x %tmp dude=@ ~]  ``noun+!>((~(got by tmp) dude.pole))
-      [%x %tmps ~]        ``noun+!>(~(key by tmp))
     ==
   ::
   ++  on-agent
@@ -159,16 +143,8 @@
 ++  arvo
   |=  [=(pole knot) =sign-arvo]
   ^+  cor
-  ?+    pole  ~|([%bad-arvo-pole pole] !!)
-      [%eyre ~]  cor
-      [%interval ~]
-    ?>  ?=([%behn %wake *] sign-arvo)
-    ?^  error.sign-arvo
-      %-  (slog '%phoenix %timer-error' u.error.sign-arvo)
-      ::(emit (set-timer run-interval))
-      cor
-    ::on-interval
-    cor
+  ?+  pole  ~|([%bad-arvo-pole pole] !!)
+    [%eyre ~]  cor
   ==
 ::
 ++  put-desk
@@ -194,9 +170,10 @@
     ~&  >>  [%phoenix-ignore dude]
     cor
   ~&  >  [%phoenix-put dude]
-  =+  .^(=egg-any %gv /[our]/[dude]/[now]/$)
+  =+  .^(raw=egg-any %gv /[our]/[dude]/[now]/$)
+  =/  good-egg=egg-any  (cook-egg raw)
   =/  =path  /[dap.bowl]/[dude]/[now]/'jam'
-  =/  dat=@  (jam egg-any)
+  =/  dat=@  (jam good-egg)
   =/  =cage  [%drum-put !>([path dat])]
   %-  emit
   [%pass /sav/[dude] %agent [our.bowl %hood] %poke cage]
@@ -206,4 +183,22 @@
   |=  dat=@
   =/  res  ;;(egg-any (cue dat))
   cor
+++  cook-egg
+  |=  raw=egg-any
+  ^-  egg-any
+  ?-    -.raw
+      ?(%13 %14)
+    ?>  ?=(%live -.egg.raw)
+    raw(p.+.old-state.egg %noun)
+  ==
+::
+++  on-phoenix
+  |=  [=dude:gall egg-jam=@]
+  ?:  =(dude dap.bowl)
+    ::  TODO restore self
+    ::
+    ~&  >>  [%phoenix %todo]
+    cor
+  =+  ;;(=egg-any (cue egg-jam))
+  cor(eggs (~(put by eggs) dude egg-any))
 --
