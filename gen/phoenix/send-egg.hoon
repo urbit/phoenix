@@ -1,4 +1,4 @@
-::  :phoenix|send-egg %phoenix
+::  :phoenix|send-egg ~zod %phoenix
 ::
 :-  %say
 |=  $:  ^

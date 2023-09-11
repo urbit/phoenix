@@ -16,6 +16,7 @@
       [%del-admin =ship]
     ::
       [%import-dat dat=@]
+      [%import-clay =dude:gall =path]
   ==
 ::
 +$  egg-any

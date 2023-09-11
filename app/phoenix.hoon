@@ -33,7 +33,6 @@
   ++  on-poke
     |=  [=mark =vase]
     ^-  (quip card _this)
-    ?>  =(our src):bowl
     ?+    mark  (on-poke:def mark vase)
         %phoenix
       ?>  ?|  =(our src):bowl
@@ -70,14 +69,15 @@
         :_  this
         [%pass /yeet %agent [ship.cmd dude.cmd] %poke cage]~
       ::
-          ?(%put-all %put-desk %put-dude %import-dat)
+          ?(%put-all %put-desk %put-dude %import-dat %import-clay)
         =^  cards  state
           =<  abet
           ?-  -.cmd
-            %put-all     put-all:cor
-            %put-desk    (put-desk:cor desk.cmd)
-            %put-dude    (put-dude:cor dude.cmd)
-            %import-dat  (import-dat:cor dat.cmd)
+            %put-all      put-all:cor
+            %put-desk     (put-desk:cor desk.cmd)
+            %put-dude     (put-dude:cor dude.cmd)
+            %import-dat   (import-dat:cor dat.cmd)
+            %import-clay  (import-clay:cor dude.cmd path.cmd)
           ==
         [cards this]
       ==
@@ -183,6 +183,15 @@
   |=  dat=@
   =/  res  ;;(egg-any (cue dat))
   cor
+::
+++  import-clay
+  |=  [=dude:gall =path]
+  =+  .^(dat=@ %cx path)
+  =+  ;;(raw=egg-any (cue dat))
+  =/  good-egg=egg-any  (cook-egg raw)
+  ~&  >>>  %here
+  cor(eggs (~(put by eggs) dude good-egg))
+::
 ++  cook-egg
   |=  raw=egg-any
   ^-  egg-any
