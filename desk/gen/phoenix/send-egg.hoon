@@ -1,8 +1,8 @@
-::  :phoenix|send-egg ~zod %phoenix
+::  :phoenix|send-egg our %phoenix ~zod
 ::
 :-  %say
 |=  $:  ^
-        [=ship =dude:gall ~]
+        [source=ship =dude:gall target=ship ~]
         ~
     ==
-[%phoenix-command [%send-egg ship dude]]
+[%phoenix-command [%send-egg source dude target]]
