@@ -2,7 +2,7 @@
 |%
 +$  records-0
   $:  eggs=(mip ship dude:gall @)
-      admins=(set ship)
+      guests=(set ship)
       offers=(map ship (set dude:gall))
   ==
 +$  update  [=ship =dude:gall dat=@]
@@ -14,11 +14,12 @@
   ==
 ::
 +$  command
-  $%  [%get-dude =dude:gall]          ::  scry and save
-      [%del-dude =dude:gall]          ::  delete our dude
+  $%  [%get-dude =dude:gall]                    ::  scry and save
+      [%del-dude =dude:gall where=ship]  ::  del our dude from local (default), or remote
+      [%del-all where=ship]              ::  del all our dudes from local (default), or remote
     ::
-      [%add-admin =ship]              ::  permit a ship to save
-      [%del-admin =ship]              ::  remove save permission
+      [%add-guest =ship]              ::  permit a ship to save
+      [%del-guest =ship]              ::  remove save permission
     ::
       [%put-all ~]                    ::  save all dudes to put
       [%put-desk =desk]               ::  save all dudes in desk to put

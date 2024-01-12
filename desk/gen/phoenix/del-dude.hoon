@@ -1,8 +1,8 @@
-::  :phoenix|del-dude %phoenix
+::  :phoenix|del-dude %phoenix, =where ~hodler
 ::
 :-  %say
-|=  $:  ^
+|=  $:  [@ @ our=@p ^]
         [=dude:gall ~]
-        ~
+        [where=ship ~]
     ==
-[%phoenix-command [%del-dude dude]]
+[%phoenix-command [%del-dude dude ?~(where our where)]]

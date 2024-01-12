@@ -1,9 +1,30 @@
 ::  %phoenix
 ::
-::  :phoenix|add-admin ~zod
-::  :phoenix|del-admin ~zod
-::  :phoenix|get-dude %pals
-::  :phoenix|send-egg our %pals
+::  :phoenix|add-guest ~zod
+::  :phoenix|del-guest ~zod
+::
+::  :phoenix|get-dude %dojo
+::  :phoenix|del-dude %dojo, =where ~hodler
+::
+::  :phoenix|del-all ~hodler
+::  :phoenix|del-dude-remote %dojo ~hodler
+::
+::  :phoenix|put-all
+::  :phoenix|put-desk %base
+::  :phoenix|put-dude %dojo
+::
+::  :phoenix|query ~hodler
+::
+::  :phoenix|request-all ~hodler
+::  :phoenix|request-dude ~hodler
+::
+::  :phoenix|send-egg our %pals ~zod
+::
+::  :phoenix|import-clay our %pals /=data=/jams/some-backup/jam
+::
+::  +phoenix!guests
+::  +phoenix!eggs
+::  +phoenix!offers
 ::
 ::    scrys:
 ::  .^((set dude:gall) %gx /=phoenix=/eggs/(scot %p our)/noun)
@@ -36,7 +57,8 @@
         %egg-any
       ?>  =(our src):bowl
       =+  !<(=egg-any:gall vase)
-      =^  cards  state  abet:(on-egg-any:cor egg-any)
+      =^  cards  state
+        abet:(on-egg-any:cor egg-any)
       [cards this]
     ::
         %phoenix-offer
@@ -53,7 +75,9 @@
     ::
         %phoenix-update
       ~&  >  %phoenix-update
-      ?>  |((our-team:cor src.bowl) (~(has in admins) src.bowl))
+      ?>  ?|  (our-team:cor src.bowl)
+              (~(has in guests) src.bowl)
+          ==
       =+  !<(=update vase)
       =^  cards  state
         abet:(on-phoenix-update:cor update)
@@ -62,18 +86,34 @@
         %phoenix-command
       =+  !<(cmd=command vase)
       ?-    -.cmd
-          %add-admin
+          %add-guest
         ?>  =(our src):bowl
-        `this(admins (~(put in admins) ship.cmd))
-          %del-admin
+        `this(guests (~(put in guests) ship.cmd))
+          %del-guest
         ?>  =(our src):bowl
-        `this(admins (~(del in admins) ship.cmd))
+        `this(guests (~(del in guests) ship.cmd))
       ::
-          %del-dude   `this(eggs (~(del bi eggs) src.bowl dude.cmd))
           %get-dude
         ?>  =(our src):bowl
-        =^  cards  state  abet:(handle-get-dude:cor dude.cmd)
+        =^  cards  state
+          abet:(handle-get-dude:cor dude.cmd)
         [cards this]
+      ::
+          %del-dude
+        ?:  =(our.bowl where.cmd)
+          `this(eggs (~(del bi eggs) src.bowl dude.cmd))
+        ?>  =(our src):bowl
+        :_  this
+        =/  =cage  [%phoenix-command !>([%del-dude dude.cmd where.cmd])]
+        [%pass /remove %agent [where.cmd %phoenix] %poke cage]~
+      ::
+          %del-all
+        ?:  =(our.bowl where.cmd)
+          `this(eggs (~(del by eggs) src.bowl))
+        ?>  =(our src):bowl
+        :_  this
+        =/  =cage  [%phoenix-command !>([%del-all where.cmd])]
+        [%pass /remove %agent [where.cmd %phoenix] %poke cage]~
       ::
           ?(%request-all %request-dude %request-query)
         ?>  =(our src):bowl
@@ -88,7 +128,8 @@
       ::
           %send-egg
         ?>  =(our src):bowl
-        =^  cards  state  abet:(handle-send-egg:cor [source dude target]:cmd)
+        =^  cards  state
+          abet:(handle-send-egg:cor [source dude target]:cmd)
         [cards this]
       ::
           ?(%put-all %put-desk %put-dude %restore %import-clay)
@@ -117,10 +158,28 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
-      [%x %admins ~]             ``noun+!>(admins)
-      [%x %eggs ~]               ``noun+!>(~(key by eggs))
-      [%x %eggs ship=@ ~]        ``noun+!>((~(key bi eggs) (slav %p ship.pole)))
-      [%x %egg ship=@ dude=@ ~]  ``noun+!>((~(got bi eggs) [ship dude]:pole))
+      [%x %guests ~]  ``noun+!>(guests)
+      [%x %offers ~]  ``noun+!>(offers)
+      [%x %hodling ~]   ``noun+!>(~(key by eggs))
+    ::
+        [%x %eggs ship=@ ~]
+      :^  ~  ~  %noun
+      !>  ^-  (set dude:gall)
+      (~(key bi eggs) (slav %p ship.pole))
+    ::
+        [%x %egg ship=@ dude=@ ~]
+      :^  ~  ~  %noun
+      !>  ^-  @
+      (~(got bi eggs) [ship dude]:pole)
+    ::
+        [%x %eggs ~]
+      :^  ~  ~  %noun
+      !>  ^-  (jug ship dude:gall)
+      %-  ~(gas ju *(jug ship dude:gall))
+      ^-  (list [ship dude:gall])
+      %+  turn  ~(tap bi eggs)
+      |=  [=ship =dude:gall @]
+      [ship dude]
     ==
   ::
   ++  on-agent
@@ -128,6 +187,7 @@
     ?+    pole  (on-agent:def pole sign)
         [%yeet ~]     `this
         [%offer ~]    `this
+        [%remove ~]   `this
         [%request ~]  `this
         [%sav dude=@ ~]
       =/  =dude:gall  (slav %tas dude.pole)
@@ -166,7 +226,7 @@
   |=  raw=egg-any:gall
   ^-  egg-any:gall
   ?-    -.raw
-      %15
+      ?(%15 %16)
     ?>  ?=(%live -.+.raw)
     raw(p.+.old-state.+ %noun)
   ==
@@ -182,7 +242,7 @@
     =/  =ship  who.public-keys-result.sign-arvo
     ?~  dudes=(~(key bi eggs) ship)
       cor
-    %-  (slog leaf+"%phoenix: breached: {<ship>}" ~)
+    %-  (slog leaf+"%phoenix: {<ship>} breached" ~)
     %-  emit
     [%pass /offer %agent [ship %phoenix] %poke %phoenix-offer !>(dudes)]
   ==
