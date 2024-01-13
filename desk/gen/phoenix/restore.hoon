@@ -1,8 +1,5 @@
 ::  :phoenix|restore %pals
 ::
 :-  %say
-|=  $:  ^
-        [=dude:gall ~]
-        ~
-    ==
+|=  [^ [=dude:gall ~] ~]
 [%phoenix-command [%restore dude]]

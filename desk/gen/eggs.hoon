@@ -1,6 +1,5 @@
 ::  %phoenix eggs
 ::
-/+  *mip
 :-  %say
 |=  [[now=@da @ our=@p ^] ~ ~]
 :-  %noun
