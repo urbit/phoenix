@@ -54,6 +54,41 @@
     |=  [=mark =vase]
     ^-  (quip card _this)
     ?+    mark  (on-poke:def mark vase)
+      ::  WIP
+      ::
+        %noun
+      ?+    q.vase  !!
+          %grow
+        =/  =dude:gall  %phoenix
+        ?~  dat=(~(get bi eggs) our.bowl dude)
+          `this
+        :_  this  :_  ~
+        [%pass /phoenix/dat %grow /[dap.bowl]/(scot %p our.bowl)/[dude] [%atom u.dat]]
+      ::
+      ::  The ames %chum task is the two-party encrypted remote scry task.
+      ::  The task has the exact same interface as the ames %keen.
+      ::  Here is an example of fetching sys.kelvin from ~zod from inside a gall agent:
+      ::
+          %chum
+        :_  this  :_  ~
+        [%pass /your-wire %arvo %a %chum ~zod /c/x/1/kids/sys/kelvin]
+      ::
+      ::  The multiparty encrypted scry is slightly more complicated.
+      ::  First, the publisher creates a named security context with the %germ:
+      ::
+      ::  XX  security contexts can't be nested
+      ::
+          %germ
+        :_  this  :_  ~
+        [%pass /your-wire %germ /your/security/context]
+      ::
+          %tend
+      ::  Then the publisher publishes some data to the security context using %tend:
+      ::
+        :_  this  :_  ~
+        [%pass /your-wire %tend /your/security/context /hello/this/is/path %noun 'hello this is data']
+      ==
+    ::
         %egg-any
       ?>  =(our src):bowl
       =+  !<(=egg-any:gall vase)
@@ -158,9 +193,13 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
-      [%x %guests ~]  ``noun+!>(guests)
-      [%x %offers ~]  ``noun+!>(offers)
-      [%x %hodling ~]   ``noun+!>(~(key by eggs))
+      ::  TODO
+      ::  remote scry
+      ::  security context
+      ::
+      [%x %guests ~]   ``noun+!>(guests)
+      [%x %offers ~]   ``noun+!>(offers)
+      [%x %hodling ~]  ``noun+!>(~(key by eggs))
     ::
         [%x %eggs ship=@ ~]
       :^  ~  ~  %noun
@@ -202,7 +241,6 @@
     phx   ~(. phoenix bowl)
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
-++  set-timer  |=(t=@dr [%pass /interval %arvo %b %wait (add t now.bowl)])
 ++  is-moon       |=(=ship =(%earl (clan:title ship)))
 ++  our-moon      |=(=ship (moon:title our.bowl ship))
 ++  get-sponsor   |=(=ship (sein:title our.bowl now.bowl ship))
