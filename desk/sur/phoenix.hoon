@@ -34,5 +34,6 @@
       [%send-egg source=ship =dude:gall target=ship]  ::  send update to target
     ::
       [%restore =dude:gall]           ::  send an egg-any to a local agent
+      [%keen spar:ames]
   ==
 --

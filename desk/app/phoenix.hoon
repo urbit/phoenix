@@ -1,3 +1,16 @@
+::  TODO
+::    encrypted data
+::  use symetric encryption; it's faster
+::  hash +code
+::
+::    remote scry
+::  %gt scry paths don't have case
+::  %gw
+::  inspect sky.bowl
+::  [%sky ~] scry endpoint
+::  411 broken?
+::  try 412
+::
 ::  %phoenix
 ::
 ::  :phoenix|add-guest ~zod
@@ -28,6 +41,7 @@
 ::
 ::    scrys:
 ::  .^((set dude:gall) %gx /=phoenix=/eggs/(scot %p our)/noun)
+::  .^((list path) %gx /=phoenix=/latest-sky/noun)
 ::
 /-  *phoenix, hark
 /+  phoenix, default-agent, dbug, verb, *mip
@@ -59,34 +73,11 @@
         %noun
       ?+    q.vase  !!
           %grow
-        =/  =dude:gall  %phoenix
+        =/  =dude:gall  %ping
         ?~  dat=(~(get bi eggs) our.bowl dude)
           `this
         :_  this  :_  ~
-        [%pass /phoenix/dat %grow /[dap.bowl]/(scot %p our.bowl)/[dude] [%atom u.dat]]
-      ::
-      ::  The ames %chum task is the two-party encrypted remote scry task.
-      ::  The task has the exact same interface as the ames %keen.
-      ::  Here is an example of fetching sys.kelvin from ~zod from inside a gall agent:
-      ::
-          %chum
-        :_  this  :_  ~
-        [%pass /your-wire %arvo %a %chum ~zod /c/x/1/kids/sys/kelvin]
-      ::
-      ::  The multiparty encrypted scry is slightly more complicated.
-      ::  First, the publisher creates a named security context with the %germ:
-      ::
-      ::  XX  security contexts can't be nested
-      ::
-          %germ
-        :_  this  :_  ~
-        [%pass /your-wire %germ /your/security/context]
-      ::
-          %tend
-      ::  Then the publisher publishes some data to the security context using %tend:
-      ::
-        :_  this  :_  ~
-        [%pass /your-wire %tend /your/security/context /hello/this/is/path %noun 'hello this is data']
+        [%pass /grow %grow /[dude] [%atom u.dat]]
       ==
     ::
         %egg-any
@@ -179,6 +170,10 @@
             %restore      (restore:cor dude.cmd)
           ==
         [cards this]
+      ::
+          %keen
+        :_  this  :_  ~
+        [%pass /phoenix/keen %arvo %a %keen ~ ship.cmd path.cmd]
       ==
     ==
   ::
@@ -219,6 +214,32 @@
       %+  turn  ~(tap bi eggs)
       |=  [=ship =dude:gall @]
       [ship dude]
+    ::
+      ::   [%x %sky ~]
+      :: ::  $=  sky
+      :: ::  %+  map  path
+      :: ::  ((mop @ud (pair @da (each page @uvI))) lte)
+      :: |^
+      ::   =/  pax
+      ::     %+  turn  ~(tap by sky.bowl)
+      ::     |=  [p=path m=((mop @ud (pair @da (each page @uvI))) lte)]
+      ::     %+  turn
+      ::       ^-  (list [@ud (pair @da (each page @uvI))])
+      ::       (tap:on-path m)
+      ::     |=  [@ud (pair @da (each page @uvI))]
+      ::   ``noun+!>(pax)
+      :: ++  on-path  ((on @ud (pair @da (each page @uvI))) lte)
+      :: --
+    ::
+        [%x %latest-sky ~]
+      =/  =beak  [our.bowl dap.bowl da+now.bowl]
+      =/  revs=(list path)
+        %+  turn
+          .^((list path) %gt (en-beam beak /$/1))
+        |=  pax=path
+        =+  .^(=case %gw (en-beam beak (weld /$/1 pax)))
+        (weld /(scot case) pax)
+      ``noun+!>(revs)
     ==
   ::
   ++  on-agent
@@ -241,6 +262,7 @@
     phx   ~(. phoenix bowl)
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
+++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
 ++  is-moon       |=(=ship =(%earl (clan:title ship)))
 ++  our-moon      |=(=ship (moon:title our.bowl ship))
 ++  get-sponsor   |=(=ship (sein:title our.bowl now.bowl ship))
@@ -283,6 +305,25 @@
     %-  (slog leaf+"%phoenix: {<ship>} breached" ~)
     %-  emit
     [%pass /offer %agent [ship %phoenix] %poke %phoenix-offer !>(dudes)]
+  ::
+      [%phoenix %keen ~]
+    ?.  ?=([%ames %tune *] sign-arvo)
+      ~|([%bad-sign-arvo sign-arvo] !!)
+    ?~  roar.sign-arvo
+      ~&  >  %sig-roar
+      cor
+    =/  who=ship      ship.sign-arvo
+    =/  pax=path      path.sign-arvo
+    =/  =roar:ames  u.roar.sign-arvo
+    ~&  >  [who pax]
+    :: +$  roar               ::  response message
+    ::   (tale:pki:jael (pair path (unit (cask))))
+    ::
+    ?~  q.dat.roar
+      ~&  >  %sig-dat
+      cor
+    ~&  >  [%dat u.q.dat.roar]
+    cor
   ==
 ::
 ++  put-desk
@@ -420,7 +461,25 @@
   ?~  maybe-egg=(~(get bi eggs) source dude)
     %-  (slog leaf+"%phoenix: missing egg: {<source>} {<dude>}" ~)
     cor
+  ::  TODO remote scry
+  ::
   =/  =cage  [%phoenix-update !>(`update`[source dude u.maybe-egg])]
-  %-  emit
-  [%pass /yeet %agent [target %phoenix] %poke cage]
+  %-  emil
+  :~  [%pass /yeet %agent [target %phoenix] %poke cage]
+      [%pass /grow %grow /[dap.bowl]/(scot %p our.bowl)/[dude] [%atom u.maybe-egg]]
+  ==
+++  encrypt
+  |=  [e=egg-any:gall pw=@t]
+  ^-  @
+  !!
+::
+++  decrypt
+  |=  [dat=@ pw=@t]
+  ^-  (unit egg-any:gall)
+  ::  try pw
+  ::  |.  (try decrypt)
+  ::  ?.  success
+  ::    ~
+  ::  `egg-any
+  !!
 --
