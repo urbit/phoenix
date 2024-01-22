@@ -8,25 +8,22 @@
 ::  %gw
 ::  inspect sky.bowl
 ::  [%sky ~] scry endpoint
-::  411 broken?
-::  try 412
 ::
 ::  %phoenix
 ::
 ::  :phoenix|add-guest ~zod
 ::  :phoenix|del-guest ~zod
 ::
-::  :phoenix|get-dude %dojo
+::  :phoenix|snap %dojo
 ::  :phoenix|del-dude %dojo, =where ~hodler
 ::
 ::  :phoenix|del-all ~hodler
 ::  :phoenix|del-dude-remote %dojo ~hodler
 ::
-::  :phoenix|put-all
-::  :phoenix|put-desk %base
-::  :phoenix|put-dude %dojo
+::  :phoenix|put %dojo
 ::
 ::  :phoenix|query ~hodler
+::  :phoenix|keen ~hodler %dude version=@ud
 ::
 ::  :phoenix|request-all ~hodler
 ::  :phoenix|request-dude ~hodler
@@ -43,7 +40,7 @@
 ::  .^((set dude:gall) %gx /=phoenix=/eggs/(scot %p our)/noun)
 ::  .^((list path) %gx /=phoenix=/latest-sky/noun)
 ::
-/-  *phoenix, hark
+/-  *phoenix
 /+  phoenix, default-agent, dbug, verb, *mip
 =>
   |%
@@ -61,6 +58,7 @@
   +*  this  .
       def   ~(. (default-agent this %|) bowl)
       cor   ~(. +> bowl)
+      phx   ~(. phoenix bowl)
   ++  on-init  [[%pass /jael/pubs %arvo %j %public-keys ~]~ this]
   ++  on-save  !>(state)
   ++  on-load  |=(=vase `this(state !<(state-0 vase)))
@@ -68,61 +66,34 @@
     |=  [=mark =vase]
     ^-  (quip card _this)
     ?+    mark  (on-poke:def mark vase)
-      ::  WIP
-      ::
-        %noun
-      ?+    q.vase  !!
-          %grow
-        =/  =dude:gall  %ping
-        ?~  dat=(~(get bi eggs) our.bowl dude)
-          `this
-        :_  this  :_  ~
-        [%pass /grow %grow /[dude] [%atom u.dat]]
-      ==
-    ::
-        %egg-any
-      ?>  =(our src):bowl
-      =+  !<(=egg-any:gall vase)
-      =^  cards  state
-        abet:(on-egg-any:cor egg-any)
-      [cards this]
-    ::
         %phoenix-offer
       =+  !<(=offer vase)
-      =^  cards  state
-        abet:(handle-offer:cor src.bowl offer)
+      =^  cards  state  abet:(handle-offer:cor src.bowl offer)
       [cards this]
     ::
         %phoenix-request
       =+  !<(req=request vase)
-      =^  cards  state
-        abet:(handle-request:cor src.bowl req)
-      [cards this]
-    ::
-        %phoenix-update
-      ~&  >  %phoenix-update
-      ?>  ?|  (our-team:cor src.bowl)
-              (~(has in guests) src.bowl)
-          ==
-      =+  !<(=update vase)
-      =^  cards  state
-        abet:(on-phoenix-update:cor update)
+      =^  cards  state  abet:(handle-request:cor src.bowl req)
       [cards this]
     ::
         %phoenix-command
       =+  !<(cmd=command vase)
       ?-    -.cmd
-          %add-guest
+          ?(%add-guest %del-guest %add-code %del-code)
         ?>  =(our src):bowl
-        `this(guests (~(put in guests) ship.cmd))
-          %del-guest
-        ?>  =(our src):bowl
-        `this(guests (~(del in guests) ship.cmd))
+        ?-    -.cmd
+            %add-guest  `this(guests (~(put in guests) ship.cmd))
+            %del-guest  `this(guests (~(del in guests) ship.cmd))
+            %del-code   `this(codes (~(del in codes) pw.cmd))
+            %add-code
+          =?  codes  !=(pw.cmd our-code:phx)
+            (~(put in codes) pw.cmd)
+          [~ this]
+        ==
       ::
-          %get-dude
+          %snap
         ?>  =(our src):bowl
-        =^  cards  state
-          abet:(handle-get-dude:cor dude.cmd)
+        =^  cards  state  abet:(handle-snap:cor dude.cmd)
         [cards this]
       ::
           %del-dude
@@ -145,7 +116,6 @@
         ?>  =(our src):bowl
         =/  =cage
           ?-  -.cmd
-            %request-all    [%phoenix-request !>([%all ~])]
             %request-dude   [%phoenix-request !>([%dude dude.cmd])]
             %request-query  [%phoenix-request !>([%query ~])]
           ==
@@ -158,14 +128,12 @@
           abet:(handle-send-egg:cor [source dude target]:cmd)
         [cards this]
       ::
-          ?(%put-all %put-desk %put-dude %restore %import-clay)
+          ?(%put %restore %import-clay)
         ?>  =(our src):bowl
         =^  cards  state
           =<  abet
           ?-  -.cmd
-            %put-all      put-all:cor
-            %put-desk     (put-desk:cor desk.cmd)
-            %put-dude     (put-dude:cor dude.cmd)
+            %put          (put:cor dude.cmd)
             %import-clay  (import-clay:cor [ship dude path]:cmd)
             %restore      (restore:cor dude.cmd)
           ==
@@ -173,7 +141,7 @@
       ::
           %keen
         :_  this  :_  ~
-        [%pass /phoenix/keen %arvo %a %keen ~ ship.cmd path.cmd]
+        [%pass /keen %arvo %a %keen ~ ship.cmd path.cmd]
       ==
     ==
   ::
@@ -188,10 +156,6 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
-      ::  TODO
-      ::  remote scry
-      ::  security context
-      ::
       [%x %guests ~]   ``noun+!>(guests)
       [%x %offers ~]   ``noun+!>(offers)
       [%x %hodling ~]  ``noun+!>(~(key by eggs))
@@ -231,14 +195,14 @@
       :: ++  on-path  ((on @ud (pair @da (each page @uvI))) lte)
       :: --
     ::
-        [%x %latest-sky ~]
+        [%x %ud-pax ~]
       =/  =beak  [our.bowl dap.bowl da+now.bowl]
-      =/  revs=(list path)
+      =/  revs=(list (pair @ud path))
         %+  turn
           .^((list path) %gt (en-beam beak /$/1))
         |=  pax=path
-        =+  .^(=case %gw (en-beam beak (weld /$/1 pax)))
-        (weld /(scot case) pax)
+        =+  .^([%ud ud=@ud] %gw (en-beam beak (weld /$/1 pax)))
+        [ud pax]
       ``noun+!>(revs)
     ==
   ::
@@ -263,22 +227,11 @@
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
-++  is-moon       |=(=ship =(%earl (clan:title ship)))
-++  our-moon      |=(=ship (moon:title our.bowl ship))
-++  get-sponsor   |=(=ship (sein:title our.bowl now.bowl ship))
-++  same-sponsor  |=([a=ship b=ship] =((get-sponsor a) (get-sponsor b)))
-++  fellow-moon   |=(=ship &((is-moon our.bowl) (same-sponsor ship our.bowl)))
-++  our-team
-  |=  =ship
-  ^-  ?
-  ?|  =(our.bowl ship)    ::  us
-      (our-moon ship)     ::  our moons
-      (fellow-moon ship)  ::  fellow moons
-  ==
-::
 ++  import-clay
   |=  [=ship =dude:gall =path]
   =+  .^(dat=@ %cx path)
+  ::  TODO grow
+  ::
   cor(eggs (~(put bi eggs) ship dude dat))
 ::  strip type so cue works
 ::
@@ -302,46 +255,48 @@
     =/  =ship  who.public-keys-result.sign-arvo
     ?~  dudes=(~(key bi eggs) ship)
       cor
-    %-  (slog leaf+"%phoenix: {<ship>} breached" ~)
+    %-  (slog leaf+"%phoenix: {<ship>} breached" ~)  ::  XX
     %-  emit
     [%pass /offer %agent [ship %phoenix] %poke %phoenix-offer !>(dudes)]
+  ::  we received a keen response
+  ::  place it in the correct location
+  ::    need:
+  ::  owner dude @
   ::
-      [%phoenix %keen ~]
+      [%keen ~]
     ?.  ?=([%ames %tune *] sign-arvo)
       ~|([%bad-sign-arvo sign-arvo] !!)
     ?~  roar.sign-arvo
       ~&  >  %sig-roar
       cor
-    =/  who=ship      ship.sign-arvo
-    =/  pax=path      path.sign-arvo
-    =/  =roar:ames  u.roar.sign-arvo
-    ~&  >  [who pax]
-    :: +$  roar               ::  response message
-    ::   (tale:pki:jael (pair path (unit (cask))))
+    =/  source=ship       ship.sign-arvo
+    =/  pax=(^pole knot)  path.sign-arvo
+    ?>  ?=([owner=@ dude=@ ~] pax)
+    =/  owner=@p    (slav %p owner.pax)
+    =/  =dude:gall  (slav %tas dude.pax)
+    ::  TODO
     ::
+    ?>  ?|  (our-team:phx source)
+            (~(has in guests) source)
+            (~(has in guests) owner)
+        ==
+    =/  =roar:ames  u.roar.sign-arvo
+    ~&  >  [source owner pax]
     ?~  q.dat.roar
-      ~&  >  %sig-dat
       cor
     ~&  >  [%dat u.q.dat.roar]
-    cor
+    ?>  ?=([%atom egg=@] u.q.dat.roar)
+    ::  XX  grow
+    ::
+    :: =/  =dude:gall  %ping
+    :: ?~  dat=(~(get bi eggs) our.bowl dude)
+    ::   `this
+    :: :_  this  :_  ~
+    :: [%pass / %grow /[dude] [%atom u.dat]]
+    cor(eggs (~(put bi eggs) owner dude +.u.q.dat.roar))
   ==
 ::
-++  put-desk
-  |=  =desk
-  =/  dudes  ~(tap in (live-dudes:phx desk))
-  |-  ^+  cor
-  ?~  dudes
-    cor
-  $(cor (put-dude i.dudes), dudes t.dudes)
-::
-++  put-all
-  =/  dudes  ~(tap in all-live-dudes:phx)
-  |-  ^+  cor
-  ?~  dudes
-    cor
-  $(cor (put-dude i.dudes), dudes t.dudes)
-::
-++  put-dude
+++  put
   |=  =dude:gall
   ^+  cor
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
@@ -360,7 +315,6 @@
   |=  [=ship =request]
   ~&  >  [%handle-request ship request]
   ?-  -.request
-    %all    (return-all ship)
     %dude   (return-dude ship dude.request)
     %query  (return-query ship)
   ==
@@ -383,22 +337,6 @@
   %-  emit
   [%pass /yeet %agent [ship %phoenix] %poke cage]
 ::
-++  return-all
-  |=  =ship
-  ^+  cor
-  =/  theirs=(unit (map dude:gall @))  (~(get by eggs) ship)
-  ?~  theirs
-    cor
-  =/  eggz=(list [=dude:gall dat=@])  ~(tap by u.theirs)
-  |-  ^+  cor
-  ?~  eggz
-    cor
-  =/  =cage
-    [%phoenix-update !>(`update`[ship dude.i.eggz dat.i.eggz])]
-  =.  cor
-    (emit [%pass /yeet %agent [ship %phoenix] %poke cage])
-  $(eggz t.eggz)
-::
 ++  restore
   |=  =dude:gall
   ^+  cor
@@ -412,38 +350,15 @@
   %-  emit
   [%pass /phoenix %agent [our.bowl dude] %poke cage]
 ::
-++  on-phoenix-update
-  |=  upd=update
-  cor(eggs (~(put bi eggs) [ship dude dat]:upd))
-::
 ++  handle-offer
   |=  [=ship =offer]
   ^+  cor
   =.  offers  (~(put by offers) ship offer)
   =/  msg=cord  %-  crip
     " backups: {<(sort ~(tap in offer) aor)>}"
-  (send-hark ship msg)
+  (emil (send-hark:phx ship msg))
 ::
-++  on-egg-any
-  |=  =egg-any:gall
-  ?>  =(our src):bowl
-  ::  TODO  restore self
-  cor
-::
-++  send-hark
-  |=  [who=ship msg=cord]
-  ^+  cor
-  ?.  .^(? %gu /(scot %p our.bowl)/hark/(scot %da now.bowl)/$)
-    cor
-  %-  emit
-  =/  con=(list content:hark)  [ship+who msg ~]
-  =/  =id:hark      (end 7 (shas %phx-notif eny.bowl))
-  =/  =rope:hark    [~ ~ q.byk.bowl /(scot %p who)/[dap.bowl]]
-  =/  =action:hark  [%add-yarn & & id rope now.bowl con /[dap.bowl] ~]
-  =/  =cage         [%hark-action !>(action)]
-  [%pass /hark %agent [our.bowl %hark] %poke cage]
-::
-++  handle-get-dude
+++  handle-snap
   |=  =dude:gall
   ^+  cor
   ?>  =(our src):bowl
@@ -453,6 +368,9 @@
     cor
   =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
   =/  good-egg=egg-any:gall  (cook-egg raw)
+  ::  XX  encrypt, grow
+  ::  ?.  ~(has in sky.bowl)
+  ::
   cor(eggs (~(put bi eggs) our.bowl dude (jam good-egg)))
 ::
 ++  handle-send-egg
@@ -465,9 +383,12 @@
   ::
   =/  =cage  [%phoenix-update !>(`update`[source dude u.maybe-egg])]
   %-  emil
+  ::  TODO grow, command w/ keen path
+  ::
   :~  [%pass /yeet %agent [target %phoenix] %poke cage]
-      [%pass /grow %grow /[dap.bowl]/(scot %p our.bowl)/[dude] [%atom u.maybe-egg]]
+      [%pass / %grow /(scot %p our.bowl)/[dude] [%atom u.maybe-egg]]
   ==
+::
 ++  encrypt
   |=  [e=egg-any:gall pw=@t]
   ^-  @
