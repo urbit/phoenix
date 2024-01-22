@@ -2,4 +2,4 @@
 ::
 :-  %say
 |=  [^ [=dude:gall ~] ~]
-[%phoenix-command [%get-dude dude]]
+[%phoenix-command [%snap dude]]
