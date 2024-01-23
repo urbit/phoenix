@@ -1,8 +1,5 @@
 ::  :phoenix|query ~hodler
 ::
 :-  %say
-|=  $:  ^
-        [=ship ~]
-        ~
-    ==
-[%phoenix-command [%request-query ship ~]]
+|=  [^ [=ship ~] ~]
+[%phoenix-command [%query `ship]]

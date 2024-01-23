@@ -1,4 +1,8 @@
-/-  hark
+/-  *phoenix, hark
+=>
+  |%
+  ++  on-path  ((on @ud (pair @da (each page @uvI))) lte)
+  --
 |_  =bowl:gall
 ++  all-desks
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
@@ -65,4 +69,36 @@
   =/  =action:hark  [%add-yarn & & id rope now.bowl con /[dap.bowl] ~]
   =/  =cage         [%hark-action !>(action)]
   [%pass /hark %agent [our.bowl %hark] %poke cage]^~
+::  strip type so cue works
+::
+++  cook-egg
+  |=  raw=egg-any:gall
+  ^-  egg-any:gall
+  ?-    -.raw
+      ?(%15 %16)
+    ?>  ?=(%live -.+.raw)
+    raw(p.+.old-state.+ %noun)
+  ==
+::
+++  make-offer
+  |=  =ship
+  ^-  offer
+  %-  silt
+  ^-  (list (pair spur case))
+  %-  zing
+  %+  murn  ~(tap by sky.bowl)
+  |=  [pax=path =fans:gall]
+  ^-  (unit (list (pair spur case)))
+  ?~  pax  ~
+  ?.  =(ship (slav %p i.pax))
+    ~
+  %-  some
+  ^-  (list (pair spur case))
+  %+  murn  (tap:on-path fans)
+  |=  [rev=@ud wen=@da wut=(each page @uvI)]
+  ^-  (unit (pair spur case))
+  ?-  -.wut
+    %|  ~
+    %&  `[pax ud+rev]
+  ==
 --
