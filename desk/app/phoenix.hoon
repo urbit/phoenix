@@ -39,9 +39,9 @@
   +$  versioned-state  $%(state-0)
   +$  state-0
     $:  %0
+        keys=(set @)
         guests=(set ship)
         offers=(map ship offer)
-        codes=(set @)
     ==
   --
 =|  state-0
@@ -93,13 +93,10 @@
     ==
   ::
   ++  on-agent
-    |=  [=(pole knot) =sign:agent:gall]
-    ?+    pole  (on-agent:def pole sign)
-        [%sav dude=@ ~]
-      =/  =dude:gall  (slav %tas dude.pole)
-      %-  (slog leaf+"%phoenix: saved to put: {<dude>}" ~)
-      [~ this]
-    ==
+    |=  [=wire =sign:agent:gall]
+    ^-  (quip card _this)
+    =^  cards  state  abet:(agent:cor wire sign)
+    [cards this]
   ++  on-fail   on-fail:def
   --
 =|  cards=(list card)
@@ -110,6 +107,11 @@
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
+++  send-query
+  |=  =ship
+  %-  emit
+  [%pass /query %agent [ship %phoenix] %poke [%phoenix-command !>([%query ~])]]
+
 ++  import-clay
   |=  [=ship =dude:gall =path]
   ^+  cor
@@ -122,8 +124,8 @@
 ++  poke
   |=  [=mark =vase]
   ^+  cor
-  ?+    mark  (on-poke:def mark vase)
-      %phoenix-offer  (handle-offer !<(offer vase))
+  ?+  mark  (on-poke:def mark vase)
+    %phoenix-offer  (handle-offer !<(offer vase))
   ::
       %phoenix-command
     =+  !<(cmd=command vase)
@@ -136,26 +138,43 @@
         %keen   (handle-keen ship.cmd path.cmd)
       ==
     ::
-        $?  %snap       %send       %restore
-            %add-code   %add-guest  %put
-            %del-code   %del-guest  %import-clay
+        $?  %snap     %send       %restore
+            %add-key  %add-guest  %put
+            %del-key  %del-guest  %import-clay
         ==
       ?>  =(our src):bowl
       ?-  -.cmd
         %snap         (handle-snap dude.cmd)
         %send         (handle-send [dude case target]:cmd)
         %restore      (restore dude.cmd case.cmd)
-        %put          (put [ship dude case]:cmd)
+        %put          (handle-put [ship dude case]:cmd)
         %import-clay  (import-clay [ship dude path]:cmd)
+        %add-key      cor(keys (~(put in keys) key.cmd))
+        %del-key      cor(keys (~(del in keys) key.cmd))
         %add-guest    cor(guests (~(put in guests) ship.cmd))
         %del-guest    cor(guests (~(del in guests) ship.cmd))
-        %del-code     cor(codes (~(del in codes) pw.cmd))
-          %add-code
-        =?  codes  !=(pw.cmd our-code:phx)
-          (~(put in codes) pw.cmd)
-        cor
       ==
     ==
+  ==
+++  agent
+  |=  [=(pole knot) =sign:agent:gall]
+  ^+  cor
+  ?+  pole  ~&([dap.bowl %strange-wire pole] cor)
+    [%hark ~]   cor
+    [%offer ~]  cor
+    [%query ~]  cor
+  ::
+      [%sav dude=@ ~]
+    =/  =dude:gall  (slav %tas dude.pole)
+    %-  (slog leaf+"%phoenix: saved to put: {<dude>}" ~)
+    cor
+  ::
+      [?(%send %keen %cull %tomb) *]
+    ?.  ?=(%poke-ack -.sign)  cor
+    ?~  p.sign
+      (send-query src.bowl)  ::  too early? sleep, the push
+    ~&  >>>  [dap.bowl %poke-fail src.bowl `path`pole]
+    cor
   ==
 ::
 ++  arvo
@@ -167,8 +186,7 @@
     ?.  ?=(%breach -.public-keys-result.sign-arvo)
       cor
     =/  =ship   who.public-keys-result.sign-arvo
-    =/  =offer  (make-offer:phx ship)                 ::  XX
-    ?~  offer
+    ?~  offer=(make-offer:phx ship)                 ::  XX
       cor
     %-  (slog leaf+"%phoenix: {<ship>} breached" ~)
     =/  =cage  [%phoenix-offer !>(offer)]
@@ -195,11 +213,11 @@
   ==
 ::  TODO
 ::
-++  put
+++  handle-put
   |=  [=ship =dude:gall =case]
   ^+  cor
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-  ::  XX sky
+  ::  XX sky, don't scry unless da+now
   ::
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
     %-  (slog leaf+"%phoenix: dude not live: {<dude>}" ~)
@@ -220,19 +238,14 @@
   %-  emit
   [%pass /keen %arvo %a %keen ~ ship path]
 ::
-++  send-query
-  |=  =ship
-  =/  =cage  [%phoenix-command !>([%query ~])]
-  %-  emit
-  [%pass /query %agent [ship %phoenix] %poke cage]
-::
 ++  handle-query
   |=  who=(unit ship)
   ?:  =(our src):bowl
     ?~  who  cor
-    =/  =cage  [%phoenix-command !>([%query ~])]
-    %-  emit
-    [%pass /query %agent [u.who %phoenix] %poke cage]
+    ?:  =(our.bowl u.who)
+      ~&  >  (make-offer:phx our.bowl)
+      cor
+    (send-query u.who)
   ::  XX
   ::
   =/  =offer  (make-offer:phx src.bowl)
@@ -258,7 +271,8 @@
 ++  handle-offer
   |=  =offer
   ^+  cor
-  ~&  >  [%phoenix "{<src.bowl>} offers {<(sort ~(tap in offer) aor)>}"]
+  ?<  =(our src):bowl
+  ~&  >  [%phoenix src.bowl %offers (sort ~(tap in offer) aor)]
   =.  offers  (~(put by offers) src.bowl offer)
   =/  msg=cord  %-  crip
     " offers: {<(sort ~(tap in offer) aor)>}"
@@ -296,8 +310,6 @@
 ++  handle-cull
   |=  [=dude:gall =case where=ship]
   ?:  =(our.bowl where)
-    ::  TODO send-offer, or just query on ack
-    ::
     =/  =spur  /(scot %p src.bowl)/[dude]
     %-  emit
     [%pass / %cull case spur]

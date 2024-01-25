@@ -1,5 +1,5 @@
 |%
-+$  offer  (set (pair spur case))
++$  offer  (set [spur case])
 ::
 +$  command
   $%  [%snap =dude:gall]                     ::  take snapshot
@@ -13,8 +13,8 @@
       [%add-guest =ship]                     ::  permit a ship to save
       [%del-guest =ship]                     ::  remove save permission
     ::
-      [%add-code pw=@]                       ::  add encryption key
-      [%del-code pw=@]                       ::  del encryption key
+      [%add-key key=@]                       ::  add encryption key
+      [%del-key key=@]                       ::  del encryption key
     ::
       [%put =ship =dude:gall =case]          ::  save to put
       [%import-clay =ship =dude:gall =path]  ::  load a jam from clay

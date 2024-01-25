@@ -84,19 +84,19 @@
   |=  =ship
   ^-  offer
   %-  silt
-  ^-  (list (pair spur case))
+  ^-  (list [spur case])
   %-  zing
   %+  murn  ~(tap by sky.bowl)
   |=  [pax=path =fans:gall]
-  ^-  (unit (list (pair spur case)))
+  ^-  (unit (list [spur case]))
   ?~  pax  ~
   ?.  =(ship (slav %p i.pax))
     ~
   %-  some
-  ^-  (list (pair spur case))
+  ^-  (list [spur case])
   %+  murn  (tap:on-path fans)
   |=  [rev=@ud wen=@da wut=(each page @uvI)]
-  ^-  (unit (pair spur case))
+  ^-  (unit [spur case])
   ?-  -.wut
     %|  ~
     %&  `[pax ud+rev]
