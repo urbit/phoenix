@@ -1,4 +1,4 @@
-::  :phoenix|send %phoenix ud+1 ~zod
+::  :phoenix|send %dude ud+42 ~hodler
 ::
 :-  %say
 |=  $:  ^

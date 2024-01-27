@@ -3,7 +3,7 @@
 ::
 +$  command
   $%  [%snap =dude:gall]                     ::  take snapshot
-      [%restore =dude:gall =case]            ::  poke an agent with egg-any
+      [%restore =ship =dude:gall =case]      ::  poke an agent with egg-any
     ::
       [%query who=(unit ship)]               ::  request for offers
       [%cull =dude:gall =case where=ship]    ::  cull ud+0 to case

@@ -1,4 +1,4 @@
-::  %phoenix guests
+::  +phoenix!guests
 ::
 :-  %say
 |=  [[now=@da @ our=@p ^] ~ ~]

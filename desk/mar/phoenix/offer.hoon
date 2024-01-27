@@ -1,9 +1,9 @@
 /-  *phoenix
-|_  fer=offer
+|_  off=offer
 ++  grad  %noun
 ++  grow
   |%
-  ++  noun  fer
+  ++  noun  off
   --
 ++  grab
   |%

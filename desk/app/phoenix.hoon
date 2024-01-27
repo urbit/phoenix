@@ -2,27 +2,31 @@
 ::    encrypted data
 ::  use symetric encryption; it's faster
 ::  hash +code
+::  save keys
 ::
 ::  %phoenix
 ::
 ::  :phoenix|add-guest ~zod
 ::  :phoenix|del-guest ~zod
 ::
-::  :phoenix|snap %dojo
-::  :phoenix|tomb %dojo ud+1, =where ~hodler
-::  :phoenix|cull %dojo ud+1, =where ~hodler
+::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup', =raw |
+::  :phoenix|del-key @
 ::
-::  :phoenix|put %dojo
+::  :phoenix|snap %dude
+::  :phoenix|send %dude ud+42 ~hodler
+::
+::  :phoenix|tomb %dude ud+42, =where `~hodler
+::  :phoenix|cull %dude ud+42, =where `~hodler
 ::
 ::  :phoenix|query ~hodler
-::  :phoenix|keen ~hodler %dude version=@ud
+::  :phoenix|keen ~hodler %dude ud+42
 ::
-::  :phoenix|send-egg our %pals ~zod
+::  :phoenix|put our %dude ud+42
+::  :phoenix|import-clay our %dude /=desk=/some-backup/jam
 ::
-::  :phoenix|import-clay our %pals /=data=/jams/some-backup/jam
-::
+::  +phoenix!gt
 ::  +phoenix!guests
-::  +phoenix!eggs
+::  +phoenix!offer ~zod
 ::  +phoenix!offers
 ::
 ::    scrys:
@@ -76,6 +80,12 @@
       [%x %guests ~]  ``noun+!>(guests)
       [%x %offers ~]  ``noun+!>(offers)
     ::
+        [%x %offer ship=@ ~]
+      =/  =ship  (slav %p ship.pole)
+      :^  ~  ~  %noun
+      !>  ^-  offer
+      (make-offer:phx ship)
+    ::
         [%x %depositors ~]
       :^  ~  ~  %noun
       !>  ^-  (set ship)
@@ -84,12 +94,6 @@
       |=  =path
       ?~  path  ~
       (slaw %p i.path)
-    ::
-        [%x %offer ship=@ ~]
-      =/  =ship  (slav %p ship.pole)
-      :^  ~  ~  %noun
-      !>  ^-  offer
-      (make-offer:phx ship)
     ==
   ::
   ++  on-agent
@@ -116,10 +120,11 @@
   |=  [=ship =dude:gall =path]
   ^+  cor
   =+  .^(dat=@ %cx path)
+  =/  =page  [%egg-any dat]
   ::  XX  encrypt
   ::
   %-  emit
-  [%pass / %grow /(scot %p ship)/[dude] [%atom dat]]
+  [%pass / %grow /(scot %p ship)/[dude] page]
 ::
 ++  poke
   |=  [=mark =vase]
@@ -146,7 +151,7 @@
       ?-  -.cmd
         %snap         (handle-snap dude.cmd)
         %send         (handle-send [dude case target]:cmd)
-        %restore      (restore dude.cmd case.cmd)
+        %restore      (handle-restore [ship dude case]:cmd)
         %put          (handle-put [ship dude case]:cmd)
         %import-clay  (import-clay [ship dude path]:cmd)
         %add-key      cor(keys (~(put in keys) key.cmd))
@@ -160,19 +165,20 @@
   |=  [=(pole knot) =sign:agent:gall]
   ^+  cor
   ?+  pole  ~&([dap.bowl %strange-wire pole] cor)
-    [%hark ~]   cor
-    [%offer ~]  cor
-    [%query ~]  cor
+    [%hark ~]     cor
+    [%send ~]     cor
+    [%offer ~]    cor
+    [%query ~]    cor
+    [%phoenix ~]  cor
   ::
-      [%sav dude=@ ~]
-    =/  =dude:gall  (slav %tas dude.pole)
-    %-  (slog leaf+"%phoenix: saved to put: {<dude>}" ~)
+      [%sav ship=@ dude=@ case=@ ~]
+    ~&  >  [dap.bowl %saved-to-put `path`+.pole]
     cor
   ::
-      [?(%send %keen %cull %tomb) *]
+      [?(%cull %tomb) *]
     ?.  ?=(%poke-ack -.sign)  cor
     ?~  p.sign
-      (send-query src.bowl)  ::  too early? sleep, the push
+      (send-query src.bowl)
     ~&  >>>  [dap.bowl %poke-fail src.bowl `path`pole]
     cor
   ==
@@ -180,7 +186,7 @@
 ++  arvo
   |=  [=(pole knot) =sign-arvo]
   ^+  cor
-  ?+    pole  ~|([%bad-arvo-pole pole] !!)
+  ?+    pole  ~&([%bad-arvo-pole pole] cor)
       [%jael %pubs ~]
     ?>  ?=([%jael %public-keys *] sign-arvo)
     ?.  ?=(%breach -.public-keys-result.sign-arvo)
@@ -193,42 +199,58 @@
     %-  emit
     [%pass /offer %agent [ship %phoenix] %poke cage]
   ::
+      [%wake %offer ship=@ ~]
+    ?>  ?=([%behn %wake *] sign-arvo)
+    ?^  error.sign-arvo
+      cor
+    (send-offer (slav %p ship.pole))
+  ::
       [%keen ~]
     ?.  ?=([%ames %tune *] sign-arvo)
       ~|([%bad-sign-arvo sign-arvo] !!)
     ?~  roar.sign-arvo
       cor
     =/  source=ship  ship.sign-arvo
-    ?>  ?|  (our-team:phx source)
-            (~(has in guests) source)
+    =/  pax=path     (slag 6 path.sign-arvo)
+    ?.  ?=(^ pax)
+      ~&  >>>  [dap.bowl %bad-keen-path path.sign-arvo]
+      cor
+    =/  owner=ship  (slav %p i.pax)
+    =/  =spur       t.pax
+    ?>  ?|  (our-team:phx owner)
+            (~(has in guests) owner)
         ==
     =/  =roar:ames  u.roar.sign-arvo
     ?~  q.dat.roar
       cor
     =/  =page  u.q.dat.roar
-    ?>  ?=([%atom @] u.q.dat.roar)
-    =/  =dude:gall  (slav %tas (rear path.sign-arvo))  ::  XX
-    %-  emit
-    [%pass / %grow /(scot %p source)/[dude] page]
+    ?.  ?=([%egg-any @] page)
+      ~&  >>>  [dap.bowl %unsupported-page]
+      cor
+    =.  cor
+      (emit [%pass / %grow [(scot %p owner) spur] page])
+    =?  cor  !=(our.bowl owner)
+      %-  emit
+      [%pass /wake/offer/(scot %p owner) %arvo %b %wait now.bowl]
+    cor
   ==
-::  TODO
 ::
 ++  handle-put
   |=  [=ship =dude:gall =case]
   ^+  cor
-  =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-  ::  XX sky, don't scry unless da+now
-  ::
-  ?.  .^(? %gu /[our]/[dude]/[now]/$)
-    %-  (slog leaf+"%phoenix: dude not live: {<dude>}" ~)
+  =/  dat=(unit page)
+    (grasp:phx ship dude case)
+  ?~  dat
+    ~&  >>>  [dap.bowl %not-found ship dude case]
     cor
-  =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
-  =/  good-egg=egg-any:gall  (cook-egg:phx raw)
-  =/  =path  /[dap.bowl]/[dude]/[now]/'jam'
-  =/  dat=@  (jam good-egg)
-  =/  =cage  [%drum-put !>([path dat])]
+  ?.  ?=([%egg-any @] u.dat)
+    ~&  >>>  [dap.bowl %unsupported-page]
+    cor
+  =+  [who=(scot %p ship) now=(scot %da now.bowl)]
+  =/  =path  /[dap.bowl]/[who]/[dude]/[now]/'jam'
+  =/  =cage  [%drum-put !>([path q.u.dat])]
   %-  emit
-  [%pass /sav/[dude] %agent [our.bowl %hood] %poke cage]
+  [%pass /sav/[who]/[dude]/[now] %agent [our.bowl %hood] %poke cage]
 ::
 ++  handle-keen
   |=  [=ship =path]
@@ -246,24 +268,32 @@
       ~&  >  (make-offer:phx our.bowl)
       cor
     (send-query u.who)
-  ::  XX
-  ::
-  =/  =offer  (make-offer:phx src.bowl)
+  (send-offer src.bowl)
+::
+++  send-offer
+  |=  =ship
+  =/  =offer  (make-offer:phx ship)
   =/  =cage  [%phoenix-offer !>(offer)]
   %-  emit
-  [%pass /offer %agent [src.bowl %phoenix] %poke cage]
+  [%pass /offer %agent [ship %phoenix] %poke cage]
 ::
-++  restore
-  |=  [=dude:gall =case]
+++  handle-restore
+  |=  [=ship =dude:gall =case]
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
+    ~&  >>  [dap.bowl 'not running:' dude]
     cor
-  ~|  "{<dap.bowl>} failed to get {<dude>} {<case>}"
-  =+  .^([%atom dat=@] %gx /[our]/[dap.bowl]/(scot case)//1/[our]/[dude])
+  =/  dat=(unit page)
+    (pluck:phx ship dude case)
+  ?~  dat
+    ~&  >>>  [dap.bowl %not-found ship dude case]
+    cor
+  ?.  ?=([%egg-any @] u.dat)
+    ~&  >>>  [dap.bowl %bad-page]
+    cor
   ::  XX  decrypt
   ::
-  ~|  "{<dap.bowl>} failed @ to egg-any {<dude>} {<case>}"
-  =+  ;;(=egg-any:gall (cue dat))
+  =+  ;;(=egg-any:gall (cue q.u.dat))
   =/  =cage  [%egg-any !>(egg-any)]
   %-  emit
   [%pass /phoenix %agent [our.bowl dude] %poke cage]
@@ -287,15 +317,16 @@
     cor
   =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
   =/  good-egg=egg-any:gall  (cook-egg:phx raw)
-  =/  dat=@  (jam good-egg)
+  =/  =page  [%egg-any (jam good-egg)]
   ::  XX  encrypt
   ::
   %-  emit
-  [%pass / %grow /(scot %p our.bowl)/[dude] [%atom dat]]
+  [%pass / %grow /(scot %p our.bowl)/[dude] page]
 ::
 ++  handle-send
   |=  [=dude:gall =case target=ship]
   ^+  cor
+  ?<  =(our.bowl target)
   ?>  ?=([%ud @] case)
   =/  =offer  (make-offer:phx our.bowl)
   ?.  (~(has in offer) [/(scot %p our.bowl)/[dude] case])
@@ -321,8 +352,6 @@
 ++  handle-tomb
   |=  [=dude:gall =case where=ship]
   ?:  =(our.bowl where)
-    ::  TODO send-offer, or just query on ack
-    ::
     =/  =spur  /(scot %p src.bowl)/[dude]
     %-  emit
     [%pass / %tomb case spur]
@@ -330,19 +359,4 @@
   %-  emit
   =/  =cage  [%phoenix-command !>([%tomb dude case where])]
   [%pass /tomb %agent [where %phoenix] %poke cage]
-::
-++  encrypt
-  |=  [e=egg-any:gall pw=@t]
-  ^-  @
-  !!
-::
-++  decrypt
-  |=  [dat=@ pw=@t]
-  ^-  (unit egg-any:gall)
-  ::  try pw
-  ::  |.  (try decrypt)
-  ::  ?.  success
-  ::    ~
-  ::  `egg-any
-  !!
 --

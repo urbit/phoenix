@@ -1,4 +1,4 @@
-::  %phoenix sky
+::  +phoenix!gt
 ::
 :-  %say
 |=  [[now=@da @ our=@p ^] ~ ~]

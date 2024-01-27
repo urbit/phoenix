@@ -101,4 +101,78 @@
     %|  ~
     %&  `[pax ud+rev]
   ==
+::
+++  pluck
+  |=  [=ship =dude:gall =case]
+  ^-  (unit page)
+  ?.  ?=([%ud @] case)  ~
+  =/  fun=(unit fans:gall)
+    (~(get by sky.bowl) /(scot %p ship)/[dude])
+  ?~  fun  ~
+  =/  wut=(unit (pair @da (each page @uvI)))
+    (get:on-path u.fun +.case)
+  ?~  wut  ~
+  ?.  ?=(%& -.q.u.wut)  ~
+  `p.q.u.wut
+::
+++  grasp
+  |=  [=ship =dude:gall =case]
+  ^-  (unit page)
+  ?.  ?&  =(our.bowl ship)
+          =([%da now.bowl] case)
+      ==
+    (pluck ship dude case)
+  =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
+  ?.  .^(? %gu /[our]/[dude]/[now]/$)
+    %-  (slog leaf+"%phoenix: dude not live: {<dude>}" ~)
+    ~
+  =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
+  =/  good-egg=egg-any:gall  (cook-egg raw)
+  ::  XX encrypt
+  ::
+  `[%egg-any (jam good-egg)]
+::
+++  encrypt
+  |=  [e=egg-any:gall key=@t]
+  ^-  [%egg-any @]
+  ::  [%egg-any (jam e)]
+  !!
+::
+++  decrypt
+  |=  [dat=* keys=(set @)]
+  |^  ^-  (unit [%egg-any egg-any:gall])
+      =?  dat  ?=(@ dat)
+        (cue dat)
+      ?.  ?=([%egg-any *] dat)
+        ~&  >  [dap.bowl %decryt-failed %bad-page]
+        ~
+      ?:  ?=([%egg-any egg=^] dat)
+        ?^  res=(check dat)
+          res
+        ~&  >  [dap.bowl %decryt-failed %bad-egg]
+        ~
+      ?>  ?=([%egg-any egg=@] dat)
+      =/  keys=(list @)  ~(tap in keys)
+      ::
+      |-
+      ?~  keys
+        ~&  >  [dap.bowl %decryt-failed]
+        ~
+      ?^  res=(try dat i.keys)
+        res
+      $(keys t.keys)
+  ::
+  ++  try
+    |=  [[%egg-any egg=@] key=@]
+    ^-  (unit [%egg-any egg-any:gall])
+    ::  decrypt
+    ::
+    ::  =/  egg=*  *egg-any:gall
+    (check [%egg-any egg])
+  ::
+  ++  check
+    |=  foo=*
+    ^-  (unit [%egg-any egg-any:gall])
+    (mole |.(;;([%egg-any egg-any:gall] dat)))
+  --
 --

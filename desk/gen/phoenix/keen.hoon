@@ -1,11 +1,11 @@
-::  :phoenix|keen ~hodler %dude version=@ud
+::  :phoenix|keen ~hodler %dude case
 ::
 :-  %say
 |=  $:  [@ @ our=@p ^]
-        [=ship =dude:gall version=@ud ~]
+        [=ship =dude:gall =case ~]
         ~
     ==
 =/  =path
-  /g/x/[version]/phoenix//1/(scot %p our)/[dude]
+  /g/x/(scot case)/phoenix//1/(scot %p our)/[dude]
 [%phoenix-command [%keen ship path]]
 

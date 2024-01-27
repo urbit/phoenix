@@ -1,8 +1,5 @@
-::  :phoenix|import-clay %pals /=foo=/some-backup/jam
+::  :phoenix|import-clay our %dude /=desk=/some-backup/jam
 ::
 :-  %say
-|=  $:  ^
-        [=dude:gall =path ~]
-        ~
-    ==
-[%phoenix-command [%import-clay dude path]]
+|=  [^ [=ship =dude:gall =path ~] ~]
+[%phoenix-command [%import-clay ship dude path]]

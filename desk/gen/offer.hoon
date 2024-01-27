@@ -1,4 +1,4 @@
-::  %phoenix offers
+::  +phoenix!offer ~zod
 ::
 :-  %say
 |=  [[now=@da @ our=@p ^] [=ship ~] ~]

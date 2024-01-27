@@ -1,8 +1,8 @@
-::  :phoenix|tomb %phoenix ud+1, =where ~hodler
+::  :phoenix|tomb %dude ud+42, =where `~hodler
 ::
 :-  %say
 |=  $:  [@ @ our=@p ^]
         [=dude:gall =case ~]
-        [where=ship ~]
+        where=(unit ship)
     ==
-[%phoenix-command [%tomb dude case ?~(where our where)]]
+[%phoenix-command [%tomb dude case ?~(where our u.where)]]
