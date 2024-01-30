@@ -3,5 +3,5 @@
 :-  %say
 |=  [^ [key=@ ~] raw=_|]
 =?  key  !raw
-  (shax key)
+  (shaz key)
 [%phoenix-command [%add-key key]]

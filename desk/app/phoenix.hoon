@@ -81,10 +81,9 @@
       [%x %offers ~]  ``noun+!>(offers)
     ::
         [%x %offer ship=@ ~]
-      =/  =ship  (slav %p ship.pole)
       :^  ~  ~  %noun
       !>  ^-  offer
-      (make-offer:phx ship)
+      (make-offer:phx (slav %p ship.pole))
     ::
         [%x %depositors ~]
       :^  ~  ~  %noun
@@ -111,20 +110,25 @@
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
+++  grow
+  |=  [owner=@p =spur =page]
+  %-  emit
+  [%pass / %grow [(scot %p owner) spur] page]
+::
 ++  send-query
   |=  =ship
   %-  emit
   [%pass /query %agent [ship %phoenix] %poke [%phoenix-command !>([%query ~])]]
-
+::
 ++  import-clay
-  |=  [=ship =dude:gall =path]
+  |=  [=ship =spur =path]
   ^+  cor
   =+  .^(dat=@ %cx path)
-  =/  =page  [%egg-any dat]
-  ::  XX  encrypt
-  ::
-  %-  emit
-  [%pass / %grow /(scot %p ship)/[dude] page]
+  =/  page  (cue dat)
+  ?.  ?=([%egg-any @] page)
+    ~&  >>>  [dap.bowl %bad-import]
+    cor
+  (grow ship spur page)
 ::
 ++  poke
   |=  [=mark =vase]
@@ -138,8 +142,8 @@
         ?(%query %cull %tomb %keen)
       ?-  -.cmd
         %query  (handle-query who.cmd)
-        %cull   (handle-cull [dude case where]:cmd)
-        %tomb   (handle-tomb [dude case where]:cmd)
+        %cull   (handle-cull [case spur where]:cmd)
+        %tomb   (handle-tomb [case spur where]:cmd)
         %keen   (handle-keen ship.cmd path.cmd)
       ==
     ::
@@ -150,10 +154,10 @@
       ?>  =(our src):bowl
       ?-  -.cmd
         %snap         (handle-snap dude.cmd)
-        %send         (handle-send [dude case target]:cmd)
-        %restore      (handle-restore [ship dude case]:cmd)
-        %put          (handle-put [ship dude case]:cmd)
-        %import-clay  (import-clay [ship dude path]:cmd)
+        %send         (handle-send [case spur target]:cmd)
+        %restore      (handle-restore [ship spur case]:cmd)
+        %put          (handle-put [ship spur case]:cmd)
+        %import-clay  (import-clay [ship spur path]:cmd)
         %add-key      cor(keys (~(put in keys) key.cmd))
         %del-key      cor(keys (~(del in keys) key.cmd))
         %add-guest    cor(guests (~(put in guests) ship.cmd))
@@ -171,8 +175,11 @@
     [%query ~]    cor
     [%phoenix ~]  cor
   ::
-      [%sav ship=@ dude=@ case=@ ~]
-    ~&  >  [dap.bowl %saved-to-put `path`+.pole]
+      [%sav rest=*]
+    ?.  ?=(%poke-ack -.sign)
+      ~&  >>>  [dap.bowl %put-failed `path`rest.pole]
+      cor
+    ~&  >  [dap.bowl %saved-to-put `path`rest.pole]
     cor
   ::
       [?(%cull %tomb) *]
@@ -195,8 +202,8 @@
     ?~  offer=(make-offer:phx ship)                 ::  XX
       cor
     %-  (slog leaf+"%phoenix: {<ship>} breached" ~)
-    =/  =cage  [%phoenix-offer !>(offer)]
     %-  emit
+    =/  =cage  [%phoenix-offer !>(offer)]
     [%pass /offer %agent [ship %phoenix] %poke cage]
   ::
       [%wake %offer ship=@ ~]
@@ -227,8 +234,7 @@
     ?.  ?=([%egg-any @] page)
       ~&  >>>  [dap.bowl %unsupported-page]
       cor
-    =.  cor
-      (emit [%pass / %grow [(scot %p owner) spur] page])
+    =.  cor  (grow owner spur page)
     =?  cor  !=(our.bowl owner)
       %-  emit
       [%pass /wake/offer/(scot %p owner) %arvo %b %wait now.bowl]
@@ -236,21 +242,23 @@
   ==
 ::
 ++  handle-put
-  |=  [=ship =dude:gall =case]
+  |=  [=ship =spur =case]
   ^+  cor
-  =/  dat=(unit page)
-    (grasp:phx ship dude case)
-  ?~  dat
-    ~&  >>>  [dap.bowl %not-found ship dude case]
+  =/  pug=(unit page)
+    (grasp:phx ship spur case)
+  ?~  pug
+    ~&  >>>  [dap.bowl %not-found ship spur case]
     cor
-  ?.  ?=([%egg-any @] u.dat)
+  ?.  ?=([%egg-any @] u.pug)
     ~&  >>>  [dap.bowl %unsupported-page]
     cor
-  =+  [who=(scot %p ship) now=(scot %da now.bowl)]
-  =/  =path  /[dap.bowl]/[who]/[dude]/[now]/'jam'
-  =/  =cage  [%drum-put !>([path q.u.dat])]
+  =/  dat=@  (jam u.pug)
   %-  emit
-  [%pass /sav/[who]/[dude]/[now] %agent [our.bowl %hood] %poke cage]
+  =+  [who=(scot %p ship) now=(scot %da now.bowl)]
+  =/  =wire  :(weld /sav/[who] spur /[now])
+  =/  =path  :(weld /[dap.bowl]/[who] spur /[now]/'jam')
+  =/  =cage  [%drum-put !>([path dat])]
+  [%pass wire %agent [our.bowl %hood] %poke cage]
 ::
 ++  handle-keen
   |=  [=ship =path]
@@ -278,15 +286,16 @@
   [%pass /offer %agent [ship %phoenix] %poke cage]
 ::
 ++  handle-restore
-  |=  [=ship =dude:gall =case]
+  |=  [=ship =spur =case]
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
+  =/  =dude:gall  (slav %tas (head spur))
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
     ~&  >>  [dap.bowl 'not running:' dude]
     cor
   =/  dat=(unit page)
-    (pluck:phx ship dude case)
+    (pluck:phx ship spur case)
   ?~  dat
-    ~&  >>>  [dap.bowl %not-found ship dude case]
+    ~&  >>>  [dap.bowl %not-found ship spur case]
     cor
   ?.  ?=([%egg-any @] u.dat)
     ~&  >>>  [dap.bowl %bad-page]
@@ -313,50 +322,49 @@
   ^+  cor
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
-    %-  (slog leaf+"%phoenix: dude not live: {<dude>}" ~)
+    ~&  >>  [dap.bowl %dude-not-live dude]
     cor
   =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
   =/  good-egg=egg-any:gall  (cook-egg:phx raw)
   =/  =page  [%egg-any (jam good-egg)]
   ::  XX  encrypt
   ::
-  %-  emit
-  [%pass / %grow /(scot %p our.bowl)/[dude] page]
+  (grow our.bowl /[dude] page)
 ::
 ++  handle-send
-  |=  [=dude:gall =case target=ship]
+  |=  [=case =spur target=ship]
   ^+  cor
   ?<  =(our.bowl target)
   ?>  ?=([%ud @] case)
   =/  =offer  (make-offer:phx our.bowl)
-  ?.  (~(has in offer) [/(scot %p our.bowl)/[dude] case])
-    ~&  >>>  [%phoenix %not-found dude case]
+  ?.  (~(has in offer) [(scot %p our.bowl) spur] case)
+    ~&  >>>  [%phoenix %not-found case spur]
     cor
-  =/  =path
-    /g/x/(scot case)/[dap.bowl]//1/(scot %p our.bowl)/[dude]
-  =/  =cage  [%phoenix-command !>([%keen our.bowl path])]
   %-  emit
+  =/  =path
+    (weld /g/x/(scot case)/[dap.bowl]//1/(scot %p our.bowl) spur)
+  =/  =cage  [%phoenix-command !>([%keen our.bowl path])]
   [%pass /send %agent [target %phoenix] %poke cage]
 ::
 ++  handle-cull
-  |=  [=dude:gall =case where=ship]
+  |=  [=case =spur where=ship]
   ?:  =(our.bowl where)
-    =/  =spur  /(scot %p src.bowl)/[dude]
     %-  emit
+    =/  =^spur  [(scot %p src.bowl) spur]
     [%pass / %cull case spur]
   ?>  =(our src):bowl
   %-  emit
-  =/  =cage  [%phoenix-command !>([%cull dude case where])]
+  =/  =cage  [%phoenix-command !>([%cull case spur where])]
   [%pass /cull %agent [where %phoenix] %poke cage]
 ::
 ++  handle-tomb
-  |=  [=dude:gall =case where=ship]
+  |=  [=case =spur where=ship]
   ?:  =(our.bowl where)
-    =/  =spur  /(scot %p src.bowl)/[dude]
     %-  emit
+    =/  =^spur  [(scot %p src.bowl) spur]
     [%pass / %tomb case spur]
   ?>  =(our src):bowl
   %-  emit
-  =/  =cage  [%phoenix-command !>([%tomb dude case where])]
+  =/  =cage  [%phoenix-command !>([%tomb case spur where])]
   [%pass /tomb %agent [where %phoenix] %poke cage]
 --

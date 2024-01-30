@@ -2,4 +2,5 @@
 ::
 :-  %say
 |=  [^ [=ship =dude:gall =path ~] ~]
-[%phoenix-command [%import-clay ship dude path]]
+=/  =spur  /[dude]
+[%phoenix-command [%import-clay ship spur path]]

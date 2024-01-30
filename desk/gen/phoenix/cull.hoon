@@ -5,5 +5,5 @@
         [=dude:gall =case ~]
         where=(unit ship)
     ==
-[%phoenix-command [%cull dude case ?~(where our u.where)]]
+[%phoenix-command [%cull case /[dude] ?~(where our u.where)]]
 

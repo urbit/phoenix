@@ -103,11 +103,11 @@
   ==
 ::
 ++  pluck
-  |=  [=ship =dude:gall =case]
+  |=  [=ship =spur =case]
   ^-  (unit page)
   ?.  ?=([%ud @] case)  ~
   =/  fun=(unit fans:gall)
-    (~(get by sky.bowl) /(scot %p ship)/[dude])
+    (~(get by sky.bowl) [(scot %p ship) spur])
   ?~  fun  ~
   =/  wut=(unit (pair @da (each page @uvI)))
     (get:on-path u.fun +.case)
@@ -116,13 +116,14 @@
   `p.q.u.wut
 ::
 ++  grasp
-  |=  [=ship =dude:gall =case]
+  |=  [=ship =spur =case]
   ^-  (unit page)
   ?.  ?&  =(our.bowl ship)
           =([%da now.bowl] case)
       ==
-    (pluck ship dude case)
+    (pluck ship spur case)
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
+  =/  =dude:gall  (slav %tas (head spur))
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
     %-  (slog leaf+"%phoenix: dude not live: {<dude>}" ~)
     ~

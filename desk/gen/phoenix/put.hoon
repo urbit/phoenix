@@ -5,4 +5,4 @@
         [=ship =dude:gall =case ~]
         ~
     ==
-[%phoenix-command [%put ship dude case]]
+[%phoenix-command [%put ship /[dude] case]]
