@@ -2,8 +2,8 @@
 +$  offer  (set [spur case])
 ::
 +$  command
-  $%  [%snap =dude:gall]                ::  take snapshot
-      [%restore =ship =spur =case]      ::  poke an agent with egg-any
+  $%  [%snap =dude:gall]                       ::  take snapshot
+      [%restore =ship =spur =case =dude:gall]  ::  poke an agent with egg-any
     ::
       [%query who=(unit ship)]          ::  request for offers
       [%cull =case =spur where=ship]    ::  cull ud+0 to case

@@ -2,4 +2,4 @@
 ::
 :-  %say
 |=  [^ [=ship =dude:gall =case ~] ~]
-[%phoenix-command [%restore ship /[dude] case]]
+[%phoenix-command [%restore ship /[dude] case dude]]

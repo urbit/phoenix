@@ -50,14 +50,6 @@
       (fellow-moon ship)  ::  fellow moons
   ==
 ::
-++  our-code
-  ^-  @t
-  =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-  %-  crip
-  %+  slag  1
-  %+  scow  %p
-  .^(@p %j /[our]/code/[now]/[our])
-::
 ++  send-hark
   |=  [who=ship msg=cord]
   ^-  (list card:agent:gall)
@@ -129,51 +121,49 @@
     ~
   =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
   =/  good-egg=egg-any:gall  (cook-egg raw)
-  ::  XX encrypt
-  ::
-  `[%egg-any (jam good-egg)]
+  =/  egg-jam=@  (jam [%egg-any good-egg])
+  =/  egg-crypt=[%atom @]
+    (encrypt egg-jam our-key)
+  `egg-crypt
+::
+++  our-key  (shaz our-code)
+++  our-code
+  ^-  @t
+  =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
+  %-  crip
+  %+  slag  1
+  %+  scow  %p
+  .^(@p %j /[our]/code/[now]/[our])
 ::
 ++  encrypt
-  |=  [e=egg-any:gall key=@t]
-  ^-  [%egg-any @]
-  ::  [%egg-any (jam e)]
-  !!
+  |=  [msg=@ key=@]
+  ^-  [%atom @]
+  =/  cc  (pit:nu:crub:crypto 512 key)
+  [%atom (en.cc key msg)]
 ::
 ++  decrypt
-  |=  [dat=* keys=(set @)]
+  |=  [msg=@ keys=(set @)]
   |^  ^-  (unit [%egg-any egg-any:gall])
-      =?  dat  ?=(@ dat)
-        (cue dat)
-      ?.  ?=([%egg-any *] dat)
-        ~&  >  [dap.bowl %decryt-failed %bad-page]
-        ~
-      ?:  ?=([%egg-any egg=^] dat)
-        ?^  res=(check dat)
-          res
-        ~&  >  [dap.bowl %decryt-failed %bad-egg]
-        ~
-      ?>  ?=([%egg-any egg=@] dat)
       =/  keys=(list @)  ~(tap in keys)
-      ::
       |-
       ?~  keys
         ~&  >  [dap.bowl %decryt-failed]
         ~
-      ?^  res=(try dat i.keys)
+      ?^  res=(try i.keys msg)
         res
       $(keys t.keys)
   ::
   ++  try
-    |=  [[%egg-any egg=@] key=@]
+    |=  [key=@ msg=@]
     ^-  (unit [%egg-any egg-any:gall])
-    ::  decrypt
-    ::
-    ::  =/  egg=*  *egg-any:gall
-    (check [%egg-any egg])
+    =/  cc=acru:ames  (pit:nu:crub:crypto 512 key)
+    ?~  res=(de.cc key msg)
+      ~
+    (check u.res)
   ::
   ++  check
-    |=  foo=*
+    |=  in=@
     ^-  (unit [%egg-any egg-any:gall])
-    (mole |.(;;([%egg-any egg-any:gall] dat)))
+    (mole |.(;;([%egg-any egg-any:gall] (cue in))))
   --
 --

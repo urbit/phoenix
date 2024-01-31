@@ -1,9 +1,3 @@
-::  TODO
-::    encrypted data
-::  use symetric encryption; it's faster
-::  hash +code
-::  save keys
-::
 ::  %phoenix
 ::
 ::  :phoenix|add-guest ~zod
@@ -125,7 +119,7 @@
   ^+  cor
   =+  .^(dat=@ %cx path)
   =/  page  (cue dat)
-  ?.  ?=([%egg-any @] page)
+  ?.  ?=([%atom @] page)
     ~&  >>>  [dap.bowl %bad-import]
     cor
   (grow ship spur page)
@@ -155,7 +149,7 @@
       ?-  -.cmd
         %snap         (handle-snap dude.cmd)
         %send         (handle-send [case spur target]:cmd)
-        %restore      (handle-restore [ship spur case]:cmd)
+        %restore      (handle-restore [ship spur case dude]:cmd)
         %put          (handle-put [ship spur case]:cmd)
         %import-clay  (import-clay [ship spur path]:cmd)
         %add-key      cor(keys (~(put in keys) key.cmd))
@@ -231,7 +225,7 @@
     ?~  q.dat.roar
       cor
     =/  =page  u.q.dat.roar
-    ?.  ?=([%egg-any @] page)
+    ?.  ?=([%atom @] page)
       ~&  >>>  [dap.bowl %unsupported-page]
       cor
     =.  cor  (grow owner spur page)
@@ -249,7 +243,7 @@
   ?~  pug
     ~&  >>>  [dap.bowl %not-found ship spur case]
     cor
-  ?.  ?=([%egg-any @] u.pug)
+  ?.  ?=([%atom @] u.pug)
     ~&  >>>  [dap.bowl %unsupported-page]
     cor
   =/  dat=@  (jam u.pug)
@@ -286,9 +280,8 @@
   [%pass /offer %agent [ship %phoenix] %poke cage]
 ::
 ++  handle-restore
-  |=  [=ship =spur =case]
+  |=  [=ship =spur =case =dude:gall]
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-  =/  =dude:gall  (slav %tas (head spur))
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
     ~&  >>  [dap.bowl 'not running:' dude]
     cor
@@ -297,14 +290,20 @@
   ?~  dat
     ~&  >>>  [dap.bowl %not-found ship spur case]
     cor
-  ?.  ?=([%egg-any @] u.dat)
-    ~&  >>>  [dap.bowl %bad-page]
+  ?.  ?=([%atom @] u.dat)
+    ~&  >>>  [dap.bowl %bad-dat]
     cor
-  ::  XX  decrypt
+  =.  keys  (~(put in keys) our-key:phx)
+  =/  egg-page=(unit page)
+    ^-  (unit [%egg-any egg-any:gall])
+    (decrypt:phx q.u.dat keys)
   ::
-  =+  ;;(=egg-any:gall (cue q.u.dat))
-  =/  =cage  [%egg-any !>(egg-any)]
+  ?~  egg-page
+    ~&  >>>  [dap.bowl %restore-failed]
+    cor
   %-  emit
+  =/  =vase  [-:!>(*egg-any:gall) q.u.egg-page]
+  =/  =cage  [%egg-any vase]
   [%pass /phoenix %agent [our.bowl dude] %poke cage]
 ::
 ++  handle-offer
@@ -326,9 +325,11 @@
     cor
   =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
   =/  good-egg=egg-any:gall  (cook-egg:phx raw)
-  =/  =page  [%egg-any (jam good-egg)]
-  ::  XX  encrypt
-  ::
+  =/  egg-page=page  [%egg-any good-egg]
+  =/  egg-jam=@      (jam egg-page)
+  =/  key=@  our-key:phx
+  =.  keys   (~(put in keys) key)
+  =/  =page  (encrypt:phx egg-jam key)
   (grow our.bowl /[dude] page)
 ::
 ++  handle-send
