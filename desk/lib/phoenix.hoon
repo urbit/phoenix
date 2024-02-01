@@ -135,11 +135,26 @@
   %+  scow  %p
   .^(@p %j /[our]/code/[now]/[our])
 ::
+:: ++  derive-symmetric-key
+::   |=  [=public-key:ames private-key=@uwprivatekey]
+::   ^-  symmetric-key:ames
+::   ?>  =('b' (end 3 public-key))
+::   =.  public-key  (rsh 8 (rsh 3 public-key))
+::   ::
+::   ?>  =('B' (end 3 private-key))
+::   =.  private-key  (rsh 8 (rsh 3 private-key))
+::   ::
+::   `@`(shar:ed:crypto public-key private-key)
+::
 ++  encrypt
   |=  [msg=@ key=@]
   ^-  [%atom @]
-  =/  cc  (pit:nu:crub:crypto 512 key)
-  [%atom (en.cc key msg)]
+  =/  cc=acru:ames  (pit:nu:crub:crypto 512 key)
+  :: =/  =symmetric-key:ames
+  ::   (derive-symmetric-key [pub sec]:ex:cc)
+  =/  encrypted-msg  (en:cc sec:ex:cc msg)
+  =/  sealed-msg     (seal:as:cc pub:ex:cc encrypted-msg)
+  [%atom sealed-msg]
 ::
 ++  decrypt
   |=  [msg=@ keys=(set @)]
@@ -157,8 +172,14 @@
     |=  [key=@ msg=@]
     ^-  (unit [%egg-any egg-any:gall])
     =/  cc=acru:ames  (pit:nu:crub:crypto 512 key)
-    ?~  res=(de.cc key msg)
-      ~
+    =/  ok=(unit @ux)
+      (sure:as:cc msg)
+    ?~  ok  ~
+    :: =/  =symmetric-key:ames
+    ::   (derive-symmetric-key [pub sec]:ex:cc)
+    =/  res=(unit @ux)
+      (de:cc sec:ex:cc u.ok)
+    ?~  res  ~
     (check u.res)
   ::
   ++  check
