@@ -135,26 +135,13 @@
   %+  scow  %p
   .^(@p %j /[our]/code/[now]/[our])
 ::
-:: ++  derive-symmetric-key
-::   |=  [=public-key:ames private-key=@uwprivatekey]
-::   ^-  symmetric-key:ames
-::   ?>  =('b' (end 3 public-key))
-::   =.  public-key  (rsh 8 (rsh 3 public-key))
-::   ::
-::   ?>  =('B' (end 3 private-key))
-::   =.  private-key  (rsh 8 (rsh 3 private-key))
-::   ::
-::   `@`(shar:ed:crypto public-key private-key)
-::
 ++  encrypt
   |=  [msg=@ key=@]
   ^-  [%atom @]
-  =/  cc=acru:ames  (pit:nu:crub:crypto 512 key)
-  :: =/  =symmetric-key:ames
-  ::   (derive-symmetric-key [pub sec]:ex:cc)
+  =/  cc=acru:ames   (pit:nu:crub:crypto 512 key)
   =/  encrypted-msg  (en:cc sec:ex:cc msg)
-  =/  sealed-msg     (seal:as:cc pub:ex:cc encrypted-msg)
-  [%atom sealed-msg]
+  =/     signed-msg  (sign:as:cc encrypted-msg)
+  [%atom signed-msg]
 ::
 ++  decrypt
   |=  [msg=@ keys=(set @)]
@@ -162,7 +149,7 @@
       =/  keys=(list @)  ~(tap in keys)
       |-
       ?~  keys
-        ~&  >  [dap.bowl %decryt-failed]
+        ~&  >>>  [dap.bowl %decryt-failed]
         ~
       ?^  res=(try i.keys msg)
         res
@@ -172,13 +159,9 @@
     |=  [key=@ msg=@]
     ^-  (unit [%egg-any egg-any:gall])
     =/  cc=acru:ames  (pit:nu:crub:crypto 512 key)
-    =/  ok=(unit @ux)
-      (sure:as:cc msg)
-    ?~  ok  ~
-    :: =/  =symmetric-key:ames
-    ::   (derive-symmetric-key [pub sec]:ex:cc)
-    =/  res=(unit @ux)
-      (de:cc sec:ex:cc u.ok)
+    =/  sure=(unit @ux)  (sure:as:cc msg)
+    ?~  sure  ~
+    =/  res=(unit @ux)   (de:cc sec:ex:cc u.sure)
     ?~  res  ~
     (check u.res)
   ::
