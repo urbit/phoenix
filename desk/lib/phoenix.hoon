@@ -116,9 +116,7 @@
     (pluck ship spur case)
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
   =/  =dude:gall  (slav %tas (head spur))
-  ?.  .^(? %gu /[our]/[dude]/[now]/$)
-    %-  (slog leaf+"%phoenix: dude not live: {<dude>}" ~)
-    ~
+  ~|  "{<dap.bowl>}: grasp failed: {<dude>}"
   =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
   =/  good-egg=egg-any:gall  (cook-egg raw)
   =/  egg-jam=@  (jam [%egg-any good-egg])

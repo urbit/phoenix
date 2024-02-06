@@ -1,5 +1,8 @@
-::  :phoenix|restore our %dude ud+42
+::  :phoenix|restore %dude ud+42
 ::
 :-  %say
-|=  [^ [=ship =dude:gall =case ~] ~]
-[%phoenix-command [%restore ship /[dude] case dude]]
+|=  $:  [@ @ our=@p ^]
+        [=dude:gall =case ~]
+        ~
+    ==
+[%phoenix-command [%restore our /[dude] case dude]]

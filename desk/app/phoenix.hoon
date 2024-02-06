@@ -8,6 +8,7 @@
 ::
 ::  :phoenix|snap %dude
 ::  :phoenix|send %dude ud+42 ~hodler
+::  :phoenix|restore %dude ud+42
 ::
 ::  :phoenix|tomb %dude ud+42, =where `~hodler
 ::  :phoenix|cull %dude ud+42, =where `~hodler
@@ -24,10 +25,12 @@
 ::  +phoenix!offers
 ::
 ::    scrys:
+::  .^((set @) %gx /=phoenix=/keys/noun)
 ::  .^((set ship) %gx /=phoenix=/guests/noun)
 ::  .^((set ship) %gx /=phoenix=/depositors/noun)
 ::  .^((map ship (set [spur case])) %gx /=phoenix=/offers/noun)
 ::  .^((set [path case]) %gx /=phoenix=/offer/(scot %p our)/noun)
+::  .^(egg-any:gall %gx /=phoenix=/egg-any/(scot %p our)/(scot ud+42)/dude/noun)
 ::
 /-  *phoenix
 /+  phoenix, default-agent, dbug, verb
@@ -71,6 +74,7 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
+      [%x %keys ~]    ``noun+!>(keys)
       [%x %guests ~]  ``noun+!>(guests)
       [%x %offers ~]  ``noun+!>(offers)
     ::
@@ -87,6 +91,22 @@
       |=  =path
       ?~  path  ~
       (slaw %p i.path)
+    ::
+        [%x %egg-any ship=@ case=@ spur=*]
+      =/  =ship  (slav %p ship.pole)
+      =/  case=(unit case)  (de-case case.pole)
+      ?~  case  ~
+      =/  dat=(unit page)
+        (pluck:phx ship spur.pole u.case)
+      ?~  dat  ~
+      ?.  ?=([%atom @] u.dat)
+        ~
+      =/  egg-page=(unit page)
+        ^-  (unit [%egg-any egg-any:gall])
+        (decrypt:phx q.u.dat keys)
+      ?~  egg-page  ~
+      =+  ;;(=egg-any:gall q.u.egg-page)
+      ``noun+!>(egg-any)
     ==
   ::
   ++  on-agent
@@ -120,7 +140,7 @@
   =+  .^(dat=@ %cx path)
   =/  page  (cue dat)
   ?.  ?=([%atom @] page)
-    ~&  >>>  [dap.bowl %bad-import]
+    ~&  >>>  "{<dap.bowl>}: import failed"
     cor
   (grow ship spur page)
 ::
@@ -162,7 +182,7 @@
 ++  agent
   |=  [=(pole knot) =sign:agent:gall]
   ^+  cor
-  ?+  pole  ~&([dap.bowl %strange-wire pole] cor)
+  ?+  pole  ~&([dap.bowl %strange-wire `path`pole] cor)
     [%hark ~]     cor
     [%send ~]     cor
     [%offer ~]    cor
@@ -180,22 +200,22 @@
     ?.  ?=(%poke-ack -.sign)  cor
     ?~  p.sign
       (send-query src.bowl)
-    ~&  >>>  [dap.bowl %poke-fail src.bowl `path`pole]
+    ~&  >>>  [dap.bowl %poke-failed src.bowl `path`pole]
     cor
   ==
 ::
 ++  arvo
   |=  [=(pole knot) =sign-arvo]
   ^+  cor
-  ?+    pole  ~&([%bad-arvo-pole pole] cor)
+  ?+    pole  ~&([dap.bowl %strange-arvo-wire `path`pole] cor)
       [%jael %pubs ~]
     ?>  ?=([%jael %public-keys *] sign-arvo)
     ?.  ?=(%breach -.public-keys-result.sign-arvo)
       cor
     =/  =ship   who.public-keys-result.sign-arvo
-    ?~  offer=(make-offer:phx ship)                 ::  XX
+    ?~  offer=(make-offer:phx ship)
       cor
-    %-  (slog leaf+"%phoenix: {<ship>} breached" ~)
+    ~&  >>  "{<dap.bowl>}: {<ship>} breached"
     %-  emit
     =/  =cage  [%phoenix-offer !>(offer)]
     [%pass /offer %agent [ship %phoenix] %poke cage]
@@ -248,9 +268,12 @@
     cor
   =/  dat=@  (jam u.pug)
   %-  emit
-  =+  [who=(scot %p ship) now=(scot %da now.bowl)]
-  =/  =wire  :(weld /sav/[who] spur /[now])
-  =/  =path  :(weld /[dap.bowl]/[who] spur /[now]/'jam')
+  =/  ship-sig=tape   (slag 1 (scow %p ship))
+  =/  directory=path  [dap.bowl (crip ship-sig) spur]
+  =/  file-name=path
+    /[(crip :(weld ship-sig "-" spur "-" (scow case)))]/'jam'
+  =/  =path  (weld directory file-name)
+  =/  =wire  [%sav path]
   =/  =cage  [%drum-put !>([path dat])]
   [%pass wire %agent [our.bowl %hood] %poke cage]
 ::
@@ -267,7 +290,7 @@
   ?:  =(our src):bowl
     ?~  who  cor
     ?:  =(our.bowl u.who)
-      ~&  >  (make-offer:phx our.bowl)
+      ~&  >  (sort ~(tap in (make-offer:phx our.bowl)) aor)
       cor
     (send-query u.who)
   (send-offer src.bowl)
@@ -283,34 +306,33 @@
   |=  [=ship =spur =case =dude:gall]
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
-    ~&  >>  [dap.bowl 'not running:' dude]
+    ~&  >>>  [dap.bowl 'restore failed: not running:' dude]
     cor
   =/  dat=(unit page)
     (pluck:phx ship spur case)
   ?~  dat
-    ~&  >>>  [dap.bowl %not-found ship spur case]
+    ~&  >>>  [dap.bowl 'restore failed: not found:' ship spur case]
     cor
   ?.  ?=([%atom @] u.dat)
-    ~&  >>>  [dap.bowl %bad-dat]
+    ~&  >>>  [dap.bowl 'restore failed: unsupported format']
     cor
   =.  keys  (~(put in keys) our-key:phx)
   =/  egg-page=(unit page)
     ^-  (unit [%egg-any egg-any:gall])
     (decrypt:phx q.u.dat keys)
-  ::
   ?~  egg-page
-    ~&  >>>  [dap.bowl %restore-failed]
+    ~&  >>>  [dap.bowl 'restore-failed: missing page']
     cor
   %-  emit
-  =/  =vase  [-:!>(*egg-any:gall) q.u.egg-page]
-  =/  =cage  [%egg-any vase]
+  =+  ;;(=egg-any:gall q.u.egg-page)
+  =/  =cage  [%egg-any !>(egg-any)]
   [%pass /phoenix %agent [our.bowl dude] %poke cage]
 ::
 ++  handle-offer
   |=  =offer
   ^+  cor
   ?<  =(our src):bowl
-  ~&  >  [%phoenix src.bowl %offers (sort ~(tap in offer) aor)]
+  ~&  >  "{<dap.bowl>}: {<src.bowl>} offers: {<(sort ~(tap in offer) aor)>}"
   =.  offers  (~(put by offers) src.bowl offer)
   =/  msg=cord  %-  crip
     " offers: {<(sort ~(tap in offer) aor)>}"
@@ -320,9 +342,7 @@
   |=  =dude:gall
   ^+  cor
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-  ?.  .^(? %gu /[our]/[dude]/[now]/$)
-    ~&  >>  [dap.bowl %dude-not-live dude]
-    cor
+  ~|  "{<dap.bowl>}: snap failed: {<dude>}"
   =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
   =/  good-egg=egg-any:gall  (cook-egg:phx raw)
   =/  egg-page=page  [%egg-any good-egg]
@@ -339,7 +359,7 @@
   ?>  ?=([%ud @] case)
   =/  =offer  (make-offer:phx our.bowl)
   ?.  (~(has in offer) [(scot %p our.bowl) spur] case)
-    ~&  >>>  [%phoenix %not-found case spur]
+    ~&  >>  "{<dap.bowl>}: not found: {<spur>} {<case>}"
     cor
   %-  emit
   =/  =path
