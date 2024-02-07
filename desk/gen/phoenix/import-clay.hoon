@@ -1,4 +1,4 @@
-::  :phoenix|import-clay our %dude /=desk=/some-backup/jam
+::  :phoenix|import-clay owner=ship %dude /=desk=/owner-dude-42/jam
 ::
 :-  %say
 |=  [^ [=ship =dude:gall =path ~] ~]

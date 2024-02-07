@@ -17,7 +17,7 @@
 ::  :phoenix|keen ~hodler %dude ud+42
 ::
 ::  :phoenix|put our %dude ud+42
-::  :phoenix|import-clay our %dude /=desk=/some-backup/jam
+::  :phoenix|import-clay owner=ship %dude /=desk=/owner-dude-42/jam
 ::
 ::  +phoenix!gt
 ::  +phoenix!guests
@@ -142,6 +142,7 @@
   ?.  ?=([%atom @] page)
     ~&  >>>  "{<dap.bowl>}: import failed"
     cor
+  ~&  >  "{<dap.bowl>}: imported: {<path>}"
   (grow ship spur page)
 ::
 ++  poke
@@ -179,6 +180,7 @@
       ==
     ==
   ==
+::
 ++  agent
   |=  [=(pole knot) =sign:agent:gall]
   ^+  cor
@@ -226,21 +228,27 @@
       cor
     (send-offer (slav %p ship.pole))
   ::
-      [%keen ~]
+      [%keen cmd-src=@ ~]
     ?.  ?=([%ames %tune *] sign-arvo)
       ~|([%bad-sign-arvo sign-arvo] !!)
     ?~  roar.sign-arvo
       cor
-    =/  source=ship  ship.sign-arvo
-    =/  pax=path     (slag 6 path.sign-arvo)
+    =/  cmd-src=ship   (slav %p cmd-src.pole)
+    =/  data-src=ship  ship.sign-arvo
+    =/  pax=path       (slag 6 path.sign-arvo)
     ?.  ?=(^ pax)
       ~&  >>>  [dap.bowl %bad-keen-path path.sign-arvo]
       cor
     =/  owner=ship  (slav %p i.pax)
     =/  =spur       t.pax
-    ?>  ?|  (our-team:phx owner)
+    ?.  ?|  =(our.bowl owner)
             (~(has in guests) owner)
         ==
+      ~&  >>>  :*  dap.bowl  %strange-data
+                   cmd-src=cmd-src  data-src=data-src
+                   path.sign-arvo
+               ==
+      cor
     =/  =roar:ames  u.roar.sign-arvo
     ?~  q.dat.roar
       cor
@@ -258,15 +266,15 @@
 ++  handle-put
   |=  [=ship =spur =case]
   ^+  cor
-  =/  pug=(unit page)
+  =/  upage=(unit page)
     (grasp:phx ship spur case)
-  ?~  pug
+  ?~  upage
     ~&  >>>  [dap.bowl %not-found ship spur case]
     cor
-  ?.  ?=([%atom @] u.pug)
+  ?.  ?=([%atom @] u.upage)
     ~&  >>>  [dap.bowl %unsupported-page]
     cor
-  =/  dat=@  (jam u.pug)
+  =/  dat=@  (jam u.upage)
   %-  emit
   =/  ship-sig=tape   (slag 1 (scow %p ship))
   =/  directory=path  [dap.bowl (crip ship-sig) spur]
@@ -279,11 +287,11 @@
 ::
 ++  handle-keen
   |=  [=ship =path]
-  ?>  ?|  (our-team:phx src.bowl)
+  ?>  ?|  =(our src):bowl
           (~(has in guests) src.bowl)
       ==
   %-  emit
-  [%pass /keen %arvo %a %keen ~ ship path]
+  [%pass /keen/(scot %p src.bowl) %arvo %a %keen ~ ship path]
 ::
 ++  handle-query
   |=  who=(unit ship)
@@ -357,35 +365,41 @@
   ^+  cor
   ?<  =(our.bowl target)
   ?>  ?=([%ud @] case)
-  =/  =offer  (make-offer:phx our.bowl)
-  ?.  (~(has in offer) [(scot %p our.bowl) spur] case)
+  =/  =offer  (make-offer:phx (slav %p (head spur)))
+  ?.  (~(has in offer) spur case)
     ~&  >>  "{<dap.bowl>}: not found: {<spur>} {<case>}"
     cor
   %-  emit
   =/  =path
-    (weld /g/x/(scot case)/[dap.bowl]//1/(scot %p our.bowl) spur)
+    (weld /g/x/(scot case)/[dap.bowl]//1 spur)
   =/  =cage  [%phoenix-command !>([%keen our.bowl path])]
   [%pass /send %agent [target %phoenix] %poke cage]
 ::
 ++  handle-cull
   |=  [=case =spur where=ship]
-  ?:  =(our.bowl where)
+  ?.  =(our src):bowl
+    ?>  =(where our.bowl)
     %-  emit
-    =/  =^spur  [(scot %p src.bowl) spur]
+    =.  spur  [(scot %p src.bowl) spur]
     [%pass / %cull case spur]
   ?>  =(our src):bowl
   %-  emit
+  ?:  =(our.bowl where)
+    [%pass / %cull case spur]
   =/  =cage  [%phoenix-command !>([%cull case spur where])]
   [%pass /cull %agent [where %phoenix] %poke cage]
 ::
 ++  handle-tomb
   |=  [=case =spur where=ship]
-  ?:  =(our.bowl where)
+  ?.  =(our src):bowl
+    ?>  =(where our.bowl)
     %-  emit
-    =/  =^spur  [(scot %p src.bowl) spur]
+    =.  spur  [(scot %p src.bowl) spur]
     [%pass / %tomb case spur]
   ?>  =(our src):bowl
   %-  emit
+  ?:  =(our.bowl where)
+    [%pass / %tomb case spur]
   =/  =cage  [%phoenix-command !>([%tomb case spur where])]
   [%pass /tomb %agent [where %phoenix] %poke cage]
 --
