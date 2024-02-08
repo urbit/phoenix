@@ -1,8 +1,8 @@
-::  :phoenix|restore %dude ud+42
+::  :phoenix|restore [[our %dude ud+42] /] %dude
 ::
 :-  %say
-|=  $:  [@ @ our=@p ^]
-        [=dude:gall =case ~]
+|=  $:  ^
+        [=beam =dude:gall ~]
         ~
     ==
-[%phoenix-command [%restore our /[dude] case dude]]
+[%phoenix-command [%restore beam dude]]

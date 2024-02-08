@@ -1,8 +1,8 @@
-::  :phoenix|put-dude our %dude ud+42
+::  :phoenix|put [[our %dude ud+42] /]
 ::
 :-  %say
 |=  $:  ^
-        [=ship =dude:gall =case ~]
+        [=beam ~]
         ~
     ==
-[%phoenix-command [%put ship /[dude] case]]
+[%phoenix-command [%put beam]]

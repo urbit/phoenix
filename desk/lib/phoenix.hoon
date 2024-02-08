@@ -44,31 +44,27 @@
   ==
 ::
 ++  pluck
-  |=  [=ship =spur =case]
+  |=  =beam
   ^-  (unit page)
-  ?.  ?=([%ud @] case)  ~
+  ?.  ?=([%ud @] r.beam)  ~
   =/  fun=(unit fans:gall)
-    (~(get by sky.bowl) [(scot %p ship) spur])
+    (~(get by sky.bowl) [(scot %p p.beam) [q.beam] s.beam])
   ?~  fun  ~
   =/  wut=(unit (pair @da (each page @uvI)))
-    (get:on-path u.fun p.case)
+    (get:on-path u.fun p.r.beam)
   ?~  wut  ~
   ?.  ?=(%& -.q.u.wut)  ~
   `p.q.u.wut
 ::
-++  grasp
-  |=  [=ship =spur =case]
+++  snap
+  |=  =dude:gall
   ^-  (unit page)
-  ?.  ?&  =(our.bowl ship)
-          =([%da now.bowl] case)
-      ==
-    (pluck ship spur case)
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-  =/  =dude:gall  (slav %tas (head spur))
-  ~|  "{<dap.bowl>}: grasp failed: {<dude>}"
+  ~|  [dap.bowl %snap-failed dude]
   =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
   =/  good-egg=egg-any:gall  (cook-egg raw)
-  =/  egg-jam=@  (jam [%egg-any good-egg])
+  =/  egg-page=page  [%egg-any good-egg]
+  =/  egg-jam=@      (jam egg-page)
   =/  egg-crypt=[%atom @]
     (encrypt egg-jam our-key)
   `egg-crypt
@@ -83,7 +79,8 @@
 ::
 ++  decrypt
   |=  [msg=@ keys=(set @)]
-  |^  ^-  (unit [%egg-any egg-any:gall])
+  |^  ^-  (unit page)
+      ^-  (unit [%egg-any egg-any:gall])
       =/  keys=(list @)  ~(tap in keys)
       |-
       ?~  keys

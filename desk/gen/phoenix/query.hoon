@@ -2,4 +2,4 @@
 ::
 :-  %say
 |=  [^ [=ship ~] ~]
-[%phoenix-command [%query `ship]]
+[%phoenix-command [%query ship]]

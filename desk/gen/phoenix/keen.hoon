@@ -1,11 +1,9 @@
-::  :phoenix|keen ~hodler %dude case
+::  :phoenix|keen [[our %dude ud+42] /] ~hodler
 ::
 :-  %say
-|=  $:  [@ @ our=@p ^]
-        [=ship =dude:gall =case ~]
+|=  $:  ^
+        [=beam where=ship ~]
         ~
     ==
-=/  =path
-  /g/x/(scot case)/phoenix//1/(scot %p our)/[dude]
-[%phoenix-command [%keen ship path]]
+[%phoenix-command [%keen beam where]]
 

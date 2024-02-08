@@ -2,23 +2,22 @@
 +$  offer  (set [spur case])
 ::
 +$  command
-  $%  [%snap =dude:gall]                       ::  take snapshot
-      [%restore =ship =spur =case =dude:gall]  ::  poke an agent with egg-any
+  $%  [%add-guest =ship]           ::  permit a ship to save
+      [%del-guest =ship]           ::  remove save permission
     ::
-      [%query who=(unit ship)]          ::  request for offers
-      [%cull =case =spur where=ship]    ::  cull ud+0 to case
-      [%tomb =case =spur where=ship]    ::  tombstone
-      [%keen spar:ames]                 ::  keen
+      [%snap =dude:gall]           ::  take snapshot
+      [%send =beam where=ship]     ::  command ship to keen
+      [%put =beam]                 ::  save to put
+      [%import =ship =spur =page]  ::  import a page
     ::
-      [%add-guest =ship]                ::  permit a ship to save
-      [%del-guest =ship]                ::  remove save permission
+      [%query =ship]               ::  request for offers
+      [%keen =beam where=ship]     ::  keen
+      [%tomb =beam where=ship]     ::  tombstone
+      [%cull =beam where=ship]     ::  cull ud+0 to case
     ::
-      [%add-key key=@]                  ::  add encryption key
-      [%del-key key=@]                  ::  del encryption key
+      [%add-key key=@]             ::  add encryption key
+      [%del-key key=@]             ::  del encryption key
     ::
-      [%put =ship =spur =case]          ::  save to put
-      [%import-clay =ship =spur =path]  ::  load a jam from clay
-    ::
-      [%send =case =spur target=ship]   ::  command target to keen
+      [%restore =beam =dude:gall]  ::  poke an agent with egg-any
   ==
 --
