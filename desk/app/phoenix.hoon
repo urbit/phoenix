@@ -143,18 +143,15 @@
   ::
       %phoenix-command
     =+  !<(cmd=command vase)
-    ?-    -.cmd
-        ?(%query %cull %tomb %keen)
-      ?-  -.cmd
-        %query  (handle-query ship.cmd)
-        %keen   (handle-keen [beam where]:cmd)
-        %tomb   (handle-tomb [beam where]:cmd)
-        %cull   (handle-cull [beam where]:cmd)
-      ==
+    ?-  -.cmd
+      %query  (handle-query ship.cmd)
+      %keen   (handle-keen [beam where]:cmd)
+      %tomb   (handle-tomb [beam where]:cmd)
+      %cull   (handle-cull [beam where]:cmd)
     ::
-        $?  %snap     %send       %restore
-            %add-key  %add-guest  %put
-            %del-key  %del-guest  %import
+        $?  %snap     %send       %put
+            %add-key  %add-guest  %import
+            %del-key  %del-guest  %restore
         ==
       ?>  =(our src):bowl
       ?-  -.cmd
@@ -204,7 +201,7 @@
     ?>  ?=([%jael %public-keys *] sign-arvo)
     ?.  ?=(%breach -.public-keys-result.sign-arvo)
       cor
-    =/  =ship   who.public-keys-result.sign-arvo
+    =/  =ship  who.public-keys-result.sign-arvo
     ?~  offer=(make-offer:phx ship)
       cor
     ~&  >>  "{<dap.bowl>}: {<ship>} breached"
