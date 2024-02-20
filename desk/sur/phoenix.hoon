@@ -1,5 +1,6 @@
 |%
 +$  offer  (set [spur case])
++$  key-id  [salt=@ salted-key=@]
 ::
 +$  command
   $%  [%add-guest =ship]           ::  permit a ship to save
@@ -17,6 +18,7 @@
     ::
       [%add-key key=@]             ::  add encryption key
       [%del-key key=@]             ::  del encryption key
+      [%export-keys ~]             ::  save keys to put
     ::
       [%restore =beam =dude:gall]  ::  poke an agent with egg-any
   ==

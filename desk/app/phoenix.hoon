@@ -15,8 +15,11 @@
 ::
 ::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup', =raw |
 ::  :phoenix|del-key @
+::  :phoenix|export-keys
 ::
 ::  :phoenix|restore [[our %dude ud+42] /] %dude
+::
+::  -phoenix!import-keys /=desk=/our-keys/jam
 ::
 ::    scrys:
 ::  .^((set @) %gx /=phoenix=/keys/noun)
@@ -87,10 +90,12 @@
       (slaw %p i.path)
     ::
         [%x %egg-any beam=*]
-      ?~  bem=(de-beam beam.pole)              ~
-      ?~  dat=(pluck:phx u.bem)                ~
-      ?.  ?=([%atom @] u.dat)                  ~
-      ?~  egg-page=(decrypt:phx q.u.dat keys)  ~
+      ?~  bem=(de-beam beam.pole)  ~
+      ?~  dat=(pluck:phx u.bem)    ~
+      ?.  ?=([%atom @] u.dat)      ~
+      =+  ;;([=key-id msg=@] (cue q.u.dat))
+      ?~  egg-page=(decrypt:phx [key-id msg] keys)
+        ~
       =+  ;;(=egg-any:gall q.u.egg-page)
       ``noun+!>(egg-any)
     ==
@@ -152,18 +157,20 @@
         $?  %snap     %send       %put
             %add-key  %add-guest  %import
             %del-key  %del-guest  %restore
+            %export-keys
         ==
       ?>  =(our src):bowl
       ?-  -.cmd
-        %snap       (handle-snap dude.cmd)
-        %send       (handle-send [beam where]:cmd)
-        %restore    (handle-restore [beam dude]:cmd)
-        %put        (handle-put beam.cmd)
-        %import     (handle-import [ship spur page]:cmd)
-        %add-key    cor(keys (~(put in keys) key.cmd))
-        %del-key    cor(keys (~(del in keys) key.cmd))
-        %add-guest  cor(guests (~(put in guests) ship.cmd))
-        %del-guest  cor(guests (~(del in guests) ship.cmd))
+        %snap         (handle-snap dude.cmd)
+        %send         (handle-send [beam where]:cmd)
+        %restore      (handle-restore [beam dude]:cmd)
+        %put          (handle-put beam.cmd)
+        %import       (handle-import [ship spur page]:cmd)
+        %export-keys  handle-export-keys
+        %add-key      cor(keys (~(put in keys) key.cmd))
+        %del-key      cor(keys (~(del in keys) key.cmd))
+        %add-guest    cor(guests (~(put in guests) ship.cmd))
+        %del-guest    cor(guests (~(del in guests) ship.cmd))
       ==
     ==
   ==
@@ -251,6 +258,23 @@
     cor
   ==
 ::
+++  handle-export-keys
+  ^+  cor
+  =.  keys   (~(put in keys) our-key:phx)
+  =/  dat=@  (jam [%keys keys])
+  =/  ship-sig=@tas   (crip +:(scow %p our.bowl))
+  =/  directory=path  /[dap.bowl]/[ship-sig]/keys
+  =/  file-name=path
+    :_  /'jam'
+    %-  reel  :_  (cury cat 3)
+    %+  join  '-'
+    `path`/[ship-sig]/keys/(scot %da now.bowl)
+  =/  =path  (weld directory file-name)
+  =/  =wire  [%sav path]
+  =/  =cage  [%drum-put !>([path dat])]
+  %-  emit
+  [%pass wire %agent [our.bowl %hood] %poke cage]
+::
 ++  handle-put
   |=  =beam
   ^+  cor
@@ -313,8 +337,9 @@
   ?.  ?=([%atom @] u.dat)
     ~&  >>>  [dap.bowl 'restore failed: unsupported format']
     cor
+  =+  ;;([=key-id msg=@] (cue q.u.dat))
   =.  keys  (~(put in keys) our-key:phx)
-  ?~  egg-page=(decrypt:phx q.u.dat keys)
+  ?~  egg-page=(decrypt:phx [key-id msg] keys)
     ~&  >>>  [dap.bowl 'restore-failed: missing page']
     cor
   %-  emit

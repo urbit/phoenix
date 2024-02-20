@@ -72,38 +72,39 @@
 ++  encrypt
   |=  [msg=@ key=@]
   ^-  [%atom @]
+  ?<  =(0 eny.bowl)
+  ::  XX use pub for key-id?
+  ::
+  =/  =key-id  [eny.bowl (shas eny.bowl key)]
   =/  cc=acru:ames   (pit:nu:crub:crypto 512 key)
   =/  encrypted-msg  (en:cc sec:ex:cc msg)
-  =/     signed-msg  (sign:as:cc encrypted-msg)
-  [%atom signed-msg]
+  =/  dat=@  (jam [key-id encrypted-msg])
+  [%atom dat]
 ::
 ++  decrypt
-  |=  [msg=@ keys=(set @)]
+  |=  [[=key-id msg=@] keys=(set @)]
   |^  ^-  (unit page)
       ^-  (unit [%egg-any egg-any:gall])
-      =/  keys=(list @)  ~(tap in keys)
-      |-
-      ?~  keys
-        ~&  >>>  [dap.bowl %decryt-failed]
+      =/  key=(unit @)
+        =/  keys=(list @)  ~(tap in keys)
+        |-
+        ?~  keys
+          ~
+        ?:  =(salted-key.key-id (shas salt.key-id i.keys))
+          `i.keys
+        $(keys t.keys)
+      ?~  key
+        ~&  >>>  [dap.bowl %no-key-match]
         ~
-      ?^  res=(try i.keys msg)
-        res
-      $(keys t.keys)
+      (unlock u.key msg)
   ::
-  ++  try
+  ++  unlock
     |=  [key=@ msg=@]
     ^-  (unit [%egg-any egg-any:gall])
-    =/  cc=acru:ames  (pit:nu:crub:crypto 512 key)
-    =/  sure=(unit @ux)  (sure:as:cc msg)
-    ?~  sure  ~
-    =/  res=(unit @ux)   (de:cc sec:ex:cc u.sure)
+    =/  cc=acru:ames    (pit:nu:crub:crypto 512 key)
+    =/  res=(unit @ux)  (de:cc sec:ex:cc msg)
     ?~  res  ~
-    (check u.res)
-  ::
-  ++  check
-    |=  in=@
-    ^-  (unit [%egg-any egg-any:gall])
-    (mole |.(;;([%egg-any egg-any:gall] (cue in))))
+    (mole |.(;;([%egg-any egg-any:gall] (cue u.res))))
   --
 ::
 ++  send-hark
