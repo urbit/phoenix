@@ -21,6 +21,10 @@
 ::
 ::  -phoenix!import-keys /=desk=/our-keys/jam
 ::
+::  -phoenix!put-dude %dude `(shaz 'lidlut-tabwed-pillex-ridrup')
+::  -phoenix!put-desk %desk `(shaz 'lidlut-tabwed-pillex-ridrup')
+::  -phoenix!put-all `(shaz 'lidlut-tabwed-pillex-ridrup')
+::
 ::    scrys:
 ::  .^((set @) %gx /=phoenix=/keys/noun)
 ::  .^((set ship) %gx /=phoenix=/guests/noun)
