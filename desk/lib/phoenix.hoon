@@ -11,9 +11,8 @@
   %+  join  '-'
   %-  turn  :_  crip
   ^-  (list tape)
-  :~
-    (a-co:co y)  (dos m)  (dos d.t)
-    (dos h.t)  (dos m.t)  (dos s.t)
+  :~  (a-co:co y)  (dos m)  (dos d.t)
+      (dos h.t)  (dos m.t)  (dos s.t)
   ==
 ::
 ++  our-key  (shaz our-code)

@@ -16,13 +16,12 @@
   |=  dat=@
   ^-  card:agent:gall
   =/  ship-sig=@t  (crip +:(scow %p our.bowl))
-  =/  now=@t       (crip +:(scow %da now.bowl))
   =/  directory=path  /phoenix/[ship-sig]/keys
   =/  file-name=path
     :_  /'jam'
     %-  reel  :_  (cury cat 3)
     %+  join  '-'
-    `path`/[ship-sig]/keys/[now]
+    `path`/[ship-sig]/keys/(pretty-date:phoenix now.bowl)
   =/  =path  (weld directory file-name)
   =/  =cage  [%drum-put !>([path dat])]
   [%pass / %agent [our.bowl %hood] %poke cage]
