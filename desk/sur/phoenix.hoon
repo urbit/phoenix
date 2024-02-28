@@ -1,5 +1,5 @@
 |%
-+$  offer  (set [spur case])
++$  offer   (set [spur case])
 +$  key-id  [salt=@ salted-key=@]
 ::
 +$  command
@@ -16,9 +16,8 @@
       [%tomb =beam where=ship]     ::  tombstone
       [%cull =beam where=ship]     ::  cull ud+0 to case
     ::
-      [%add-key key=@]             ::  add encryption key
-      [%del-key key=@]             ::  del encryption key
-      [%export-keys ~]             ::  save keys to put
+      [%add-keys keys=(set @)]     ::  add encryption keys
+      [%del-keys keys=(set @)]     ::  del encryption keys
     ::
       [%restore =beam =dude:gall]  ::  poke an agent with egg-any
   ==

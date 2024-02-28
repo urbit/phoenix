@@ -1,6 +1,21 @@
 /-  *phoenix, hark
 ::
 |_  =bowl:gall
+++  pretty-date
+  |=  t=@da
+  ^-  @t
+  =/  =date  (yore t)
+  =,  date
+  =/  dos   (d-co:co 2)
+  %-  reel  :_  (cury cat 3)
+  %+  join  '-'
+  %-  turn  :_  crip
+  ^-  (list tape)
+  :~
+    (a-co:co y)  (dos m)  (dos d.t)
+    (dos h.t)  (dos m.t)  (dos s.t)
+  ==
+::
 ++  our-key  (shaz our-code)
 ++  our-code
   ^-  @t
@@ -66,13 +81,13 @@
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@      (jam egg-page)
   =/  egg-crypt=[%atom @]
-    (encrypt egg-jam our-key)
+    (encrypt egg-jam our-key eny.bowl)
   `egg-crypt
 ::
 ++  encrypt
-  |=  [msg=@ key=@]
+  |=  [msg=@ key=@ eny=@uvJ]
   ^-  [%atom @]
-  ?<  =(0 eny.bowl)
+  ?<  =(0 eny)
   ::  XX use pub for key-id?
   ::
   =/  =key-id  [eny.bowl (shas eny.bowl key)]

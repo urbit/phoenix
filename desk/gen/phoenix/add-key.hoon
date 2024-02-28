@@ -1,7 +1,6 @@
-::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup', =raw |
+::  :phoenix|add-key (shaz 'lidlut-tabwed-pillex-ridrup')
 ::
 :-  %say
-|=  [^ [key=@ ~] raw=_|]
-=?  key  !raw
-  (shaz key)
-[%phoenix-command [%add-key key]]
+|=  [^ [key=@ ~] ~]
+=/  keys=(set @)  (silt key ~)
+[%phoenix-command [%add-keys keys]]

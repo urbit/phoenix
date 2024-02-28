@@ -2,4 +2,5 @@
 ::
 :-  %say
 |=  [^ [key=@ ~] ~]
-[%phoenix-command [%del-key key]]
+=/  keys=(set @)  (silt key ~)
+[%phoenix-command [%del-keys keys]]

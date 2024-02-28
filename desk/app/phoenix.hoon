@@ -13,17 +13,16 @@
 ::  :phoenix|tomb [[our %dude ud+42] /] ~hodler
 ::  :phoenix|cull [[our %dude ud+42] /] ~hodler
 ::
-::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup', =raw |
+::  :phoenix|add-key (shaz 'lidlut-tabwed-pillex-ridrup')
 ::  :phoenix|del-key @
-::  :phoenix|export-keys
 ::
 ::  :phoenix|restore [[our %dude ud+42] /] %dude
 ::
-::  -phoenix!import-keys /=desk=/our-keys/jam
+::  -phoenix!phoenix-put-keys
 ::
-::  -phoenix!put-dude %dude `(shaz 'lidlut-tabwed-pillex-ridrup')
-::  -phoenix!put-desk %desk `(shaz 'lidlut-tabwed-pillex-ridrup')
-::  -phoenix!put-all `(shaz 'lidlut-tabwed-pillex-ridrup')
+::  -phoenix!phoenix-put-dude %dude `(shaz 'lidlut-tabwed-pillex-ridrup')
+::  -phoenix!phoenix-put-desk %desk `(shaz 'lidlut-tabwed-pillex-ridrup')
+::  -phoenix!phoenix-put-all `(shaz 'lidlut-tabwed-pillex-ridrup')
 ::
 ::    scrys:
 ::  .^((set @) %gx /=phoenix=/keys/noun)
@@ -57,7 +56,12 @@
       def   ~(. (default-agent this %|) bowl)
       cor   ~(. +> bowl)
       phx   ~(. phoenix bowl)
-  ++  on-init  [[%pass /jael/pubs %arvo %j %public-keys ~]~ this]
+  ++  on-init
+    ^-  (quip card _this)
+    :_  this
+    :~  put-keys:cor
+        [%pass /jael/pubs %arvo %j %public-keys ~]
+    ==
   ++  on-save  !>(state)
   ++  on-load  |=(=vase `this(state !<(state-0 vase)))
   ++  on-poke
@@ -124,6 +128,12 @@
   %-  emit
   [%pass / %grow [(scot %p owner) spur] page]
 ::
+++  put-keys
+  ^-  card
+  :*  %pass  /keys  %arvo  %k  %fard  q.byk.bowl
+      %phoenix-put-keys  [%noun !>(~)]
+  ==
+::
 ++  send-query
   |=  =ship
   %-  emit
@@ -158,23 +168,33 @@
       %tomb   (handle-tomb [beam where]:cmd)
       %cull   (handle-cull [beam where]:cmd)
     ::
-        $?  %snap     %send       %put
-            %add-key  %add-guest  %import
-            %del-key  %del-guest  %restore
-            %export-keys
+        $?  %snap      %send       %put
+            %add-keys  %add-guest  %import
+            %del-keys  %del-guest  %restore
         ==
       ?>  =(our src):bowl
       ?-  -.cmd
-        %snap         (handle-snap dude.cmd)
-        %send         (handle-send [beam where]:cmd)
-        %restore      (handle-restore [beam dude]:cmd)
-        %put          (handle-put beam.cmd)
-        %import       (handle-import [ship spur page]:cmd)
-        %export-keys  handle-export-keys
-        %add-key      cor(keys (~(put in keys) key.cmd))
-        %del-key      cor(keys (~(del in keys) key.cmd))
-        %add-guest    cor(guests (~(put in guests) ship.cmd))
-        %del-guest    cor(guests (~(del in guests) ship.cmd))
+        %snap       (handle-snap dude.cmd)
+        %send       (handle-send [beam where]:cmd)
+        %restore    (handle-restore [beam dude]:cmd)
+        %put        (handle-put beam.cmd)
+        %import     (handle-import [ship spur page]:cmd)
+        %add-guest  cor(guests (~(put in guests) ship.cmd))
+        %del-guest  cor(guests (~(del in guests) ship.cmd))
+      ::
+          %add-keys
+        =/  old  keys
+        =.  keys  (~(uni in keys) keys.cmd)
+        ?:  =(old keys)
+          cor
+        (emit put-keys)
+      ::
+          %del-keys
+        =/  old  keys
+        =.  keys  (~(dif in keys) keys.cmd)
+        ?:  =(old keys)
+          cor
+        (emit put-keys)
       ==
     ==
   ==
@@ -208,6 +228,7 @@
   |=  [=(pole knot) =sign-arvo]
   ^+  cor
   ?+    pole  ~&([dap.bowl %strange-arvo-wire `path`pole] cor)
+      [%keys ~]  cor
       [%jael %pubs ~]
     ?>  ?=([%jael %public-keys *] sign-arvo)
     ?.  ?=(%breach -.public-keys-result.sign-arvo)
@@ -262,23 +283,6 @@
     cor
   ==
 ::
-++  handle-export-keys
-  ^+  cor
-  =.  keys   (~(put in keys) our-key:phx)
-  =/  dat=@  (jam [%keys keys])
-  =/  ship-sig=@tas   (crip +:(scow %p our.bowl))
-  =/  directory=path  /[dap.bowl]/[ship-sig]/keys
-  =/  file-name=path
-    :_  /'jam'
-    %-  reel  :_  (cury cat 3)
-    %+  join  '-'
-    `path`/[ship-sig]/keys/(scot %da now.bowl)
-  =/  =path  (weld directory file-name)
-  =/  =wire  [%sav path]
-  =/  =cage  [%drum-put !>([path dat])]
-  %-  emit
-  [%pass wire %agent [our.bowl %hood] %poke cage]
-::
 ++  handle-put
   |=  =beam
   ^+  cor
@@ -302,10 +306,14 @@
         (reel (join '-' [q.beam s.beam]) (cury cat 3))
     ==
   =/  file-name=path
+    =/  cas=@t
+      ?.  ?=(%da -.r.beam)
+        (scot r.beam)
+      (pretty-date:phx p.r.beam)
     :_  /'jam'
     %-  reel  :_  (cury cat 3)
     %+  join  '-'
-    (weld [ship-sig q.beam s.beam] /(scot r.beam))
+    (weld [ship-sig q.beam s.beam] /[cas])
   =/  =path  (weld directory file-name)
   =/  =wire  [%sav path]
   =/  =cage  [%drum-put !>([path dat])]
@@ -341,7 +349,11 @@
   ?.  ?=([%atom @] u.dat)
     ~&  >>>  [dap.bowl 'restore failed: unsupported format']
     cor
-  =+  ;;([=key-id msg=@] (cue q.u.dat))
+  =/  non  (cue q.u.dat)
+  ?.  ?=([[@ @] @] non)
+    ~&  >>>  [dap.bowl 'restore failed: bad [key-id msg] format']
+    cor
+  =+  ;;([=key-id msg=@] non)
   =.  keys  (~(put in keys) our-key:phx)
   ?~  egg-page=(decrypt:phx [key-id msg] keys)
     ~&  >>>  [dap.bowl 'restore-failed: missing page']
@@ -433,10 +445,7 @@
   ?-    -.egg-any
       ?(%15 %16)
     ?>  ?=(%live -.+.egg-any)
-    =/  state-vase=^vase
-      :-  -:!>(*versioned-state)
-      q.+.old-state.+.egg-any
-    =+  !<(old=versioned-state state-vase)
+    =+  ;;(old=versioned-state q.+.old-state.+.egg-any)
     ?-    -.old
         %0
       =.  keys  (~(gas in keys) ~(tap in keys.old))
