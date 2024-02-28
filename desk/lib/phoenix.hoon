@@ -89,10 +89,10 @@
   ?<  =(0 eny)
   ::  XX use pub for key-id?
   ::
-  =/  =key-id  [eny.bowl (shas eny.bowl key)]
+  =/  =key-id        [eny (shas eny key)]
   =/  cc=acru:ames   (pit:nu:crub:crypto 512 key)
   =/  encrypted-msg  (en:cc sec:ex:cc msg)
-  =/  dat=@  (jam [key-id encrypted-msg])
+  =/  dat=@          (jam [key-id encrypted-msg])
   [%atom dat]
 ::
 ++  decrypt
