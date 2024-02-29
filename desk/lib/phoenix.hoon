@@ -1,4 +1,5 @@
 /-  *phoenix, hark
+/+  egg
 ::
 |_  =bowl:gall
 ++  pretty-date
@@ -23,16 +24,6 @@
   %+  slag  1
   %+  scow  %p
   .^(@p %j /[our]/code/[now]/[our])
-::  strip type so cue works
-::
-++  cook-egg
-  |=  raw=egg-any:gall
-  ^-  egg-any:gall
-  ?-    -.raw
-      ?(%15 %16)
-    ?>  ?=(%live -.+.raw)
-    raw(p.+.old-state.+ %noun)
-  ==
 ::
 ++  on-path  ((on @ud (pair @da (each page @uvI))) lte)
 ++  make-offer
@@ -72,28 +63,23 @@
 ::
 ++  snap
   |=  =dude:gall
-  ^-  (unit page)
-  =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-  ~|  [dap.bowl %snap-failed dude]
-  =+  .^(raw=egg-any:gall %gv /[our]/[dude]/[now]/$)
-  =/  good-egg=egg-any:gall  (cook-egg raw)
+  ^-  page
+  =/  raw=egg-any:gall  (snap:egg [our.bowl dude da+now.bowl])
+  =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@      (jam egg-page)
-  =/  egg-crypt=[%atom @]
-    (encrypt egg-jam our-key eny.bowl)
-  `egg-crypt
+  (encrypt egg-jam our-key eny.bowl)
 ::
 ++  encrypt
   |=  [msg=@ key=@ eny=@uvJ]
-  ^-  [%atom @]
+  ^-  [%phx key-id @]
   ?<  =(0 eny)
   ::  XX use pub for key-id?
   ::
   =/  =key-id        [eny (shas eny key)]
   =/  cc=acru:ames   (pit:nu:crub:crypto 512 key)
   =/  encrypted-msg  (en:cc sec:ex:cc msg)
-  =/  dat=@          (jam [key-id encrypted-msg])
-  [%atom dat]
+  [%phx [key-id encrypted-msg]]
 ::
 ++  decrypt
   |=  [[=key-id msg=@] keys=(set @)]

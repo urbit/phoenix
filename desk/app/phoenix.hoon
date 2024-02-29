@@ -58,24 +58,16 @@
       phx   ~(. phoenix bowl)
   ++  on-init
     ^-  (quip card _this)
-    :_  this
-    :~  put-keys:cor
-        [%pass /jael/pubs %arvo %j %public-keys ~]
-    ==
+    :_(this [put-keys:cor ~])
   ++  on-save  !>(state)
-  ++  on-load  |=(=vase `this(state !<(state-0 vase)))
+  ++  on-load  |=(=vase `this(state !<(versioned-state vase)))
   ++  on-poke
     |=  [=mark =vase]
     ^-  (quip card _this)
     =^  cards  state  abet:(poke:cor mark vase)
     [cards this]
-  ++  on-leave  on-leave:def
   ++  on-watch  on-watch:def
-  ++  on-arvo
-    |=  [=wire =sign-arvo]
-    ^-  (quip card _this)
-    =^  cards  state  abet:(arvo:cor wire sign-arvo)
-    [cards this]
+  ++  on-leave  on-leave:def
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
@@ -100,8 +92,7 @@
         [%x %egg-any beam=*]
       ?~  bem=(de-beam beam.pole)  ~
       ?~  dat=(pluck:phx u.bem)    ~
-      ?.  ?=([%atom @] u.dat)      ~
-      =+  ;;([=key-id msg=@] (cue q.u.dat))
+      =+  ;;([%phx =key-id msg=@] u.dat)
       ?~  egg-page=(decrypt:phx [key-id msg] keys)
         ~
       =+  ;;(=egg-any:gall q.u.egg-page)
@@ -111,7 +102,20 @@
   ++  on-agent
     |=  [=wire =sign:agent:gall]
     ^-  (quip card _this)
-    =^  cards  state  abet:(agent:cor wire sign)
+    ?+    wire  (on-agent:def wire sign)
+        [?(%cull %hark %offer %phoenix %query %send %tomb) ~]
+      [~ this]
+    ::
+        [%sav *]
+      ?>  ?=([%poke-ack ~] sign)
+      ~&  >  [dap.bowl %saved-to-put t.wire]
+      [~ this]
+    ==
+  ::
+  ++  on-arvo
+    |=  [=wire =sign-arvo]
+    ^-  (quip card _this)
+    =^  cards  state  abet:(arvo:cor wire sign-arvo)
     [cards this]
   ++  on-fail   on-fail:def
   --
@@ -119,7 +123,6 @@
 |_  =bowl:gall
 +*  cor   .
     phx   ~(. phoenix bowl)
-    def   ~(. (default-agent cor %|) bowl)
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
@@ -140,20 +143,26 @@
   =/  =cage  [%phoenix-command !>([%query our.bowl])]
   [%pass /query %agent [ship %phoenix] %poke cage]
 ::
+++  wake-offer
+  |=  =ship
+  ^+  cor
+  ?:  =(our.bowl ship)
+    cor
+  (emit [%pass /wake/offer/(scot %p ship) %arvo %b %wait now.bowl])
+::
 ++  handle-import
   |=  [=ship =spur =page]
   ^+  cor
   ?>  =(our src):bowl
-  ?.  ?=([%atom @] page)
-    ~&  >>>  [dap.bowl %import-failed ship spur]
-    cor
+  ~|  [dap.bowl %import-failed ship spur]
+  ?>  ?=([%phx key-id msg=@] page)
   ~&  >  [dap.bowl %imported ship spur]
   (grow ship spur page)
 ::
 ++  poke
   |=  [=mark =vase]
   ^+  cor
-  ?+    mark  (on-poke:def mark vase)
+  ?+    mark  ~|("unexpected poke to {<dap.bowl>} with mark {<mark>}" !!)
       %egg-any
     ?>  =(our src):bowl
     (on-egg-any mark vase)
@@ -179,8 +188,12 @@
         %restore    (handle-restore [beam dude]:cmd)
         %put        (handle-put beam.cmd)
         %import     (handle-import [ship spur page]:cmd)
-        %add-guest  cor(guests (~(put in guests) ship.cmd))
         %del-guest  cor(guests (~(del in guests) ship.cmd))
+      ::
+          %add-guest
+        =.  guests  (~(put in guests) ship.cmd)
+        %-  emit
+        [%pass /jael/pubs %arvo %j %public-keys (silt ship.cmd ~)]
       ::
           %add-keys
         =/  old  keys
@@ -197,31 +210,6 @@
         (emit put-keys)
       ==
     ==
-  ==
-::
-++  agent
-  |=  [=(pole knot) =sign:agent:gall]
-  ^+  cor
-  ?+  pole  ~&([dap.bowl %strange-wire `path`pole] cor)
-    [%hark ~]     cor
-    [%send ~]     cor
-    [%offer ~]    cor
-    [%query ~]    cor
-    [%phoenix ~]  cor
-  ::
-      [%sav rest=*]
-    ?.  ?=(%poke-ack -.sign)
-      ~&  >>>  [dap.bowl %put-failed `path`rest.pole]
-      cor
-    ~&  >  [dap.bowl %saved-to-put `path`rest.pole]
-    cor
-  ::
-      [?(%cull %tomb) *]
-    ?.  ?=(%poke-ack -.sign)  cor
-    ?~  p.sign
-      (send-query src.bowl)
-    ~&  >>>  [dap.bowl %poke-failed src.bowl `path`pole]
-    cor
   ==
 ::
 ++  arvo
@@ -272,15 +260,10 @@
     ?~  q.dat.roar
       cor
     =/  =page  u.q.dat.roar
-    ?.  ?=([%atom @] page)
-      ~&  >>>  [dap.bowl %unsupported-page]
-      cor
-    =.  cor  (grow owner spur page)
+    ?>  ?=([%phx key-id @] page)
     ~&  >  "{<dap.bowl>}: received from {<data-src>}: [{<owner>} {<spur>}]"
-    =?  cor  !=(our.bowl owner)
-      %-  emit
-      [%pass /wake/offer/(scot %p owner) %arvo %b %wait now.bowl]
-    cor
+    =.  cor  (grow owner spur page)
+    (wake-offer owner)
   ==
 ::
 ++  handle-put
@@ -290,14 +273,12 @@
     ?:  ?&  =(our.bowl p.beam)
             =([%da now.bowl] r.beam)
         ==
-      (snap:phx q.beam)
+      `(snap:phx q.beam)
     (pluck:phx beam)
   ?~  page
     ~&  >>>  [dap.bowl %not-found beam]
     cor
-  ?.  ?=([%atom @] u.page)
-    ~&  >>>  [dap.bowl %unsupported-page]
-    cor
+  ?>  ?=([%phx key-id msg=@] u.page)
   =/  dat=@  (jam u.page)
   %-  emit
   =/  ship-sig=@t   (crip +:(scow %p p.beam))
@@ -346,17 +327,10 @@
   ?~  dat
     ~&  >>>  [dap.bowl 'restore failed: not found:' beam]
     cor
-  ?.  ?=([%atom @] u.dat)
-    ~&  >>>  [dap.bowl 'restore failed: unsupported format']
-    cor
-  =/  non  (cue q.u.dat)
-  ?.  ?=([[@ @] @] non)
-    ~&  >>>  [dap.bowl 'restore failed: bad [key-id msg] format']
-    cor
-  =+  ;;([=key-id msg=@] non)
+  =+  ;;([%phx =key-id msg=@] u.dat)
   =.  keys  (~(put in keys) our-key:phx)
   ?~  egg-page=(decrypt:phx [key-id msg] keys)
-    ~&  >>>  [dap.bowl 'restore-failed: missing page']
+    ~&  >>>  [dap.bowl 'restore-failed: no decryption result']
     cor
   %-  emit
   =+  ;;(=egg-any:gall q.u.egg-page)
@@ -376,10 +350,9 @@
 ++  handle-snap
   |=  =dude:gall
   ^+  cor
-  =/  page=(unit page)  (snap:phx dude)
-  ?~  page  cor
+  =/  =page  (snap:phx dude)
   =.  keys  (~(put in keys) our-key:phx)
-  (grow our.bowl /[dude] u.page)
+  (grow our.bowl /[dude] page)
 ::
 ++  make-keen-path
   |=  =beam
@@ -402,10 +375,10 @@
 ++  handle-keen
   |=  [=beam =ship]
   ?>  ?|  =(our src):bowl
-        ?&  =(src.bowl ship)
-            =(src.bowl p.beam)
-            (~(has in guests) src.bowl)
-        ==
+          ?&  =(src.bowl ship)
+              =(src.bowl p.beam)
+              (~(has in guests) src.bowl)
+          ==
       ==
   %-  emit
   =/  keen-path=path  (make-keen-path beam)
@@ -417,8 +390,9 @@
     ?>  ?|  =(our src):bowl
             =(p.beam src.bowl)
         ==
-    %-  emit
-    [%pass / %tomb r.beam [(scot %p p.beam) q.beam s.beam]]
+    =.  cor
+      (emit [%pass / %tomb r.beam [(scot %p p.beam) q.beam s.beam]])
+    (wake-offer p.beam)
   ?>  =(our src):bowl
   %-  emit
   =/  =cage  [%phoenix-command !>([%tomb beam where])]
@@ -430,8 +404,9 @@
     ?>  ?|  =(our src):bowl
             =(p.beam src.bowl)
         ==
-    %-  emit
-    [%pass / %cull r.beam [(scot %p p.beam) q.beam s.beam]]
+    =.  cor
+      (emit [%pass / %cull r.beam [(scot %p p.beam) q.beam s.beam]])
+    (wake-offer p.beam)
   ?>  =(our src):bowl
   %-  emit
   =/  =cage  [%phoenix-command !>([%cull beam where])]
@@ -448,7 +423,7 @@
     =+  ;;(old=versioned-state q.+.old-state.+.egg-any)
     ?-    -.old
         %0
-      =.  keys  (~(gas in keys) ~(tap in keys.old))
+      =.  keys  (~(uni in keys) keys.old)
       =.  cor
         %-  emil
         =/  =cage  [%phoenix-command !>([%query our.bowl])]

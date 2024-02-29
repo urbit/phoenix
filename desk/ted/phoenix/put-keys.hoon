@@ -1,5 +1,5 @@
 /-  spider
-/+  io=strandio, egg, phoenix
+/+  io=strandio, phoenix
 ^-  thread:spider
 |=  arg=vase
 =/  m  (strand:rand ,vase)
