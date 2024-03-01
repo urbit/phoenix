@@ -84,10 +84,15 @@
       :^  ~  ~  %noun
       !>  ^-  (set ship)
       %-  silt
-      %+  murn  ~(tap in ~(key by sky.bowl))
-      |=  =path
+      %+  murn  ~(tap by sky.bowl)
+      |=  [=path =fans:gall]
       ?~  path  ~
-      (slaw %p i.path)
+      ?~  who=(slaw %p i.path)  ~
+      ?.  %+  any:on-path:phx  fans
+          |=  [rev=@ud wen=@da wut=(each page @uvI)]
+          -.wut
+        ~
+      who
     ::
         [%x %egg-any beam=*]
       ?~  bem=(de-beam beam.pole)  ~

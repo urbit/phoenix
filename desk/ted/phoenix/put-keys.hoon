@@ -7,7 +7,8 @@
 |^  ^-  form:m
     ;<  keys=(set @)  bind:m  (scry:io (set @) /gx/phoenix/keys/noun)
     ;<  code=@p       bind:m  (scry:io @p /j/code/(scot %p our.bowl))
-    =/  keys  (~(put in keys) (shaz code))
+    =/  code=@  (shaz (crip (slag 1 (scow %p code))))
+    =/  keys=(set @)  (~(put in keys) code)
     =/  dat=@  (jam [%keys keys])
     ;<  ~  bind:m  (send-raw-card:io (put-keys dat))
     (pure:m !>(%done))
