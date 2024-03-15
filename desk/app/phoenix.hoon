@@ -13,8 +13,9 @@
 ::  :phoenix|tomb [[our %dude ud+42] /] ~hodler
 ::  :phoenix|cull [[our %dude ud+42] /] ~hodler
 ::
-::  :phoenix|add-key (shaz 'lidlut-tabwed-pillex-ridrup')
+::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup'
 ::  :phoenix|del-key @
+::  :phoenix|set-backup-key `'lidlut-tabwed-pillex-ridrup'
 ::
 ::  :phoenix|restore [[our %dude ud+42] /] %dude
 ::
@@ -40,7 +41,9 @@
   +$  versioned-state  $%(state-0)
   +$  state-0
     $:  %0
-        keys=(set @)
+        keys=(set @ux)
+        static-code=@ux
+        backup-key=(unit @ux)
         guests=(set ship)
         offers=(map ship offer)
     ==
@@ -58,7 +61,8 @@
       phx   ~(. phoenix bowl)
   ++  on-init
     ^-  (quip card _this)
-    :_(this [put-keys:cor ~])
+    :_  this  :_  ~
+    [%pass /wake/inflate %arvo %b %wait now.bowl]
   ++  on-save  !>(state)
   ++  on-load  |=(=vase `this(state !<(versioned-state vase)))
   ++  on-poke
@@ -71,9 +75,11 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
-      [%x %keys ~]    ``noun+!>(keys)
-      [%x %guests ~]  ``noun+!>(guests)
-      [%x %offers ~]  ``noun+!>(offers)
+      [%x %keys ~]         ``noun+!>(keys)
+      [%x %guests ~]       ``noun+!>(guests)
+      [%x %offers ~]       ``noun+!>(offers)
+      [%x %backup-key ~]   ``noun+!>(backup-key)
+      [%x %static-code ~]  ``noun+!>(static-code)
     ::
         [%x %offer ship=@ ~]
       :^  ~  ~  %noun
@@ -185,6 +191,7 @@
         $?  %snap      %send       %put
             %add-keys  %add-guest  %import
             %del-keys  %del-guest  %restore
+            %set-backup-key
         ==
       ?>  =(our src):bowl
       ?-  -.cmd
@@ -213,6 +220,16 @@
         ?:  =(old keys)
           cor
         (emit put-keys)
+      ::
+          %set-backup-key
+        =.  backup-key  key.cmd
+        =?  cor  ?=(^ key.cmd)
+          =/  old  keys
+          =.  keys  (~(put in keys) u.key.cmd)
+          ?:  =(old keys)
+            cor
+          (emit put-keys)
+        cor
       ==
     ==
   ==
@@ -233,6 +250,14 @@
     %-  emit
     =/  =cage  [%phoenix-offer !>(offer)]
     [%pass /offer %agent [ship %phoenix] %poke cage]
+  ::
+      [%wake %inflate ~]
+    ?>  ?=([%behn %wake *] sign-arvo)
+    ?^  error.sign-arvo
+      cor
+    =?  static-code  =(*_static-code static-code)
+      our-key:phx
+    (poke [%phoenix-command !>([%add-keys (sy our-key:phx ~)])])
   ::
       [%wake %offer ship=@ ~]
     ?>  ?=([%behn %wake *] sign-arvo)

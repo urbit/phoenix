@@ -1,4 +1,4 @@
-::  :phoenix|add-key (shaz 'lidlut-tabwed-pillex-ridrup')
+::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup'
 ::
 :-  %say
 |=  [^ [key=@ ~] ~]

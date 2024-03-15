@@ -68,7 +68,13 @@
   =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@      (jam egg-page)
-  (encrypt egg-jam our-key eny.bowl)
+  =/  key=@
+    =/  =beak  [our.bowl %phoenix da+now.bowl]
+    =+  .^(backup-key=(unit @) %gx (en-beam beak /backup-key/noun))
+    ?^  backup-key
+      u.backup-key
+    .^(static-code=@ %gx (en-beam beak /static-code/noun))
+  (encrypt egg-jam key eny.bowl)
 ::
 ++  encrypt
   |=  [msg=@ key=@ eny=@uvJ]
