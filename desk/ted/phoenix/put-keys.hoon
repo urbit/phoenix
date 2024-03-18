@@ -9,7 +9,8 @@
     ;<  code=@p       bind:m  (scry:io @p /j/code/(scot %p our.bowl))
     =/  code=@  (shaz (crip (slag 1 (scow %p code))))
     =/  keys=(set @)  (~(put in keys) code)
-    =/  dat=@  (jam [%keys keys])
+    =/  dat=@t
+      (of-wain:format (turn ~(tap in keys) (cury scot %ux)))
     ;<  ~  bind:m  (send-raw-card:io (put-keys dat))
     (pure:m !>(%done))
 ::
@@ -19,7 +20,7 @@
   =/  ship-sig=@t  (crip +:(scow %p our.bowl))
   =/  directory=path  /phoenix/[ship-sig]/keys
   =/  file-name=path
-    :_  /'jam'
+    :_  /'txt'
     %-  reel  :_  (cury cat 3)
     %+  join  '-'
     `path`/[ship-sig]/keys/(pretty-date:phoenix now.bowl)
