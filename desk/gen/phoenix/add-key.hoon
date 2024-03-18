@@ -1,6 +1,6 @@
 ::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup'
 ::
 :-  %say
-|=  [^ [key=@ ~] ~]
-=/  keys=(set @)  (silt key ~)
+|=  [^ [keys=$@(@ (list @)) ~] ~]
+=/  keys=(set @)  (sy ?^(keys keys [keys ~]))
 [%phoenix-command [%add-keys keys]]
