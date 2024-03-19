@@ -142,12 +142,6 @@
   %-  emit
   [%pass / %grow [(scot %p owner) spur] page]
 ::
-++  put-keys
-  ^-  card
-  :*  %pass  /keys  %arvo  %k  %fard  q.byk.bowl
-      %phoenix-put-keys  [%noun !>(~)]
-  ==
-::
 ++  send-query
   |=  =ship
   %-  emit
@@ -200,6 +194,8 @@
         %restore    (handle-restore [beam dude]:cmd)
         %put        (handle-put beam.cmd)
         %import     (handle-import [ship spur page]:cmd)
+        %add-keys   cor(keys (~(uni in keys) keys.cmd))
+        %del-keys   cor(keys (~(dif in keys) keys.cmd))
         %del-guest  cor(guests (~(del in guests) ship.cmd))
       ::
           %add-guest
@@ -207,28 +203,10 @@
         %-  emit
         [%pass /jael/pubs %arvo %j %public-keys (silt ship.cmd ~)]
       ::
-          %add-keys
-        =/  old  keys
-        =.  keys  (~(uni in keys) keys.cmd)
-        ?:  =(old keys)
-          cor
-        (emit put-keys)
-      ::
-          %del-keys
-        =/  old  keys
-        =.  keys  (~(dif in keys) keys.cmd)
-        ?:  =(old keys)
-          cor
-        (emit put-keys)
-      ::
           %set-backup-key
         =.  backup-key  key.cmd
-        =?  cor  ?=(^ key.cmd)
-          =/  old  keys
-          =.  keys  (~(put in keys) u.key.cmd)
-          ?:  =(old keys)
-            cor
-          (emit put-keys)
+        =?  keys  ?=(^ key.cmd)
+          (~(put in keys) u.key.cmd)
         cor
       ==
     ==
@@ -238,7 +216,6 @@
   |=  [=(pole knot) =sign-arvo]
   ^+  cor
   ?+    pole  ~&([dap.bowl %strange-arvo-wire `path`pole] cor)
-      [%keys ~]  cor
       [%jael %pubs ~]
     ?>  ?=([%jael %public-keys *] sign-arvo)
     ?.  ?=(%breach -.public-keys-result.sign-arvo)
@@ -257,7 +234,7 @@
       cor
     =?  static-code  =(*_static-code static-code)
       our-key:phx
-    (poke [%phoenix-command !>([%add-keys (sy our-key:phx ~)])])
+    cor(keys (~(put in keys) our-key:phx))
   ::
       [%wake %offer ship=@ ~]
     ?>  ?=([%behn %wake *] sign-arvo)

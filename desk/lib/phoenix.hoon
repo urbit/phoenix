@@ -80,8 +80,6 @@
   |=  [msg=@ key=@ eny=@uvJ]
   ^-  [%phx key-id @]
   ?<  =(0 eny)
-  ::  XX use pub for key-id?
-  ::
   =/  =key-id        [eny (shas eny key)]
   =/  cc=acru:ames   (pit:nu:crub:crypto 512 key)
   =/  encrypted-msg  (en:cc sec:ex:cc msg)
