@@ -194,14 +194,21 @@
         %restore    (handle-restore [beam dude]:cmd)
         %put        (handle-put beam.cmd)
         %import     (handle-import [ship spur page]:cmd)
-        %add-keys   cor(keys (~(uni in keys) keys.cmd))
-        %del-keys   cor(keys (~(dif in keys) keys.cmd))
         %del-guest  cor(guests (~(del in guests) ship.cmd))
       ::
           %add-guest
         =.  guests  (~(put in guests) ship.cmd)
         %-  emit
         [%pass /jael/pubs %arvo %j %public-keys (silt ship.cmd ~)]
+      ::
+        %add-keys  cor(keys (~(uni in keys) keys.cmd))
+      ::
+          %del-keys
+        =.  keys  (~(dif in keys) keys.cmd)
+        =.  keys  (~(put in keys) static-code)
+        =?  keys  ?=(^ backup-key)
+          (~(put in keys) u.backup-key)
+        cor
       ::
           %set-backup-key
         =.  backup-key  key.cmd
