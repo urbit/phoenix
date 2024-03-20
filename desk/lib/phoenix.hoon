@@ -16,7 +16,7 @@
       (dos h.t)  (dos m.t)  (dos s.t)
   ==
 ::
-++  our-key  (shaz our-code)
+++  our-key  (shaz (mix %phoenix our-code))
 ++  our-code
   ^-  @t
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
