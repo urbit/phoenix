@@ -81,7 +81,8 @@
   ^-  [%phx key-id @]
   ?<  =(0 eny)
   =/  =key-id        [eny (shas eny key)]
-  =/  cc=acru:ames   (pit:nu:crub:crypto 512 key)
+  =/  new-key=@      (shaz (mix eny key))
+  =/  cc=acru:ames   (pit:nu:crub:crypto 512 new-key)
   =/  encrypted-msg  (en:cc sec:ex:cc msg)
   [%phx [key-id encrypted-msg]]
 ::
@@ -100,7 +101,8 @@
       ?~  key
         ~&  >>>  [dap.bowl %no-key-match]
         ~
-      (unlock u.key msg)
+      =/  new-key=@  (shaz (mix salt.key-id u.key))
+      (unlock new-key msg)
   ::
   ++  unlock
     |=  [key=@ msg=@]
