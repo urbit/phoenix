@@ -26,9 +26,12 @@
 ::  -phoenix!phoenix-put-all `(shaz 'lidlut-tabwed-pillex-ridrup')
 ::
 ::    scrys:
-::  .^((set @) %gx /=phoenix=/keys/noun)
+::  .^((set @ux) %gx /=phoenix=/keys/noun)
 ::  .^((set ship) %gx /=phoenix=/guests/noun)
 ::  .^((set ship) %gx /=phoenix=/depositors/noun)
+::  .^((unit @ux) %gx /=phoenix=/backup-key/noun)
+::  .^(@ux %gx /=phoenix=/static-code/noun)
+::  .^(@ux %gx /=phoenix=/preferred-key/noun)
 ::  .^((map ship (set [spur case])) %gx /=phoenix=/offers/noun)
 ::  .^((set [path case]) %gx /=phoenix=/offer/(scot %p our)/noun)
 ::  .^(egg-any:gall %gx /=phoenix=/egg-any/(scot %p our)/dude/(scot ud+42)/noun)
@@ -80,6 +83,9 @@
       [%x %offers ~]       ``noun+!>(offers)
       [%x %backup-key ~]   ``noun+!>(backup-key)
       [%x %static-code ~]  ``noun+!>(static-code)
+    ::
+        [%x %preferred-key ~]
+      ``noun+!>(?^(backup-key u.backup-key static-code))
     ::
         [%x %offer ship=@ ~]
       :^  ~  ~  %noun

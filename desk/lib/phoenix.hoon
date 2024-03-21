@@ -5,8 +5,7 @@
 ++  pretty-date
   |=  t=@da
   ^-  @t
-  =/  =date  (yore t)
-  =,  date
+  =+  (yore t)
   =/  dos   (d-co:co 2)
   %-  reel  :_  (cury cat 3)
   %+  join  '-'
@@ -68,12 +67,8 @@
   =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@      (jam egg-page)
-  =/  key=@
-    =/  =beak  [our.bowl %phoenix da+now.bowl]
-    =+  .^(backup-key=(unit @) %gx (en-beam beak /backup-key/noun))
-    ?^  backup-key
-      u.backup-key
-    .^(static-code=@ %gx (en-beam beak /static-code/noun))
+  =/  =beak  [our.bowl %phoenix da+now.bowl]
+  =+  .^(key=@ %gx (en-beam beak /preferred-key/noun))
   (encrypt egg-jam key eny.bowl)
 ::
 ++  encrypt
