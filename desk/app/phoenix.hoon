@@ -145,8 +145,33 @@
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
 ++  grow
   |=  [owner=@p =spur =page]
+  :: =+  ;;([%phx k=key-id @] page)
+  :: ~&  >  [%en-path `path`(encrypt-path spur k)]
   %-  emit
   [%pass / %grow [(scot %p owner) spur] page]
+::
+++  encrypt-path
+  |=  [=spur key-id]
+  ^-  ^spur
+  ?~  key=(find-key:phx [salt salted-key] keys)
+    spur
+  =/  pat=@  (jam path)
+  =/  new-key=@       (shaz (mix salt u.key))
+  =/  cc=acru:ames    (pit:nu:crub:crypto 512 new-key)
+  =/  encrypted-path  (en:cc sec:ex:cc pat)
+  /(scot %uw salt)/(scot %uw salted-key)/[encrypted-path]
+::
+++  decrypt-path
+  |=  =(pole knot)
+  ^-  (unit spur)
+  ?>  ?=([salt=@ salted-key=@ pat=@ ~] pole)
+  ?~  key=(find-key:phx [salt salted-key]:pole keys)
+    ~
+  =/  new-key=@     (shaz (mix salt.pole u.key))
+  =/  cc=acru:ames  (pit:nu:crub:crypto 512 new-key)
+  =/  res=(unit @ux)  (de:cc sec:ex:cc pat.pole)
+  ?~  res  ~
+  (mole |.(;;(path (cue u.res))))
 ::
 ++  send-query
   |=  =ship

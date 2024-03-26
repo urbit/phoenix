@@ -85,15 +85,7 @@
   |=  [[=key-id msg=@] keys=(set @)]
   |^  ^-  (unit page)
       ^-  (unit [%egg-any egg-any:gall])
-      =/  key=(unit @)
-        =/  keys=(list @)  ~(tap in keys)
-        |-
-        ?~  keys
-          ~
-        ?:  =(salted-key.key-id (shas salt.key-id i.keys))
-          `i.keys
-        $(keys t.keys)
-      ?~  key
+      ?~  key=(find-key key-id keys)
         ~&  >>>  [dap.bowl %no-key-match]
         ~
       =/  new-key=@  (shaz (mix salt.key-id u.key))
@@ -107,6 +99,17 @@
     ?~  res  ~
     (mole |.(;;([%egg-any egg-any:gall] (cue u.res))))
   --
+::
+++  find-key
+  |=  [key-id keys=(set @)]
+  ^-  (unit @)
+  =/  keys=(list @)  ~(tap in keys)
+  |-
+  ?~  keys
+    ~
+  ?:  =(salted-key (shas salt i.keys))
+    `i.keys
+  $(keys t.keys)
 ::
 ++  send-hark
   |=  [who=ship msg=cord]
