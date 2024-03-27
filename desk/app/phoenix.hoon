@@ -78,14 +78,12 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
-      [%x %keys ~]         ``noun+!>(keys)
-      [%x %guests ~]       ``noun+!>(guests)
-      [%x %offers ~]       ``noun+!>(offers)
-      [%x %backup-key ~]   ``noun+!>(backup-key)
-      [%x %static-code ~]  ``noun+!>(static-code)
-    ::
-        [%x %preferred-key ~]
-      ``noun+!>(?^(backup-key u.backup-key static-code))
+      [%x %keys ~]           ``noun+!>(keys)
+      [%x %guests ~]         ``noun+!>(guests)
+      [%x %offers ~]         ``noun+!>(offers)
+      [%x %backup-key ~]     ``noun+!>(backup-key)
+      [%x %static-code ~]    ``noun+!>(static-code)
+      [%x %preferred-key ~]  ``noun+!>(preferred-key)
     ::
         [%x %offer ship=@ ~]
       :^  ~  ~  %noun
@@ -143,35 +141,11 @@
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
+++  preferred-key  ?^(backup-key u.backup-key static-code)
 ++  grow
   |=  [owner=@p =spur =page]
-  :: =+  ;;([%phx k=key-id @] page)
-  :: ~&  >  [%en-path `path`(encrypt-path spur k)]
   %-  emit
   [%pass / %grow [(scot %p owner) spur] page]
-::
-++  encrypt-path
-  |=  [=spur key-id]
-  ^-  ^spur
-  ?~  key=(find-key:phx [salt salted-key] keys)
-    spur
-  =/  pat=@  (jam path)
-  =/  new-key=@       (shaz (mix salt u.key))
-  =/  cc=acru:ames    (pit:nu:crub:crypto 512 new-key)
-  =/  encrypted-path  (en:cc sec:ex:cc pat)
-  /(scot %uw salt)/(scot %uw salted-key)/[encrypted-path]
-::
-++  decrypt-path
-  |=  =(pole knot)
-  ^-  (unit spur)
-  ?>  ?=([salt=@ salted-key=@ pat=@ ~] pole)
-  ?~  key=(find-key:phx [salt salted-key]:pole keys)
-    ~
-  =/  new-key=@     (shaz (mix salt.pole u.key))
-  =/  cc=acru:ames  (pit:nu:crub:crypto 512 new-key)
-  =/  res=(unit @ux)  (de:cc sec:ex:cc pat.pole)
-  ?~  res  ~
-  (mole |.(;;(path (cue u.res))))
 ::
 ++  send-query
   |=  =ship
@@ -318,7 +292,7 @@
     ?:  ?&  =(our.bowl p.beam)
             =([%da now.bowl] r.beam)
         ==
-      `(snap:phx q.beam)
+      `(snap:phx q.beam preferred-key eny.bowl)
     (pluck:phx beam)
   ?~  page
     ~&  >>>  [dap.bowl %not-found beam]
@@ -395,9 +369,10 @@
 ++  handle-snap
   |=  =dude:gall
   ^+  cor
-  =/  =page  (snap:phx dude)
-  =.  keys  (~(put in keys) our-key:phx)
-  (grow our.bowl /[dude] page)
+  =/  =page  (snap:phx dude preferred-key eny.bowl)
+  =/  encrypted-path=path
+    (encrypt-path:phx /[dude] preferred-key eny.bowl)
+  (grow our.bowl encrypted-path page)
 ::
 ++  make-keen-path
   |=  =beam

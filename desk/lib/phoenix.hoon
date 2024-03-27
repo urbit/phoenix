@@ -61,25 +61,24 @@
   `p.q.u.wut
 ::
 ++  snap
-  |=  =dude:gall
+  |=  [=dude:gall key=@ eny=@uvJ]
   ^-  page
   =/  raw=egg-any:gall  (snap:egg [our.bowl dude da+now.bowl])
   =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@      (jam egg-page)
   =/  =beak  [our.bowl %phoenix da+now.bowl]
-  =+  .^(key=@ %gx (en-beam beak /preferred-key/noun))
-  (encrypt egg-jam key eny.bowl)
+  [%phx (encrypt egg-jam key eny)]
 ::
 ++  encrypt
   |=  [msg=@ key=@ eny=@uvJ]
-  ^-  [%phx key-id @]
+  ^-  [key-id cyf=@]
   ?<  =(0 eny)
   =/  =key-id        [eny (shas eny key)]
   =/  new-key=@      (shaz (mix eny key))
   =/  cc=acru:ames   (pit:nu:crub:crypto 512 new-key)
   =/  encrypted-msg  (en:cc sec:ex:cc msg)
-  [%phx [key-id encrypted-msg]]
+  [key-id encrypted-msg]
 ::
 ++  decrypt
   |=  [[=key-id msg=@] keys=(set @)]
@@ -122,4 +121,27 @@
   =/  =action:hark  [%add-yarn & & id rope now.bowl con /[dap.bowl] ~]
   =/  =cage         [%hark-action !>(action)]
   [%pass /hark %agent [our.bowl %hark] %poke cage]^~
+::
+++  encrypt-path
+  |=  [=spur key=@ eny=@uvJ]
+  ^-  ^spur
+  =/  pat=@t  (spat spur)
+  =+  (encrypt pat key eny)
+  /(scot %uw salt)/(scot %uw salted-key)/(scot %uw cyf)
+::
+++  decrypt-path
+  |=  [=(pole knot) keys=(set @)]
+  ^-  (unit spur)
+  ?>  ?=([salt=@ salted-key=@ cyf=@ ~] pole)
+  =/  sal  (slav %uw salt.pole)
+  =/  ski  (slav %uw salted-key.pole)
+  =/  msg  (slav %uw cyf.pole)
+  ?~  key=(find-key [sal ski] keys)
+    ~
+  =/  new-key=@       (shaz (mix sal u.key))
+  =/  cc=acru:ames    (pit:nu:crub:crypto 512 new-key)
+  =/  res=(unit @ux)  (de:cc sec:ex:cc msg)
+  ?~  res
+    ~
+  (mole |.((stab ;;(@t u.res))))
 --
