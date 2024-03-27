@@ -37,7 +37,7 @@
 ::  .^(egg-any:gall %gx /=phoenix=/egg-any/(scot %p our)/dude/(scot ud+42)/noun)
 ::
 /-  *phoenix
-/+  phoenix, default-agent, dbug, verb
+/+  phoenix, egg, default-agent, dbug, verb
 =>
   |%
   +$  card  $+(card card:agent:gall)
@@ -369,9 +369,14 @@
 ++  handle-snap
   |=  =dude:gall
   ^+  cor
-  =/  =page  (snap:phx dude preferred-key eny.bowl)
+  =/  raw=egg-any:gall  (snap:egg our.bowl dude da+now.bowl)
+  =/  good-egg=egg-any:gall  (cook:egg raw)
+  =/  egg-page=page  [%egg-any good-egg]
+  =/  egg-jam=@  (jam egg-page)
+  =/  =page  [%phx (encrypt:phx egg-jam preferred-key eny.bowl)]
   =/  encrypted-path=path
-    (encrypt-path:phx /[dude] preferred-key eny.bowl)
+    =/  act=@ud  (get-act:egg good-egg)
+    (encrypt-path:phx /[dude]/(scot %ud act) preferred-key eny.bowl)
   (grow our.bowl encrypted-path page)
 ::
 ++  make-keen-path

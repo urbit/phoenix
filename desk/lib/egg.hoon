@@ -14,4 +14,13 @@
     ?>  ?=(%live -.+.raw)
     raw(p.+.old-state.+ %noun)
   ==
+::
+++  get-act
+  |=  =egg-any:gall
+  ^-  @ud
+  ?-    -.egg-any
+      ?(%15 %16)
+    ?>  ?=(%live -.+.egg-any)
+    change.stats.+.egg-any
+  ==
 --

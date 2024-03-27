@@ -67,7 +67,6 @@
   =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@      (jam egg-page)
-  =/  =beak  [our.bowl %phoenix da+now.bowl]
   [%phx (encrypt egg-jam key eny)]
 ::
 ++  encrypt
