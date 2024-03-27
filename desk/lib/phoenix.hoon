@@ -131,7 +131,8 @@
 ++  decrypt-path
   |=  [=(pole knot) keys=(set @)]
   ^-  (unit spur)
-  ?>  ?=([salt=@ salted-key=@ cyf=@ ~] pole)
+  ?.  ?=([salt=@ salted-key=@ cyf=@ ~] pole)
+    ~
   =/  sal  (slav %uw salt.pole)
   =/  ski  (slav %uw salted-key.pole)
   =/  msg  (slav %uw cyf.pole)
