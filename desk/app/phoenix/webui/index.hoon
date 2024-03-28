@@ -76,6 +76,9 @@
         ;a/"/apps/phoenix/offers"
           ;h2:"offers"
         ==
+        ;a/"/apps/phoenix/guests"
+          ;h2:"guests"
+        ==
 
         ;h4:"agent backup & restore"
 

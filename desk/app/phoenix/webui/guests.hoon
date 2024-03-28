@@ -11,14 +11,15 @@
   =/  args=(map @t @t)
     ?~(body ~ (frisk:rudder q.u.body))
   ?~  what=(~(get by args) 'what')  ~
+  ~&  >  [%what what]
   ?+    u.what  ~
-      %snap
-    ?~  dude=(slaw %tas (~(gut by args) 'dude' ''))  ~
-    [%snap u.dude]
+      %add-guest
+    ?~  who=(slaw %p (~(gut by args) 'who' ''))  ~
+    [%add-guest u.who]
   ::
-      %put
-    ?~  dude=(slaw %tas (~(gut by args) 'dude' ''))  ~
-    [%put u.dude]
+      %del-guest
+    ?~  who=(slaw %p (~(gut by args) 'who' ''))  ~
+    [%del-guest u.who]
   ==
 ::
 ++  build
@@ -61,11 +62,17 @@
         ;table#phoenix
           ;form(method "post")
             ::  table header
+            ;tr
+              ;td
+                ;button(type "submit", name "what", value "add-guest"):"+"
+              ==
+              ;td
+                ;input(type "text", name "who", placeholder "~sampel");
+              ==
+            ==
             ;tr(style "font-weight: bold")
-              ;td(align "center"):"snap"
-              ;td(align "center"):"put"
-              ;td(align "center"):"desk"
-              ;td(align "center"):"dude"
+              ;td(align "center"):"~"
+              ;td(align "center"):"guest"
             ==
           ==    ::  form
           ;*  work
@@ -75,47 +82,18 @@
   ::
   ++  work
     ^-  (list manx)
-    %+  turn  (sort ~(tap in dusks) aor)
-    |=  [=desk =dude:gall]
+    %+  turn  (sort ~(tap in guests) aor)
+    |=  guest=ship
     ;tr
-       ::  snap
+       ::  del-guest
        ;td
          ;form(method "post")
-           ;button(type "submit", name "what", value "snap"):"snap"
-           ;input(type "hidden", name "dude", value (scow %tas dude));
+           ;button(type "submit", name "what", value "del-guest"):"-"
+           ;input(type "hidden", name "who", value (scow %p guest));
          ==
        ==
-       ::  put
-       ;td
-         ;form(method "post")
-           ;button(type "submit", name "what", value "put"):"put"
-           ;input(type "hidden", name "dude", value (scow %tas dude));
-         ==
-       ==
-       ::  desk
-       ;td(align "right"):"{<desk>}"
-       ::  dude
-       ;td(align "left"):"{<dude>}"
+       ::  guest
+       ;td(align "right"):"{<guest>}"
     ==
-  ::
-  ++  desks  .^((set desk) %cd (en-beam [our.bowl %$ da+now.bowl] /))
-  ++  get-dudes
-    |=  =desk
-    ^-  (list =dude:gall)
-    %-  turn  :_  head
-    %~  tap  in
-    .^((set [=dude:gall live=?]) %ge (en-beam [our.bowl desk da+now.bowl] /$))
-  ::
-  ++  dusks
-    =|  res=(set [desk dude:gall])
-    =/  desks=(list desk)  ~(tap in desks)
-    |-  ^+  res
-    ?~  desks
-      res
-    =/  dudes=(list dude:gall)  (get-dudes i.desks)
-    |-
-    ?~  dudes
-      ^$(desks t.desks)
-    $(dudes t.dudes, res (~(put in res) i.desks i.dudes))
   --
 --
