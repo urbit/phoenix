@@ -17,10 +17,12 @@
     [%snap u.dude]
   ::
       %tomb
-    ?~  bat=(slaw %t (~(gut by args) 'beam' ''))  ~
-    ?~  bem=(de-beam (stab u.bat))  ~
+    ?~  cus=(~(get by args) 'case')  ~
+    ?~  cas=(de-case u.cus)          ~
+    ?~  pat=(~(get by args) 'spur')  ~
+    ?~  pax=(rush u.pat stap)        ~
     ?~  where=(slaw %p (~(gut by args) 'where' ''))  ~
-    [%tomb u.bem u.where]
+    [%tomb u.cas u.pax u.where]
   ==
 ::
 ++  build
@@ -41,7 +43,7 @@
       ==
       ;body
         ::  links
-        ;a/"/phoenix"
+        ;a/"/apps/phoenix"
           ;h2:"%phoenix"
         ==
 
@@ -67,17 +69,26 @@
   ++  work
     ^-  (list manx)
     %+  turn  ~(tap in (make-offer:phx our.bowl))
-    |=  [pax=path =case]
+    |=  [=case pax=path]
     ;tr
        ::  tomb
        ;td
          ;form(method "post")
            ;button(type "submit", name "what", value "tomb"):"-"
-           ;input(type "hidden", name "who", value "{(scow %p our.bowl)}");
+           ;input(type "hidden", name "case", value (scow case));
+           ;input(type "hidden", name "spur", value (trip (spat pax)));
+           ;input(type "hidden", name "where", value (scow %p our.bowl));
          ==
        ==
        ::  path
-       ;td(align "left"):"{<pax>}"
+       ;td(align "left"):"{<(ppath pax)>}"
     ==
+  ::
+  ++  ppath
+    |=  pax=path
+    ^-  path
+    ?~  dep=(decrypt-path:phx (tail pax) keys)
+      pax
+    [(head pax) u.dep]
   --
 --

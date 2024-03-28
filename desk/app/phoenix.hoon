@@ -110,9 +110,9 @@
         ~
       who
     ::
-        [%x %egg-any beam=*]
-      ?~  bem=(de-beam beam.pole)  ~
-      ?~  dat=(pluck:phx u.bem)    ~
+        [%x %egg-any case=@ spur=*]
+      ?~  cas=(de-case case.pole)  ~
+      ?~  dat=(pluck:phx u.cas spur.pole)  ~
       =+  ;;([%phx =key-id msg=@] u.dat)
       ?~  egg-page=(decrypt:phx [key-id msg] keys)
         ~
@@ -189,9 +189,9 @@
     =+  !<(cmd=command vase)
     ?-  -.cmd
       %query  (handle-query ship.cmd)
-      %keen   (handle-keen [beam where]:cmd)
-      %tomb   (handle-tomb [beam where]:cmd)
-      %cull   (handle-cull [beam where]:cmd)
+      %keen   (handle-keen [case spur where]:cmd)
+      %tomb   (handle-tomb [case spur where]:cmd)
+      %cull   (handle-cull [case spur where]:cmd)
     ::
         $?  %snap      %send       %put
             %add-keys  %add-guest  %import
@@ -201,9 +201,9 @@
       ?>  =(our src):bowl
       ?-  -.cmd
         %snap       (handle-snap dude.cmd)
-        %send       (handle-send [beam where]:cmd)
-        %restore    (handle-restore [beam dude]:cmd)
-        %put        (handle-put beam.cmd)
+        %send       (handle-send [case spur where]:cmd)
+        %restore    (handle-restore [case spur dude]:cmd)
+        %put        (handle-put [case spur]:cmd)
         %import     (handle-import [ship spur page]:cmd)
         %del-guest  cor(guests (~(del in guests) ship.cmd))
       ::
@@ -308,34 +308,44 @@
   ==
 ::
 ++  handle-put
-  |=  =beam
+  |=  [=case =spur]
   ^+  cor
   =/  page=(unit page)
-    ?:  ?&  =(our.bowl p.beam)
-            =([%da now.bowl] r.beam)
-        ==
-      `(snap:phx q.beam preferred-key eny.bowl)
-    (pluck:phx beam)
+    :: XX
+    ::
+    :: ?:  ?&  =(our.bowl p.beam)
+    ::         =([%da now.bowl] r.beam)
+    ::     ==
+    ::   `(snap:phx q.beam preferred-key eny.bowl)
+    (pluck:phx case spur)
   ?~  page
-    ~&  >>>  [dap.bowl %not-found beam]
+    ~&  >>>  [dap.bowl %not-found case spur]
     cor
   ?>  ?=([%phx key-id msg=@] u.page)
   =/  dat=@  (jam u.page)
   %-  emit
-  =/  ship-sig=@t   (crip +:(scow %p p.beam))
+  =/  ship-sig=@t   (crip +:(scow %p (head spur)))
+  ::  XX
+  ::
   =/  directory=path
     :~  dap.bowl  ship-sig
-        (reel (join '-' [q.beam s.beam]) (cury cat 3))
+        ::  XX
+        (spat spur)
+        :: (reel (join '-' [q.beam s.beam]) (cury cat 3))
     ==
   =/  file-name=path
     =/  cas=@t
-      ?.  ?=(%da -.r.beam)
-        (scot r.beam)
-      (pretty-date:phx p.r.beam)
+      ::  XX
+      (scot ud+42)
+      :: ?.  ?=(%da -.r.beam)
+      ::   (scot r.beam)
+      :: (pretty-date:phx p.r.beam)
     :_  /'jam'
     %-  reel  :_  (cury cat 3)
     %+  join  '-'
-    (weld [ship-sig q.beam s.beam] /[cas])
+    ::  XX
+    (weld `path`[ship-sig (spat spur) ~] /[cas])
+    :: (weld [ship-sig q.beam s.beam] /[cas])
   =/  =path  (weld directory file-name)
   =/  =wire  [%sav path]
   =/  =cage  [%drum-put !>([path dat])]
@@ -359,14 +369,14 @@
   [%pass /offer %agent [ship %phoenix] %poke cage]
 ::
 ++  handle-restore
-  |=  [=beam =dude:gall]
+  |=  [=case =spur =dude:gall]
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
     ~&  >>>  [dap.bowl 'restore failed: not running:' dude]
     cor
-  =/  dat=(unit page)  (pluck:phx beam)
+  =/  dat=(unit page)  (pluck:phx case spur)
   ?~  dat
-    ~&  >>>  [dap.bowl 'restore failed: not found:' beam]
+    ~&  >>>  [dap.bowl 'restore failed: not found:' case spur]
     cor
   =+  ;;([%phx =key-id msg=@] u.dat)
   =.  keys  (~(put in keys) our-key:phx)
@@ -397,66 +407,73 @@
   =/  egg-jam=@  (jam egg-page)
   =/  =page  [%phx (encrypt:phx egg-jam preferred-key eny.bowl)]
   =/  encrypted-path=path
+    =/  rift
+      .^(@ud %j (en-beam [our.bowl %rift da+now.bowl] /(scot %p our.bowl)))
     =/  act=@ud  (get-act:egg good-egg)
-    (encrypt-path:phx /[dude]/(scot %ud act) preferred-key eny.bowl)
+    %^    encrypt-path:phx
+        /(scot %ud rift)/[dude]/(scot %ud act)
+      preferred-key
+    eny.bowl
   (grow our.bowl encrypted-path page)
 ::
 ++  make-keen-path
-  |=  =beam
+  |=  [=case =spur]
   ^-  path
-  =+  [case=(scot r.beam) who=(scot %p p.beam)]
-  (weld /g/x/[case]/[dap.bowl]//1 [who q.beam s.beam])
+  (weld /g/x/(scot case)/[dap.bowl]//1 spur)
 ::
 ++  handle-send
-  |=  [=beam =ship]
+  |=  [=case =spur where=ship]
   ^+  cor
   ?>  =(our src):bowl
-  ?<  =(our.bowl ship)
-  ?~  (pluck:phx beam)
-    ~&  >>  [dap.bowl %not-found beam]
+  ?<  =(our.bowl where)
+  ?~  (pluck:phx case spur)
+    ~&  >>  [dap.bowl %not-found case spur]
     cor
   %-  emit
-  =/  =cage  [%phoenix-command !>([%keen beam our.bowl])]
-  [%pass /send %agent [ship %phoenix] %poke cage]
+  =/  =cage  [%phoenix-command !>([%keen case spur our.bowl])]
+  [%pass /send %agent [where %phoenix] %poke cage]
 ::
 ++  handle-keen
-  |=  [=beam =ship]
+  |=  [=case =spur where=ship]
+  =/  owner=ship  (slav %p (head spur))
   ?>  ?|  =(our src):bowl
-          ?&  =(src.bowl ship)
-              =(src.bowl p.beam)
+          ?&  =(where src.bowl)
+              =(owner src.bowl)
               (~(has in guests) src.bowl)
           ==
       ==
   %-  emit
-  =/  keen-path=path  (make-keen-path beam)
-  [%pass /keen/(scot %p src.bowl) %arvo %a %keen ~ ship keen-path]
+  =/  keen-path=path  (make-keen-path case spur)
+  [%pass /keen/(scot %p src.bowl) %arvo %a %keen ~ where keen-path]
 ::
 ++  handle-tomb
-  |=  [=beam where=ship]
+  |=  [=case =spur where=ship]
+  =/  owner=ship  (slav %p (head spur))
   ?:  =(where our.bowl)
     ?>  ?|  =(our src):bowl
-            =(p.beam src.bowl)
+            =(owner src.bowl)
         ==
     =.  cor
-      (emit [%pass / %tomb r.beam [(scot %p p.beam) q.beam s.beam]])
-    (wake-offer p.beam)
+      (emit [%pass / %tomb case spur])
+    (wake-offer owner)
   ?>  =(our src):bowl
   %-  emit
-  =/  =cage  [%phoenix-command !>([%tomb beam where])]
+  =/  =cage  [%phoenix-command !>([%tomb case spur where])]
   [%pass /tomb %agent [where %phoenix] %poke cage]
 ::
 ++  handle-cull
-  |=  [=beam where=ship]
+  |=  [=case =spur where=ship]
+  =/  owner=ship  (slav %p (head spur))
   ?:  =(where our.bowl)
     ?>  ?|  =(our src):bowl
-            =(p.beam src.bowl)
+            =(owner src.bowl)
         ==
     =.  cor
-      (emit [%pass / %cull r.beam [(scot %p p.beam) q.beam s.beam]])
-    (wake-offer p.beam)
+      (emit [%pass / %cull case spur])
+    (wake-offer owner)
   ?>  =(our src):bowl
   %-  emit
-  =/  =cage  [%phoenix-command !>([%cull beam where])]
+  =/  =cage  [%phoenix-command !>([%cull case spur where])]
   [%pass /cull %agent [where %phoenix] %poke cage]
 ::
 ++  on-egg-any

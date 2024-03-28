@@ -1,5 +1,5 @@
 |%
-+$  offer   (set [spur case])
++$  offer   (set [case spur])
 +$  key-id  [salt=@ salted-key=@]
 ::
 +$  command
@@ -7,20 +7,20 @@
       [%del-guest =ship]              ::  remove save permission
     ::
       [%snap =dude:gall]              ::  take snapshot
-      [%send =beam where=ship]        ::  command ship to keen
-      [%put =beam]                    ::  save to put
+      [%send =case =spur where=ship]  ::  command ship to keen
+      [%put =case =spur]              ::  save to put
       [%import =ship =spur =page]     ::  import a page
     ::
       [%query =ship]                  ::  request for offers
-      [%keen =beam where=ship]        ::  keen
-      [%tomb =beam where=ship]        ::  tombstone
-      [%cull =beam where=ship]        ::  cull ud+0 to case
+      [%keen =case =spur where=ship]  ::  keen
+      [%tomb =case =spur where=ship]  ::  tombstone
+      [%cull =case =spur where=ship]  ::  cull ud+0 to case
     ::
       [%add-keys keys=(set @)]        ::  add encryption keys
       [%del-keys keys=(set @)]        ::  del encryption keys
       [%set-backup-key key=(unit @)]  ::  set primary backup key
     ::
-      [%restore =beam =dude:gall]     ::  poke an agent with egg-any
+      [%restore =case =spur =dude:gall]     ::  poke an agent with egg-any
   ==
 ::
 +$  records-0

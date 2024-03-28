@@ -29,33 +29,33 @@
   |=  =ship
   ^-  offer
   %-  silt
-  ^-  (list [spur case])
+  ^-  (list [case spur])
   %-  zing
   %+  murn  ~(tap by sky.bowl)
   |=  [pax=path =fans:gall]
-  ^-  (unit (list [spur case]))
+  ^-  (unit (list [case spur]))
   ?~  pax  ~
   ?.  =(ship (slav %p i.pax))
     ~
   %-  some
-  ^-  (list [spur case])
+  ^-  (list [case spur])
   %+  murn  (tap:on-path fans)
   |=  [rev=@ud wen=@da wut=(each page @uvI)]
-  ^-  (unit [spur case])
+  ^-  (unit [case spur])
   ?-  -.wut
     %|  ~
-    %&  `[pax ud+rev]
+    %&  `[ud+rev pax]
   ==
 ::
 ++  pluck
-  |=  =beam
+  |=  [=case =spur]
   ^-  (unit page)
-  ?.  ?=([%ud @] r.beam)  ~
+  ?.  ?=(%ud -.case)  ~
   =/  fun=(unit fans:gall)
-    (~(get by sky.bowl) [(scot %p p.beam) [q.beam] s.beam])
+    (~(get by sky.bowl) spur)
   ?~  fun  ~
   =/  wut=(unit (pair @da (each page @uvI)))
-    (get:on-path u.fun p.r.beam)
+    (get:on-path u.fun p.case)
   ?~  wut  ~
   ?.  ?=(%& -.q.u.wut)  ~
   `p.q.u.wut
@@ -126,16 +126,16 @@
   ^-  ^spur
   =/  pat=@t  (spat spur)
   =+  (encrypt pat key eny)
-  /(scot %uw salt)/(scot %uw salted-key)/(scot %uw cyf)
+  /(scot %uv salt)/(scot %uv salted-key)/(scot %uv cyf)
 ::
 ++  decrypt-path
   |=  [=(pole knot) keys=(set @)]
   ^-  (unit spur)
   ?.  ?=([salt=@ salted-key=@ cyf=@ ~] pole)
     ~
-  ?~  sal=(slaw %uw salt.pole)           ~
-  ?~  ski=(slaw %uw salted-key.pole)     ~
-  ?~  msg=(slaw %uw cyf.pole)            ~
+  ?~  sal=(slaw %uv salt.pole)           ~
+  ?~  ski=(slaw %uv salted-key.pole)     ~
+  ?~  msg=(slaw %uv cyf.pole)            ~
   ?~  key=(find-key [u.sal u.ski] keys)  ~
   =/  new-key=@       (shaz (mix u.sal u.key))
   =/  cc=acru:ames    (pit:nu:crub:crypto 512 new-key)
