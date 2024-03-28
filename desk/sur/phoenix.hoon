@@ -22,4 +22,12 @@
     ::
       [%restore =beam =dude:gall]     ::  poke an agent with egg-any
   ==
+::
++$  records-0
+  $:  keys=(set @ux)
+      static-code=@ux
+      backup-key=(unit @ux)
+      guests=(set ship)
+      offers=(map ship offer)
+  ==
 --

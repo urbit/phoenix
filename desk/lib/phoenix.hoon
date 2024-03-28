@@ -133,15 +133,13 @@
   ^-  (unit spur)
   ?.  ?=([salt=@ salted-key=@ cyf=@ ~] pole)
     ~
-  =/  sal  (slav %uw salt.pole)
-  =/  ski  (slav %uw salted-key.pole)
-  =/  msg  (slav %uw cyf.pole)
-  ?~  key=(find-key [sal ski] keys)
-    ~
-  =/  new-key=@       (shaz (mix sal u.key))
+  ?~  sal=(slaw %uw salt.pole)           ~
+  ?~  ski=(slaw %uw salted-key.pole)     ~
+  ?~  msg=(slaw %uw cyf.pole)            ~
+  ?~  key=(find-key [u.sal u.ski] keys)  ~
+  =/  new-key=@       (shaz (mix u.sal u.key))
   =/  cc=acru:ames    (pit:nu:crub:crypto 512 new-key)
-  =/  res=(unit @ux)  (de:cc sec:ex:cc msg)
-  ?~  res
-    ~
+  =/  res=(unit @ux)  (de:cc sec:ex:cc u.msg)
+  ?~  res  ~
   (mole |.((stab ;;(@t u.res))))
 --

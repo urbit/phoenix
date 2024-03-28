@@ -37,19 +37,13 @@
 ::  .^(egg-any:gall %gx /=phoenix=/egg-any/(scot %p our)/dude/(scot ud+42)/noun)
 ::
 /-  *phoenix
-/+  phoenix, egg, default-agent, dbug, verb
+/+  phoenix, egg, default-agent, dbug, verb, rudder
+/~  pages  (page:rudder records-0 command)  /app/phoenix/webui
 =>
   |%
   +$  card  $+(card card:agent:gall)
   +$  versioned-state  $%(state-0)
-  +$  state-0
-    $:  %0
-        keys=(set @ux)
-        static-code=@ux
-        backup-key=(unit @ux)
-        guests=(set ship)
-        offers=(map ship offer)
-    ==
+  +$  state-0  [%0 records-0]
   --
 =|  state-0
 =*  state  -
@@ -64,16 +58,28 @@
       phx   ~(. phoenix bowl)
   ++  on-init
     ^-  (quip card _this)
-    :_  this  :_  ~
-    [%pass /wake/inflate %arvo %b %wait now.bowl]
+    :_  this
+    :-  [%pass /wake/inflate %arvo %b %wait now.bowl]
+    [%pass /eyre/bind %arvo %e %connect `/apps/[dap.bowl] dap.bowl]~
+  ::
   ++  on-save  !>(state)
-  ++  on-load  |=(=vase `this(state !<(versioned-state vase)))
+  ++  on-load
+    |=  =vase
+    =+  !<(old=versioned-state vase)
+    ?>  ?=(%0 -.old)
+    `this(state old)
   ++  on-poke
     |=  [=mark =vase]
     ^-  (quip card _this)
     =^  cards  state  abet:(poke:cor mark vase)
     [cards this]
-  ++  on-watch  on-watch:def
+  ++  on-watch
+    |=  =path
+    ^-  (quip card _this)
+    ?>  =(our src):bowl
+    ?>  ?=([%http-response @ ~] path)
+    [~ this]
+  ::
   ++  on-leave  on-leave:def
   ++  on-peek
     |=  =(pole knot)
@@ -222,6 +228,22 @@
         cor
       ==
     ==
+  ::
+     %handle-http-request
+    =;  out=(quip card _+.state)
+      =.  +.state  +.out
+      (emil -.out)
+    ^-  (quip card _+.state)
+    %.  [bowl !<(order:rudder vase) +.state]
+    %-  (steer:rudder _+.state command)
+    :^    pages
+        (point:rudder /apps/[dap.bowl] & ~(key by pages))
+      (fours:rudder +.state)
+    |=  cmd=command
+    ^-  $@(brief:rudder [brief:rudder (list card) _+.state])
+    =*  success  `brief:rudder`'Processed succesfully.'
+    =.  cor  (poke phoenix-command+!>(cmd))
+    [success cards +.state]
   ==
 ::
 ++  arvo
