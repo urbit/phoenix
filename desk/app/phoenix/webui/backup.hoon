@@ -16,20 +16,9 @@
     ?~  dude=(slaw %tas (~(gut by args) 'dude' ''))  ~
     [%snap u.dude]
   ::
-      %tomb
-    ?~  cus=(~(get by args) 'case')  ~
-    ?~  cas=(de-case u.cus)          ~
-    ?~  pat=(~(get by args) 'spur')  ~
-    ?~  pax=(rush u.pat stap)        ~
-    ?~  where=(slaw %p (~(gut by args) 'where' ''))  ~
-    [%tomb u.cas u.pax u.where]
-  ::
       %put
-    ?~  cus=(~(get by args) 'case')  ~
-    ?~  cas=(de-case u.cus)          ~
-    ?~  pat=(~(get by args) 'spur')  ~
-    ?~  pax=(rush u.pat stap)        ~
-    [%put u.cas u.pax]
+    ?~  dude=(slaw %tas (~(gut by args) 'dude' ''))  ~
+    [%put u.dude]
   ==
 ::
 ++  build
@@ -67,9 +56,10 @@
           ;form(method "post")
             ::  table header
             ;tr(style "font-weight: bold")
-              ;td(align "center"):"~"
+              ;td(align "center"):"snap"
               ;td(align "center"):"put"
-              ;td(align "center"):"path"
+              ;td(align "center"):"desk"
+              ;td(align "center"):"dude"
             ==
           ==    ::  form
           ;*  work
@@ -79,35 +69,47 @@
   ::
   ++  work
     ^-  (list manx)
-    %+  turn  ~(tap in (make-offer:phx our.bowl))
-    |=  [=case pax=path]
+    %+  turn  (sort ~(tap in dusks) aor)
+    |=  [=desk =dude:gall]
     ;tr
-       ::  tomb
+       ::  snap
        ;td
          ;form(method "post")
-           ;button(type "submit", name "what", value "tomb"):"del"
-           ;input(type "hidden", name "case", value (scow case));
-           ;input(type "hidden", name "spur", value (trip (spat pax)));
-           ;input(type "hidden", name "where", value (scow %p our.bowl));
+           ;button(type "submit", name "what", value "snap"):"snap"
+           ;input(type "hidden", name "dude", value (scow %tas dude));
          ==
        ==
        ::  put
        ;td
          ;form(method "post")
            ;button(type "submit", name "what", value "put"):"put"
-           ;input(type "hidden", name "case", value (scow case));
-           ;input(type "hidden", name "spur", value (trip (spat pax)));
+           ;input(type "hidden", name "dude", value (scow %tas dude));
          ==
        ==
-       ::  path
-       ;td(align "left"):"{<(ppath pax)>}"
+       ::  desk
+       ;td(align "right"):"{<desk>}"
+       ::  dude
+       ;td(align "left"):"{<dude>}"
     ==
   ::
-  ++  ppath
-    |=  pax=path
-    ^-  path
-    ?~  dep=(decrypt-path:phx (tail pax) keys)
-      pax
-    [(head pax) u.dep]
+  ++  desks  .^((set desk) %cd (en-beam [our.bowl %$ da+now.bowl] /))
+  ++  get-dudes
+    |=  =desk
+    ^-  (list =dude:gall)
+    %-  turn  :_  head
+    %~  tap  in
+    .^((set [=dude:gall live=?]) %ge (en-beam [our.bowl desk da+now.bowl] /$))
+  ::
+  ++  dusks
+    =|  res=(set [desk dude:gall])
+    =/  desks=(list desk)  ~(tap in desks)
+    |-  ^+  res
+    ?~  desks
+      res
+    =/  dudes=(list dude:gall)  (get-dudes i.desks)
+    |-
+    ?~  dudes
+      ^$(desks t.desks)
+    $(dudes t.dudes, res (~(put in res) i.desks i.dudes))
   --
 --

@@ -8,7 +8,7 @@
     ::
       [%snap =dude:gall]              ::  take snapshot
       [%send =case =spur where=ship]  ::  command ship to keen
-      [%put =case =spur]              ::  save to put
+      [%put arg=$@(=dude:gall [=case =spur])]  ::  save to put
       [%import =ship =spur =page]     ::  import a page
     ::
       [%query =ship]                  ::  request for offers

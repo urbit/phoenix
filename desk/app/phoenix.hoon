@@ -203,7 +203,7 @@
         %snap       (handle-snap dude.cmd)
         %send       (handle-send [case spur where]:cmd)
         %restore    (handle-restore [case spur dude]:cmd)
-        %put        (handle-put [case spur]:cmd)
+        %put        (handle-put arg.cmd)
         %import     (handle-import [ship spur page]:cmd)
         %del-guest  cor(guests (~(del in guests) ship.cmd))
       ::
@@ -308,29 +308,24 @@
   ==
 ::
 ++  handle-put
-  |=  [=case =spur]
+  |=  arg=$@(=dude:gall [=case =spur])
   ^+  cor
   =/  page=(unit page)
-    :: XX
-    ::
-    :: ?:  ?&  =(our.bowl p.beam)
-    ::         =([%da now.bowl] r.beam)
-    ::     ==
-    ::   `(snap:phx q.beam preferred-key eny.bowl)
-    (pluck:phx case spur)
+    ?@  arg
+      `(snap:phx dude.arg preferred-key eny.bowl)
+    (pluck:phx case.arg spur.arg)
   ?~  page
-    ~&  >>>  [dap.bowl %not-found case spur]
+    ~&  >>>  [dap.bowl %not-found arg]
     cor
   ?>  ?=([%phx key-id msg=@] u.page)
   =/  dat=@  (jam u.page)
   %-  emit
-  =/  ship-sig=@t   (crip +:(scow %p (head spur)))
+  =/  ship-sig=@t  (crip +:(scow %p ?@(arg our.bowl (slav %p (head spur.arg)))))
   ::  XX
   ::
   =/  directory=path
     :~  dap.bowl  ship-sig
         ::  XX
-        (spat spur)
         :: (reel (join '-' [q.beam s.beam]) (cury cat 3))
     ==
   =/  file-name=path
@@ -344,7 +339,7 @@
     %-  reel  :_  (cury cat 3)
     %+  join  '-'
     ::  XX
-    (weld `path`[ship-sig (spat spur) ~] /[cas])
+    (weld `path`[ship-sig ~] /[cas])
     :: (weld [ship-sig q.beam s.beam] /[cas])
   =/  =path  (weld directory file-name)
   =/  =wire  [%sav path]
