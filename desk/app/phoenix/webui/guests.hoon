@@ -62,6 +62,11 @@
         ;table#phoenix
           ;form(method "post")
             ::  table header
+            ;tr(style "font-weight: bold")
+              ;td(align "center"):"~"
+              ;td(align "center"):"guest"
+            ==
+            ::
             ;tr
               ;td
                 ;button(type "submit", name "what", value "add-guest"):"+"
@@ -69,10 +74,6 @@
               ;td
                 ;input(type "text", name "who", placeholder "~sampel");
               ==
-            ==
-            ;tr(style "font-weight: bold")
-              ;td(align "center"):"~"
-              ;td(align "center"):"guest"
             ==
           ==    ::  form
           ;*  work
