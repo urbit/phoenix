@@ -45,6 +45,9 @@
         ;a/"/apps/phoenix/backup"
           ;h2:"backup"
         ==
+        ;a/"/apps/phoenix/offers"
+          ;h2:"offers"
+        ==
 
         ;h4:"agent backup & restore"
 

@@ -12,10 +12,6 @@
     ?~(body ~ (frisk:rudder q.u.body))
   ?~  what=(~(get by args) 'what')  ~
   ?+    u.what  ~
-      %snap
-    ?~  dude=(slaw %tas (~(gut by args) 'dude' ''))  ~
-    [%snap u.dude]
-  ::
       %tomb
     ?~  cus=(~(get by args) 'case')  ~
     ?~  cas=(de-case u.cus)          ~
@@ -24,29 +20,13 @@
     ?~  where=(slaw %p (~(gut by args) 'where' ''))  ~
     [%tomb u.cas u.pax u.where]
   ::
-      %put
+      %keen
     ?~  cus=(~(get by args) 'case')  ~
     ?~  cas=(de-case u.cus)          ~
     ?~  pat=(~(get by args) 'spur')  ~
     ?~  pax=(rush u.pat stap)        ~
-    [%put u.cas u.pax]
-  ::
-      %restore
-    ?~  cus=(~(get by args) 'case')  ~
-    ?~  cas=(de-case u.cus)          ~
-    ?~  pat=(~(get by args) 'spur')  ~
-    ?~  pax=(rush u.pat stap)        ~
-    ?~  dude=(rush (~(gut by args) 'dude' '') ;~(pfix cen sym))  ~
-    ?.  ((sane %tas) u.dude)  ~
-    [%restore u.cas u.pax u.dude]
-  ::
-      %send
-    ?~  cus=(~(get by args) 'case')  ~
-    ?~  cas=(de-case u.cus)          ~
-    ?~  pat=(~(get by args) 'spur')  ~
-    ?~  pax=(rush u.pat stap)        ~
-    ?~  who=(slaw %p (~(gut by args) 'who' ''))  ~
-    [%send u.cas u.pax u.who]
+    ?~  where=(slaw %p (~(gut by args) 'where' ''))  ~
+    [%keen u.cas u.pax u.where]
   ==
 ::
 ++  build
@@ -87,10 +67,9 @@
           ;form(method "post")
             ::  table header
             ;tr(style "font-weight: bold")
-              ;td(align "center"):"~"
-              ;td(align "center"):"put"
-              ;td(align "center"):"restore"
-              ;td(align "center"):"send"
+              ;td(align "center"):"tomb"
+              ;td(align "center"):"keen"
+              ;td(align "center"):"~hodler"
               ;td(align "center"):"path"
               ;td(align "center"):"case"
             ==
@@ -102,12 +81,15 @@
   ::
   ++  work
     ^-  (list manx)
-    =/  dat=(list [case de-pax=path raw=path])
-      %+  turn  ~(tap in (make-offer:phx our.bowl))
-      |=  [=case raw=path]
-      [case (ppath raw) raw]
+    =/  dat=(list [ship case path path])
+      %-  zing
+      %+  turn  ~(tap by offers)
+      |=  [hodler=ship =offer]
+      %+  turn  ~(tap in offer)
+      |=  [cas=case raw=spur]
+      [hodler cas (ppath raw) raw]
     %+  turn  (sort dat aor)
-    |=  [=case pax=path raw=path]
+    |=  [hodler=ship =case pax=path raw=path]
     ;tr
       ::  tomb
       ;td
@@ -115,35 +97,20 @@
           ;button(type "submit", name "what", value "tomb"):"del"
           ;input(type "hidden", name "case", value (scow case));
           ;input(type "hidden", name "spur", value (trip (spat raw)));
-          ;input(type "hidden", name "where", value (scow %p our.bowl));
+          ;input(type "hidden", name "where", value (scow %p hodler));
         ==
       ==
-      ::  put
+      ::  keen
       ;td
         ;form(method "post")
-          ;button(type "submit", name "what", value "put"):"put"
+          ;button(type "submit", name "what", value "keen"):"keen"
           ;input(type "hidden", name "case", value (scow case));
           ;input(type "hidden", name "spur", value (trip (spat raw)));
+          ;input(type "hidden", name "where", value (scow %p hodler));
         ==
       ==
-      ::  restore
-      ;td
-        ;form(method "post")
-          ;input(type "hidden", name "what", value "restore");
-          ;input(type "hidden", name "case", value (scow case));
-          ;input(type "hidden", name "spur", value (trip (spat raw)));
-          ;input(type "text", name "dude", placeholder "%dude");
-        ==
-      ==
-      ::  send
-      ;td
-        ;form(method "post")
-          ;input(type "hidden", name "what", value "send");
-          ;input(type "hidden", name "case", value (scow case));
-          ;input(type "hidden", name "spur", value (trip (spat raw)));
-          ;input(type "text", name "who", placeholder "~hodler");
-        ==
-      ==
+      ::  hodler
+      ;td(align "left"):"{<hodler>}"
       ::  path
       ;td(align "left"):"{<pax>}"
       ::  case
