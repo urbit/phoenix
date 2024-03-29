@@ -1,5 +1,6 @@
 ::  :phoenix|snap %dude
 ::
+/-  *phoenix
 :-  %say
 |=  [^ [=dude:gall ~] ~]
-[%phoenix-command [%snap dude]]
+[%phoenix-command `command`[%snap dude]]

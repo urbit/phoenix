@@ -1,5 +1,6 @@
 ::  :phoenix|add-guest ~zod
 ::
+/-  *phoenix
 :-  %say
 |=  [^ [=ship ~] ~]
-[%phoenix-command [%add-guest ship]]
+[%phoenix-command `command`[%add-guest ship]]

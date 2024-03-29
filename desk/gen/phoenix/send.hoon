@@ -1,8 +1,9 @@
-::  :phoenix|send [[our %dude ud+42] /] ~hodler
+::  :phoenix|send ud+1 /~zod/foo/bar/baz ~hodler
 ::
+/-  *phoenix
 :-  %say
 |=  $:  ^
-        [=beam where=ship ~]
+        [=case =spur where=ship ~]
         ~
     ==
-[%phoenix-command [%send beam where]]
+[%phoenix-command `command`[%send case spur where]]

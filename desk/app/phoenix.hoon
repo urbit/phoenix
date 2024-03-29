@@ -4,21 +4,22 @@
 ::  :phoenix|del-guest ~zod
 ::
 ::  :phoenix|snap %dude
-::  :phoenix|send [[our %dude ud+42] /] ~hodler
-::  :phoenix|put [[our %dude ud+42] /]
-::  :phoenix|import-clay owner=ship %dude /=desk=/owner-dude-42/jam
+::  :phoenix|send ud+1 /~zod/foo/bar/baz ~hodler
+::  :phoenix|put %dude
+::  :phoenix|import-clay ~zod /foo/bar/baz /=desk=/zod-0-dude-42/jam
 ::
 ::  :phoenix|query ~hodler
-::  :phoenix|keen [[our %dude ud+42] /] ~hodler
-::  :phoenix|tomb [[our %dude ud+42] /] ~hodler
-::  :phoenix|cull [[our %dude ud+42] /] ~hodler
+::  :phoenix|keen ud+1 /~zod/foo/bar/baz ~hodler
+::  :phoenix|tomb ud+1 /~zod/foo/bar/baz ~hodler
+::  :phoenix|cull ud+1 /~zod/foo/bar/baz ~hodler
 ::
 ::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup'
 ::  :phoenix|del-key @
 ::  :phoenix|set-backup-key `'lidlut-tabwed-pillex-ridrup'
 ::
-::  :phoenix|restore [[our %dude ud+42] /] %dude
+::  :phoenix|restore ud+1 /~zod/foo/bar/baz %dude
 ::
+::  +phoenix!phoenix/show-keys
 ::  -phoenix!phoenix-put-keys
 ::
 ::  -phoenix!phoenix-put-dude %dude `(shaz 'lidlut-tabwed-pillex-ridrup')

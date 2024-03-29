@@ -1,5 +1,7 @@
-::  :phoenix|put [[our %dude ud+42] /]
+::  :phoenix|put %dude
+::  :phoenix|put ud+1 /~zod/foo/bar/baz
 ::
+/-  *phoenix
 :-  %say
-|=  [^ [=beam ~] ~]
-[%phoenix-command [%put beam]]
+|=  [^ [arg=$@(dude:gall [case spur]) ~] ~]
+[%phoenix-command `command`[%put arg]]

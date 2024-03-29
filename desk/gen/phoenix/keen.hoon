@@ -1,9 +1,10 @@
-::  :phoenix|keen [[our %dude ud+42] /] ~hodler
+::  :phoenix|keen ud+1 /~zod/foo/bar/baz ~hodler
 ::
+/-  *phoenix
 :-  %say
 |=  $:  ^
-        [=beam where=ship ~]
+        [=case =spur where=ship ~]
         ~
     ==
-[%phoenix-command [%keen beam where]]
+[%phoenix-command `command`[%keen case spur where]]
 

@@ -1,6 +1,7 @@
 ::  :phoenix|del-key @
 ::
+/-  *phoenix
 :-  %say
 |=  [^ [key=@ ~] ~]
 =/  keys=(set @)  (silt key ~)
-[%phoenix-command [%del-keys keys]]
+[%phoenix-command `command`[%del-keys keys]]

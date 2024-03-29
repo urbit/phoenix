@@ -1,8 +1,9 @@
-::  :phoenix|restore [[our %dude ud+42] /] %dude
+::  :phoenix|restore ud+1 /~zod/foo/bar/baz %dude
 ::
+/-  *phoenix
 :-  %say
 |=  $:  ^
-        [=beam =dude:gall ~]
+        [=case =spur =dude:gall ~]
         ~
     ==
-[%phoenix-command [%restore beam dude]]
+[%phoenix-command `command`[%restore case spur dude]]
