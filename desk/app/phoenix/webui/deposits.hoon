@@ -95,11 +95,9 @@
             ;td(align "center"):"🔒"
             ;td(align "center"):"~"
             ;td(align "center"):"put"
-            ;td(align "center"):"send"
             ;td(align "center"):"restore"
             ;td(align "center"):"path"
             ;td(align "center"):"case"
-            ;td(align "center"):"sources"
           ==
           ;*  work
         ==
@@ -108,12 +106,29 @@
   ::
   ++  work
     ^-  (list manx)
-    =/  dat=(list [case de-pax=(unit path) raw=path])
-      %+  turn  ~(tap in (make-offer:phx our.bowl))
-      |=  [=case raw=path]
-      [case (ppath raw) raw]
-    %+  turn  (sort dat aor)
-    |=  [=case pax=(unit path) raw=path]
+    =/  deps=(map ship offer)
+      =|  res=(map ship offer)
+      =/  dep=(list ship)  ~(tap in (~(del in depositors) our.bowl))
+      |-  ^+  res
+      ?~  dep
+        res
+      $(dep t.dep, res (~(put by res) i.dep (make-offer:phx i.dep)))
+    ::
+    =/  dat=(set [ship case de-pax=(unit path) raw=path])
+      =|  res=(set [ship case de-pax=(unit path) raw=path])
+      =/  wut=(list (pair ship offer))  ~(tap by deps)
+      |-  ^+  res
+      ?~  wut
+        res
+      =/  bak=(list [=case =spur])  ~(tap in q.i.wut)
+      |-
+      ?~  bak
+        ^$(wut t.wut)
+      =.  res
+        (~(put in res) [p.i.wut case.i.bak (ppath spur.i.bak) spur.i.bak])
+      $(bak t.bak)
+    %+  turn  (sort ~(tap in dat) aor)
+    |=  [who=ship =case pax=(unit path) raw=path]
     ;tr
       ::  lock
       ;td(align "center")
@@ -138,15 +153,6 @@
           ;input(type "hidden", name "spur", value (trip (spat raw)));
         ==
       ==
-      ::  send
-      ;td
-        ;form(method "post")
-          ;input(type "hidden", name "what", value "send");
-          ;input(type "hidden", name "case", value (scow case));
-          ;input(type "hidden", name "spur", value (trip (spat raw)));
-          ;input(type "text", name "who", placeholder "~hodler");
-        ==
-      ==
       ::  restore
       ;td(align "center")
         ;+  ?~  pax
@@ -162,8 +168,6 @@
       ;td(align "left"):"{<?^(pax u.pax raw)>}"
       ::  case
       ;td(align "left"):"{<case>}"
-      ::  sources
-      ;td(align "center"):"{<~(tap in (bank raw))>}"
     ==
   ::
   ++  ppath
@@ -173,19 +177,8 @@
       ~
     `[(head pax) u.dep]
   ::
-  ++  bank
-    |=  pax=path
+  ++  depositors
     ^-  (set ship)
-    =/  off=(list (pair ship offer))  ~(tap by offers)
-    =|  ships=(set ship)
-    |-  ^+  ships
-    ?~  off
-      ships
-    =/  paz=(set path)
-      %-  sy
-      (turn ~(tap in q.i.off) tail)
-    =?  ships  (~(has in paz) pax)
-      (~(put in ships) p.i.off)
-    $(off t.off)
+    .^((set ship) %gx (en-beam [our.bowl %phoenix da+now.bowl] /depositors/noun))
   --
 --

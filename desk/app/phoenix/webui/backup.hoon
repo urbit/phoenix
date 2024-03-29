@@ -51,6 +51,9 @@
         ;a/"/apps/phoenix/guests"
           ;h2:"guests"
         ==
+        ;a/"/apps/phoenix/deposits"
+          ;h2:"deposits"
+        ==
 
         ;h4:"agent backup & restore"
 
@@ -59,15 +62,13 @@
               ;p.green:"{(trip t.u.msg)}"
             ;p.red:"{(trip t.u.msg)}"
         ;table#phoenix
-          ;form(method "post")
-            ::  table header
-            ;tr(style "font-weight: bold")
-              ;td(align "center"):"snap"
-              ;td(align "center"):"put"
-              ;td(align "center"):"desk"
-              ;td(align "center"):"dude"
-            ==
-          ==    ::  form
+          ::  table header
+          ;tr(style "font-weight: bold")
+            ;td(align "center"):"snap"
+            ;td(align "center"):"put"
+            ;td(align "center"):"desk"
+            ;td(align "center"):"dude"
+          ==
           ;*  work
         ==
       ==  ::  body
@@ -78,24 +79,24 @@
     %+  turn  (sort ~(tap in dusks) aor)
     |=  [=desk =dude:gall]
     ;tr
-       ::  snap
-       ;td
-         ;form(method "post")
-           ;button(type "submit", name "what", value "snap"):"snap"
-           ;input(type "hidden", name "dude", value (scow %tas dude));
-         ==
-       ==
-       ::  put
-       ;td
-         ;form(method "post")
-           ;button(type "submit", name "what", value "put"):"put"
-           ;input(type "hidden", name "dude", value (scow %tas dude));
-         ==
-       ==
-       ::  desk
-       ;td(align "right"):"{<desk>}"
-       ::  dude
-       ;td(align "left"):"{<dude>}"
+      ::  snap
+      ;td
+        ;form(method "post")
+          ;button(type "submit", name "what", value "snap"):"snap"
+          ;input(type "hidden", name "dude", value (scow %tas dude));
+        ==
+      ==
+      ::  put
+      ;td
+        ;form(method "post")
+          ;button(type "submit", name "what", value "put"):"put"
+          ;input(type "hidden", name "dude", value (scow %tas dude));
+        ==
+      ==
+      ::  desk
+      ;td(align "right"):"{<desk>}"
+      ::  dude
+      ;td(align "right"):"{<dude>}"
     ==
   ::
   ++  desks  .^((set desk) %cd (en-beam [our.bowl %$ da+now.bowl] /))

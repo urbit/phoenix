@@ -11,7 +11,6 @@
   =/  args=(map @t @t)
     ?~(body ~ (frisk:rudder q.u.body))
   ?~  what=(~(get by args) 'what')  ~
-  ~&  >  [%what what]
   ?+    u.what  ~
       %add-guest
     ?~  who=(slaw %p (~(gut by args) 'who' ''))  ~
@@ -52,6 +51,9 @@
         ;a/"/apps/phoenix/guests"
           ;h2:"guests"
         ==
+        ;a/"/apps/phoenix/deposits"
+          ;h2:"deposits"
+        ==
 
         ;h4:"agent backup & restore"
 
@@ -60,13 +62,13 @@
               ;p.green:"{(trip t.u.msg)}"
             ;p.red:"{(trip t.u.msg)}"
         ;table#phoenix
+          ::  table header
+          ;tr(style "font-weight: bold")
+            ;td(align "center"):"~"
+            ;td(align "center"):"guest"
+          ==
+          ::
           ;form(method "post")
-            ::  table header
-            ;tr(style "font-weight: bold")
-              ;td(align "center"):"~"
-              ;td(align "center"):"guest"
-            ==
-            ::
             ;tr
               ;td
                 ;button(type "submit", name "what", value "add-guest"):"+"
@@ -86,15 +88,15 @@
     %+  turn  (sort ~(tap in guests) aor)
     |=  guest=ship
     ;tr
-       ::  del-guest
-       ;td
-         ;form(method "post")
-           ;button(type "submit", name "what", value "del-guest"):"-"
-           ;input(type "hidden", name "who", value (scow %p guest));
-         ==
-       ==
-       ::  guest
-       ;td(align "right"):"{<guest>}"
+      ::  del-guest
+      ;td
+        ;form(method "post")
+          ;button(type "submit", name "what", value "del-guest"):"-"
+          ;input(type "hidden", name "who", value (scow %p guest));
+        ==
+      ==
+      ::  guest
+      ;td(align "right"):"{<guest>}"
     ==
   --
 --

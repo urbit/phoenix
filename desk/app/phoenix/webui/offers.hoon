@@ -12,6 +12,10 @@
     ?~(body ~ (frisk:rudder q.u.body))
   ?~  what=(~(get by args) 'what')  ~
   ?+    u.what  ~
+      %query
+    ?~  who=(slaw %p (~(gut by args) 'who' ''))  ~
+    [%query u.who]
+  ::
       %tomb
     ?~  cus=(~(get by args) 'case')  ~
     ?~  cas=(de-case u.cus)          ~
@@ -59,6 +63,9 @@
         ;a/"/apps/phoenix/guests"
           ;h2:"guests"
         ==
+        ;a/"/apps/phoenix/deposits"
+          ;h2:"deposits"
+        ==
 
         ;h4:"agent backup & restore"
 
@@ -68,15 +75,27 @@
             ;p.red:"{(trip t.u.msg)}"
         ;table#phoenix
           ;form(method "post")
-            ::  table header
-            ;tr(style "font-weight: bold")
-              ;td(align "center"):"tomb"
-              ;td(align "center"):"keen"
-              ;td(align "center"):"~hodler"
-              ;td(align "center"):"path"
-              ;td(align "center"):"case"
+            ;tr
+              ;td
+                ;input(type "text", name "who", placeholder "~hodler");
+              ==
+              ;td
+                ;button(type "submit", name "what", value "query"):"query"
+              ==
             ==
           ==    ::  form
+        ==
+        ::
+        ;table#phoenix
+          ::  table header
+          ;tr(style "font-weight: bold")
+            ;td(align "center"):"🔒"
+            ;td(align "center"):"tomb"
+            ;td(align "center"):"keen"
+            ;td(align "center"):"~hodler"
+            ;td(align "center"):"path"
+            ;td(align "center"):"case"
+          ==
           ;*  work
         ==
       ==  ::  body
@@ -84,7 +103,7 @@
   ::
   ++  work
     ^-  (list manx)
-    =/  dat=(list [ship case path path])
+    =/  dat=(list [ship case (unit path) path])
       %-  zing
       %+  turn  ~(tap by offers)
       |=  [hodler=ship =offer]
@@ -92,12 +111,18 @@
       |=  [cas=case raw=spur]
       [hodler cas (ppath raw) raw]
     %+  turn  (sort dat aor)
-    |=  [hodler=ship =case pax=path raw=path]
+    |=  [hodler=ship =case pax=(unit path) raw=path]
     ;tr
+      ::  lock
+      ;td(align "center")
+        ;+  ?^  pax
+              ;p:"🔓"
+            ;p:"~"
+      ==
       ::  tomb
       ;td
         ;form(method "post")
-          ;button(type "submit", name "what", value "tomb"):"del"
+          ;button(type "submit", name "what", value "tomb"):"tomb"
           ;input(type "hidden", name "case", value (scow case));
           ;input(type "hidden", name "spur", value (trip (spat raw)));
           ;input(type "hidden", name "where", value (scow %p hodler));
@@ -113,18 +138,18 @@
         ==
       ==
       ::  hodler
-      ;td(align "left"):"{<hodler>}"
+      ;td(align "right"):"{<hodler>}"
       ::  path
-      ;td(align "left"):"{<pax>}"
+      ;td(align "left"):"{<?^(pax u.pax raw)>}"
       ::  case
       ;td(align "left"):"{<case>}"
     ==
   ::
   ++  ppath
     |=  pax=path
-    ^-  path
+    ^-  (unit path)
     ?~  dep=(decrypt-path:phx (tail pax) keys)
-      pax
-    [(head pax) u.dep]
+      ~
+    `[(head pax) u.dep]
   --
 --
