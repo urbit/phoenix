@@ -51,13 +51,17 @@
 ++  pretty-fil
   |=  [=ship rift=@ud =dude:gall act=@ud]
   ^-  path
+  =/  rift=@ta  (crip (a-co:co rift))
+  =/  act=@ta   (crip (a-co:co act))
   :_  /'jam'
   %-  reel  :_  (cury cat 3)
   %+  join  '-'
-  `path`/(ship-sig ship)/(scot %ud rift)/[dude]/(scot %ud act)
+  `path`/(ship-sig ship)/[rift]/[dude]/[act]
 ::
 ++  pretty-dir
   |=  [=ship rift=@ud =dude:gall act=@ud]
   ^-  path
-  /phoenix/(ship-sig ship)/(scot %ud rift)/[dude]/(scot %ud act)
+  =/  rift=@ta  (crip (a-co:co rift))
+  =/  act=@ta   (crip (a-co:co act))
+  /phoenix/(ship-sig ship)/[rift]/[dude]/[act]
 --
