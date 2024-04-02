@@ -127,11 +127,6 @@
     ?+    wire  (on-agent:def wire sign)
         [?(%cull %hark %offer %phoenix %query %send %tomb) ~]
       [~ this]
-    ::
-        [%sav *]
-      ?>  ?=([%poke-ack ~] sign)
-      ~&  >  [dap.bowl %saved-to-put t.wire]
-      [~ this]
     ==
   ::
   ++  on-arvo
@@ -251,6 +246,8 @@
   |=  [=(pole knot) =sign-arvo]
   ^+  cor
   ?+    pole  ~&([dap.bowl %strange-arvo-wire `path`pole] cor)
+    [%sav *]  cor
+  ::
       [%jael %pubs ~]
     ?>  ?=([%jael %public-keys *] sign-arvo)
     ?.  ?=(%breach -.public-keys-result.sign-arvo)
@@ -311,41 +308,22 @@
 ++  handle-put
   |=  arg=$@(=dude:gall [=case =spur])
   ^+  cor
-  =/  page=(unit page)
-    ?@  arg
-      `(snap:phx dude.arg preferred-key eny.bowl)
-    (pluck:phx case.arg spur.arg)
-  ?~  page
-    ~&  >>>  [dap.bowl %not-found arg]
-    cor
-  ?>  ?=([%phx key-id msg=@] u.page)
-  =/  dat=@  (jam u.page)
-  %-  emit
-  =/  ship-sig=@t  (crip +:(scow %p ?@(arg our.bowl (slav %p (head spur.arg)))))
-  ::  XX
-  ::
-  =/  directory=path
-    :~  dap.bowl  ship-sig
-        ::  XX
-        :: (reel (join '-' [q.beam s.beam]) (cury cat 3))
+  |^  ?@  arg
+        (put-dude dude.arg)
+      (put-case-spur case.arg spur.arg)
+  ++  put-dude
+    |=  =dude:gall
+    %-  emit
+    :*  %pass  /sav  %arvo  %k  %fard  q.byk.bowl
+        %phoenix-put-dude  [%noun !>(`[dude `preferred-key])]
     ==
-  =/  file-name=path
-    =/  cas=@t
-      ::  XX
-      (scot ud+42)
-      :: ?.  ?=(%da -.r.beam)
-      ::   (scot r.beam)
-      :: (pretty-date:phx p.r.beam)
-    :_  /'jam'
-    %-  reel  :_  (cury cat 3)
-    %+  join  '-'
-    ::  XX
-    (weld `path`[ship-sig ~] /[cas])
-    :: (weld [ship-sig q.beam s.beam] /[cas])
-  =/  =path  (weld directory file-name)
-  =/  =wire  [%sav path]
-  =/  =cage  [%drum-put !>([path dat])]
-  [%pass wire %agent [our.bowl %hood] %poke cage]
+  ++  put-case-spur
+    |=  [=case =spur]
+    %-  emit
+    :*  %pass  /sav  %arvo  %k  %fard  q.byk.bowl
+        %phoenix-put-case-spur  [%noun !>([case spur])]
+    ==
+  --
 ::
 ++  handle-query
   |=  =ship
@@ -403,9 +381,8 @@
   =/  egg-jam=@  (jam egg-page)
   =/  =page  [%phx (encrypt:phx egg-jam preferred-key eny.bowl)]
   =/  encrypted-path=path
-    =/  rift
-      .^(@ud %j (en-beam [our.bowl %rift da+now.bowl] /(scot %p our.bowl)))
-    =/  act=@ud  (get-act:egg good-egg)
+    =+  rift=(get-rift:phx our.bowl)
+    =+  act=(get-act:egg good-egg)
     %^    encrypt-path:phx
         /(scot %ud rift)/[dude]/(scot %ud act)
       preferred-key

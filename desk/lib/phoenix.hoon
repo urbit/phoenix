@@ -2,6 +2,11 @@
 /+  egg
 ::
 |_  =bowl:gall
+++  get-rift
+  |=  =ship
+  ^-  @ud
+  .^(@ud %j (en-beam [our.bowl %rift da+now.bowl] /(scot %p ship)))
+::
 ++  pretty-date
   |=  t=@da
   ^-  @t
