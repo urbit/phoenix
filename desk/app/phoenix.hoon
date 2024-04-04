@@ -114,7 +114,7 @@
         [%x %page case=@ spur=*]
       ?~  cas=(de-case case.pole)  ~
       ?~  page=(pluck:phx u.cas spur.pole)  ~
-      ``noun+!>(page)
+      ``noun+!>(u.page)
     ::
         [%x %egg-any case=@ spur=*]
       ?~  cas=(de-case case.pole)  ~

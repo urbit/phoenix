@@ -3,12 +3,11 @@
 ^-  thread:spider
 |=  arg=vase
 =+  !<([~ =case =spur] arg)
-~&  >  [%put-cs case spur]
 =/  m  (strand:rand ,vase)
 ;<  =bowl:rand  bind:m  get-bowl:io
 |^  ^-  form:m
-    =+  .^(=page %gx (en-beam [our.bowl %phoenix case] (weld //1 spur)))
-    :: =+  .^(=page %gx (en-beam [our.bowl %phoenix da+now.bowl] :(weld /x/page/(scot case) spur /noun)))
+    ;<  =page  bind:m
+      (scry:io ,page :(weld /gx/phoenix/page/(scot case) spur /noun))
     =/  =key-id  =<  key-id  ;;(egg-cyf page)
     =/  =phx-ex
       [%phx-ex `key-id spur page]
