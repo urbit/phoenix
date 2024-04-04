@@ -392,8 +392,8 @@
   =/  egg-jam=@  (jam egg-page)
   =/  =page  `egg-cyf`[%egg-cyf (encrypt:phx egg-jam preferred-key eny.bowl)]
   =/  encrypted-path=path
-    =+  rift=(crip (a-co:co (get-rift:phx our.bowl)))
-    =+  act=(crip (a-co:co (get-act:egg good-egg)))
+    =+  rift=(scot %ud (get-rift:phx our.bowl))
+    =+  act=(scot %ud (get-act:egg good-egg))
     %-  encrypt-path:phx
     [/[rift]/[dude]/[act] preferred-key eny.bowl]
   (grow our.bowl encrypted-path page)
