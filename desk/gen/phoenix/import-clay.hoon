@@ -1,13 +1,12 @@
-::  :phoenix|import-clay ~zod /foo/bar/baz /=desk=/zod-0-dude-42/jam
+::  :phoenix|import-clay /=desk=/zod-0-dude-42/jam
 ::
 /-  *phoenix
 /+  *phoenix
 :-  %say
 |=  $:  [now=@da @ our=@p ^]
-        [=ship =spur =path ~]
+        [pax=path ~]
         ~
     ==
-=+  .^(dat=@ %cx path)
-=/  page  (cue dat)
-?>  ?=([%phx key-id msg=@] page)
-[%phoenix-command `command`[%import ship spur page]]
+=+  .^(dat=@ %cx pax)
+=/  =phx-ex  ;;(phx-ex (cue dat))
+[%phoenix-command `command`[%import [spur page]:phx-ex]]

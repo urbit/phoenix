@@ -1,6 +1,8 @@
 |%
-+$  offer   (set [case spur])
-+$  key-id  [salt=@ salted-key=@]
++$  offer    (set [case spur])
++$  key-id   [salt=@ salted-key=@]
++$  phx-ex   [%phx-ex kid=(unit key-id) =spur =page]
++$  egg-cyf  [%egg-cyf =key-id cyf=@]
 ::
 +$  command
   $%  [%add-guest =ship]              ::  permit a ship to save
@@ -9,7 +11,7 @@
       [%snap =dude:gall]              ::  take snapshot
       [%send =case =spur where=ship]  ::  command ship to keen
       [%put arg=$@(=dude:gall [=case =spur])]  ::  save to put
-      [%import =ship =spur =page]     ::  import a page
+      [%import =spur =page]           ::  import a page
     ::
       [%query =ship]                  ::  request for offers
       [%keen =case =spur where=ship]  ::  keen

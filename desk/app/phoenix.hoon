@@ -111,11 +111,16 @@
         ~
       who
     ::
+        [%x %page case=@ spur=*]
+      ?~  cas=(de-case case.pole)  ~
+      ?~  page=(pluck:phx u.cas spur.pole)  ~
+      ``noun+!>(page)
+    ::
         [%x %egg-any case=@ spur=*]
       ?~  cas=(de-case case.pole)  ~
       ?~  dat=(pluck:phx u.cas spur.pole)  ~
-      =+  ;;([%phx =key-id msg=@] u.dat)
-      ?~  egg-page=(decrypt:phx [key-id msg] keys)
+      =+  ;;(egg-cyf u.dat)
+      ?~  egg-page=(decrypt:phx [key-id cyf] keys)
         ~
       =+  ;;(=egg-any:gall q.u.egg-page)
       ``noun+!>(egg-any)
@@ -163,13 +168,19 @@
   (emit [%pass /wake/offer/(scot %p ship) %arvo %b %wait now.bowl])
 ::
 ++  handle-import
-  |=  [=ship =spur =page]
+  |=  [=spur =page]
   ^+  cor
   ?>  =(our src):bowl
-  ~|  [dap.bowl %import-failed ship spur]
-  ?>  ?=([%phx key-id msg=@] page)
-  ~&  >  [dap.bowl %imported ship spur]
-  (grow ship spur page)
+  =/  =ship  (slav %p (head spur))
+  ?>  ?|  =(our.bowl ship)
+          (~(has in guests) ship)
+      ==
+  ~|  [dap.bowl %import-failed spur]
+  ?>  ?=(egg-cyf page)
+  =/  rest=path  (tail spur)
+  ?>  ?=(^ rest)
+  ~&  >  [dap.bowl %imported spur]
+  (grow ship rest page)
 ::
 ++  poke
   |=  [=mark =vase]
@@ -200,7 +211,7 @@
         %send       (handle-send [case spur where]:cmd)
         %restore    (handle-restore [case spur dude]:cmd)
         %put        (handle-put arg.cmd)
-        %import     (handle-import [ship spur page]:cmd)
+        %import     (handle-import [spur page]:cmd)
         %del-guest  cor(guests (~(del in guests) ship.cmd))
       ::
           %add-guest
@@ -299,7 +310,7 @@
     ?~  q.dat.roar
       cor
     =/  =page  u.q.dat.roar
-    ?>  ?=([%phx key-id @] page)
+    ?>  ?=(egg-cyf page)
     ~&  >  "{<dap.bowl>}: received from {<data-src>}: [{<owner>} {<spur>}]"
     =.  cor  (grow owner spur page)
     (wake-offer owner)
@@ -321,7 +332,7 @@
     |=  [=case =spur]
     %-  emit
     :*  %pass  /sav  %arvo  %k  %fard  q.byk.bowl
-        %phoenix-put-case-spur  [%noun !>([case spur])]
+        %phoenix-put-case-spur  [%noun !>(`[case spur])]
     ==
   --
 ::
@@ -352,9 +363,9 @@
   ?~  dat
     ~&  >>>  [dap.bowl 'restore failed: not found:' case spur]
     cor
-  =+  ;;([%phx =key-id msg=@] u.dat)
+  =+  ;;(egg-cyf u.dat)
   =.  keys  (~(put in keys) our-key:phx)
-  ?~  egg-page=(decrypt:phx [key-id msg] keys)
+  ?~  egg-page=(decrypt:phx [key-id cyf] keys)
     ~&  >>>  [dap.bowl 'restore-failed: no decryption result']
     cor
   %-  emit
@@ -379,14 +390,12 @@
   =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@  (jam egg-page)
-  =/  =page  [%phx (encrypt:phx egg-jam preferred-key eny.bowl)]
+  =/  =page  `egg-cyf`[%egg-cyf (encrypt:phx egg-jam preferred-key eny.bowl)]
   =/  encrypted-path=path
-    =+  rift=(get-rift:phx our.bowl)
-    =+  act=(get-act:egg good-egg)
-    %^    encrypt-path:phx
-        /(scot %ud rift)/[dude]/(scot %ud act)
-      preferred-key
-    eny.bowl
+    =+  rift=(crip (a-co:co (get-rift:phx our.bowl)))
+    =+  act=(crip (a-co:co (get-act:egg good-egg)))
+    %-  encrypt-path:phx
+    [/[rift]/[dude]/[act] preferred-key eny.bowl]
   (grow our.bowl encrypted-path page)
 ::
 ++  make-keen-path
