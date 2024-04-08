@@ -69,5 +69,5 @@
   ^-  path
   =/  rift=@ta  (crip (a-co:co rift))
   =/  act=@ta   (crip (a-co:co act))
-  /phoenix/(ship-sig ship)/[rift]/[dude]/[act]
+  /phoenix/(ship-sig ship)/[rift]/[dude]
 --

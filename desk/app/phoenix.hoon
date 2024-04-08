@@ -180,7 +180,8 @@
   =/  rest=path  (tail spur)
   ?>  ?=(^ rest)
   ~&  >  [dap.bowl %imported spur]
-  (grow ship rest page)
+  =.  cor  (grow ship rest page)
+  (wake-offer ship)
 ::
 ++  poke
   |=  [=mark =vase]
