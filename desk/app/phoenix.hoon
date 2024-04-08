@@ -238,6 +238,7 @@
     ==
   ::
      %handle-http-request
+    ?>  =(our src):bowl
     =;  out=(quip card _+.state)
       =.  +.state  +.out
       (emil -.out)
