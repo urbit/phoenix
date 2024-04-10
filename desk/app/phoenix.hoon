@@ -366,7 +366,6 @@
     ~&  >>>  [dap.bowl 'restore failed: not found:' case spur]
     cor
   =+  ;;(egg-cyf u.dat)
-  =.  keys  (~(put in keys) our-key:phx)
   ?~  egg-page=(decrypt:phx [key-id cyf] keys)
     ~&  >>>  [dap.bowl 'restore-failed: no decryption result']
     cor

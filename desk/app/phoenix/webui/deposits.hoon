@@ -12,10 +12,6 @@
     ?~(body ~ (frisk:rudder q.u.body))
   ?~  what=(~(get by args) 'what')  ~
   ?+    u.what  ~
-      %snap
-    ?~  dude=(slaw %tas (~(gut by args) 'dude' ''))  ~
-    [%snap u.dude]
-  ::
       %tomb
     ?~  cus=(~(get by args) 'case')  ~
     ?~  cas=(de-case u.cus)          ~
@@ -39,14 +35,6 @@
     ?~  dude=(rush (~(gut by args) 'dude' '') ;~(pfix cen sym))  ~
     ?.  ((sane %tas) u.dude)  ~
     [%restore u.cas u.pax u.dude]
-  ::
-      %send
-    ?~  cus=(~(get by args) 'case')  ~
-    ?~  cas=(de-case u.cus)          ~
-    ?~  pat=(~(get by args) 'spur')  ~
-    ?~  pax=(rush u.pat stap)        ~
-    ?~  who=(slaw %p (~(gut by args) 'who' ''))  ~
-    [%send u.cas u.pax u.who]
   ==
 ::
 ++  build
@@ -93,7 +81,7 @@
           ::  table header
           ;tr(style "font-weight: bold")
             ;td(align "center"):"🔒"
-            ;td(align "center"):"~"
+            ;td(align "center"):"tomb"
             ;td(align "center"):"put"
             ;td(align "center"):"restore"
             ;td(align "center"):"path"
@@ -133,7 +121,7 @@
       ::  lock
       ;td(align "center")
         ;+  ?^  pax
-              ;p:"🔓"
+              ;p:"🔑"
             ;p:"~"
       ==
       ::  tomb

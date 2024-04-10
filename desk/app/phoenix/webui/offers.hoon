@@ -116,7 +116,7 @@
       ::  lock
       ;td(align "center")
         ;+  ?^  pax
-              ;p:"🔓"
+              ;p:"🔑"
             ;p:"~"
       ==
       ::  tomb

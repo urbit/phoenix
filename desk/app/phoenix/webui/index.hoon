@@ -93,7 +93,7 @@
           ::  table header
           ;tr(style "font-weight: bold")
             ;td(align "center"):"🔒"
-            ;td(align "center"):"~"
+            ;td(align "center"):"tomb"
             ;td(align "center"):"put"
             ;td(align "center"):"send"
             ;td(align "center"):"restore"
@@ -118,7 +118,7 @@
       ::  lock
       ;td(align "center")
         ;+  ?^  pax
-              ;p:"🔓"
+              ;p:"🔑"
             ;p:"~"
       ==
       ::  tomb
