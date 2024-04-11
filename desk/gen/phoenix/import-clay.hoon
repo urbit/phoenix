@@ -8,5 +8,5 @@
         ~
     ==
 =+  .^(dat=@ %cx pax)
-=/  =phx-ex  ;;(phx-ex (cue dat))
-[%phoenix-command `command`[%import [spur page]:phx-ex]]
+=+  ;;(=phx-export (cue dat))
+[%phoenix-command `command`[%import [spur page]:phx-export]]

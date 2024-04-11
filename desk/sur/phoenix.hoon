@@ -1,8 +1,8 @@
 |%
-+$  offer    (set [case spur])
-+$  key-id   [salt=@ salted-key=@]
-+$  phx-ex   [%phx-ex kid=(unit key-id) =spur =page]
-+$  egg-cyf  [%egg-cyf =key-id cyf=@]
++$  offer       (set [case spur])
++$  key-id      [salt=@ salted-key=@]
++$  egg-cyf     [%egg-cyf =key-id cyf=@]
++$  phx-export  [%phx-export kid=(unit key-id) =spur =page]
 ::
 +$  command
   $%  [%add-guest =ship]              ::  permit a ship to save

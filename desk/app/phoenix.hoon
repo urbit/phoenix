@@ -19,7 +19,7 @@
 ::
 ::  :phoenix|restore ud+1 /~zod/foo/bar/baz %dude
 ::
-::  +phoenix!phoenix/show-keys
+::  +phoenix!phoenix-show-keys
 ::  -phoenix!phoenix-put-keys
 ::
 ::  -phoenix!phoenix-put-dude %dude `(shaz 'lidlut-tabwed-pillex-ridrup')
@@ -171,13 +171,24 @@
   |=  [=spur =page]
   ^+  cor
   ?>  =(our src):bowl
+  ~|  [dap.bowl %import-failed spur]
   =/  =ship  (slav %p (head spur))
+  =/  rest=path  (tail spur)
   ?>  ?|  =(our.bowl ship)
           (~(has in guests) ship)
       ==
-  ~|  [dap.bowl %import-failed spur]
+  ?:  &(=(our.bowl ship) ?=([%egg-any *] page))
+    =+  ;;(raw=egg-any:gall q.page)
+    =/  good-egg=egg-any:gall  (cook:egg raw)
+    =/  egg-page=^page  [%egg-any good-egg]
+    =/  egg-jam=@       (jam egg-page)
+    =/  =egg-cyf
+      [%egg-cyf (encrypt:phx egg-jam preferred-key eny.bowl)]
+    =/  encrypted-path=path
+      (encrypt-path:phx rest preferred-key eny.bowl)
+    ~&  >  [dap.bowl %imported spur]
+    (grow ship encrypted-path egg-cyf)
   ?>  ?=(egg-cyf page)
-  =/  rest=path  (tail spur)
   ?>  ?=(^ rest)
   ~&  >  [dap.bowl %imported spur]
   =.  cor  (grow ship rest page)

@@ -16,8 +16,8 @@
       /(scot %p our.bowl)/(scot %ud rift)/[dude]/(scot %ud act)
     =/  kid=(unit key-id)
       ?~(key ~ `[eny.bowl (shas eny.bowl u.key)])
-    =/  =phx-ex
-      :+  %phx-ex  kid
+    =/  =phx-export
+      :+  %phx-export  kid
       ?~  key
         [raw-path egg-page]
       =/  en-path=path
@@ -25,7 +25,7 @@
         %-  encrypt-path:phx
         [(tail raw-path) u.key eny.bowl]
       [en-path [%egg-cyf (encrypt:phx (jam egg-page) u.key eny.bowl)]]
-    =/  dat=@  (jam phx-ex)
+    =/  dat=@  (jam phx-export)
     =/  cards=(list card:agent:gall)
       =+  dir=(pretty-dir our.bowl rift dude act)
       =+  fil=(pretty-fil our.bowl rift dude act)
