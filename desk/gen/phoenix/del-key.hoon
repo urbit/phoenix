@@ -1,4 +1,4 @@
-::  :phoenix|del-key @
+::  :phoenix|del-key 0xdead.beef
 ::
 /-  *phoenix
 :-  %say

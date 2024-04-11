@@ -13,26 +13,23 @@
 ::  :phoenix|tomb ud+1 /~zod/foo/bar/baz ~hodler
 ::  :phoenix|cull ud+1 /~zod/foo/bar/baz ~hodler
 ::
-::  :phoenix|add-key 'lidlut-tabwed-pillex-ridrup'
-::  :phoenix|del-key @
-::  :phoenix|set-backup-key `'lidlut-tabwed-pillex-ridrup'
+::  :phoenix|add-key 0xdead.beef
+::  :phoenix|del-key 0xdead.beef
 ::
 ::  :phoenix|restore ud+1 /~zod/foo/bar/baz %dude
 ::
 ::  +phoenix!phoenix-show-keys
 ::  -phoenix!phoenix-put-keys
 ::
-::  -phoenix!phoenix-put-dude %dude `(shaz 'lidlut-tabwed-pillex-ridrup')
-::  -phoenix!phoenix-put-desk %desk `(shaz 'lidlut-tabwed-pillex-ridrup')
-::  -phoenix!phoenix-put-all `(shaz 'lidlut-tabwed-pillex-ridrup')
+::  -phoenix!phoenix-put-dude %dude `.^(@ux %gx /=phoenix=/backup-key/noun)
+::  -phoenix!phoenix-put-desk %desk `.^(@ux %gx /=phoenix=/backup-key/noun)
+::  -phoenix!phoenix-put-all `.^(@ux %gx /=phoenix=/backup-key/noun)
 ::
 ::    scrys:
 ::  .^((set @ux) %gx /=phoenix=/keys/noun)
 ::  .^((set ship) %gx /=phoenix=/guests/noun)
 ::  .^((set ship) %gx /=phoenix=/depositors/noun)
-::  .^((unit @ux) %gx /=phoenix=/backup-key/noun)
-::  .^(@ux %gx /=phoenix=/static-code/noun)
-::  .^(@ux %gx /=phoenix=/preferred-key/noun)
+::  .^(@ux %gx /=phoenix=/backup-key/noun)
 ::  .^((map ship (set [spur case])) %gx /=phoenix=/offers/noun)
 ::  .^((set [path case]) %gx /=phoenix=/offer/(scot %p our)/noun)
 ::  .^(egg-any:gall %gx /=phoenix=/egg-any/(scot %p our)/dude/(scot ud+42)/noun)
@@ -85,12 +82,10 @@
   ++  on-peek
     |=  =(pole knot)
     ?+  pole  (on-peek:def pole)
-      [%x %keys ~]           ``noun+!>(keys)
-      [%x %guests ~]         ``noun+!>(guests)
-      [%x %offers ~]         ``noun+!>(offers)
-      [%x %backup-key ~]     ``noun+!>(backup-key)
-      [%x %static-code ~]    ``noun+!>(static-code)
-      [%x %preferred-key ~]  ``noun+!>(preferred-key)
+      [%x %keys ~]        ``noun+!>(keys)
+      [%x %guests ~]      ``noun+!>(guests)
+      [%x %offers ~]      ``noun+!>(offers)
+      [%x %backup-key ~]  ``noun+!>(backup-key)
     ::
         [%x %offer ship=@ ~]
       :^  ~  ~  %noun
@@ -148,7 +143,6 @@
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
-++  preferred-key  ?^(backup-key u.backup-key static-code)
 ++  grow
   |=  [owner=@p =spur =page]
   %-  emit
@@ -183,9 +177,9 @@
     =/  egg-page=^page  [%egg-any good-egg]
     =/  egg-jam=@       (jam egg-page)
     =/  =egg-cyf
-      [%egg-cyf (encrypt:phx egg-jam preferred-key eny.bowl)]
+      [%egg-cyf (encrypt:phx egg-jam backup-key eny.bowl)]
     =/  encrypted-path=path
-      (encrypt-path:phx rest preferred-key eny.bowl)
+      (encrypt-path:phx rest backup-key eny.bowl)
     ~&  >  [dap.bowl %imported spur]
     (grow ship encrypted-path egg-cyf)
   ?>  ?=(egg-cyf page)
@@ -215,7 +209,6 @@
         $?  %snap      %send       %put
             %add-keys  %add-guest  %import
             %del-keys  %del-guest  %restore
-            %set-backup-key
         ==
       ?>  =(our src):bowl
       ?-  -.cmd
@@ -235,16 +228,7 @@
       ::
           %del-keys
         =.  keys  (~(dif in keys) keys.cmd)
-        =.  keys  (~(put in keys) static-code)
-        =?  keys  ?=(^ backup-key)
-          (~(put in keys) u.backup-key)
-        cor
-      ::
-          %set-backup-key
-        =.  backup-key  key.cmd
-        =?  keys  ?=(^ key.cmd)
-          (~(put in keys) u.key.cmd)
-        cor
+        cor(keys (~(put in keys) backup-key))
       ==
     ==
   ::
@@ -288,9 +272,12 @@
     ?>  ?=([%behn %wake *] sign-arvo)
     ?^  error.sign-arvo
       cor
-    =?  static-code  =(*_static-code static-code)
-      our-key:phx
-    cor(keys (~(put in keys) our-key:phx))
+    =?  backup-key  =(*_backup-key backup-key)
+      =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
+      =+  .^(life=@ud %j /[our]/life/[now]/(scot %p our.bowl))
+      =+  .^(vein=@uw %j /[our]/vein/[now]/(scot %ud life))
+      (shaz (mix %phoenix vein))
+    cor(keys (~(put in keys) backup-key))
   ::
       [%wake %offer ship=@ ~]
     ?>  ?=([%behn %wake *] sign-arvo)
@@ -339,7 +326,7 @@
     |=  =dude:gall
     %-  emit
     :*  %pass  /sav  %arvo  %k  %fard  q.byk.bowl
-        %phoenix-put-dude  [%noun !>(`[dude `preferred-key])]
+        %phoenix-put-dude  [%noun !>(`[dude `backup-key])]
     ==
   ++  put-case-spur
     |=  [=case =spur]
@@ -402,12 +389,12 @@
   =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@  (jam egg-page)
-  =/  =page  `egg-cyf`[%egg-cyf (encrypt:phx egg-jam preferred-key eny.bowl)]
+  =/  =page  `egg-cyf`[%egg-cyf (encrypt:phx egg-jam backup-key eny.bowl)]
   =/  encrypted-path=path
     =+  rift=(scot %ud (get-rift:phx our.bowl))
     =+  act=(scot %ud (get-act:egg good-egg))
     %-  encrypt-path:phx
-    [/[rift]/[dude]/[act] preferred-key eny.bowl]
+    [/[rift]/[dude]/[act] backup-key eny.bowl]
   (grow our.bowl encrypted-path page)
 ::
 ++  make-keen-path

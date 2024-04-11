@@ -70,6 +70,9 @@
         ;a/"/apps/phoenix/deposits"
           ;h2:"deposits"
         ==
+        ;a/"/apps/phoenix/readme"
+          ;h2:"README"
+        ==
 
         ;h4:"agent backup & restore"
 

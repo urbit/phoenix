@@ -1,4 +1,6 @@
 |%
+++  crypto-suite  1
+::
 +$  offer       (set [case spur])
 +$  key-id      [salt=@ salted-key=@]
 +$  egg-cyf     [%egg-cyf =key-id cyf=@]
@@ -20,15 +22,13 @@
     ::
       [%add-keys keys=(set @)]        ::  add encryption keys
       [%del-keys keys=(set @)]        ::  del encryption keys
-      [%set-backup-key key=(unit @)]  ::  set primary backup key
     ::
       [%restore =case =spur =dude:gall]     ::  poke an agent with egg-any
   ==
 ::
 +$  records-0
   $:  keys=(set @ux)
-      static-code=@ux
-      backup-key=(unit @ux)
+      backup-key=@ux
       guests=(set ship)
       offers=(map ship offer)
   ==

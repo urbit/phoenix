@@ -20,15 +20,6 @@
       (dos h.t)  (dos m.t)  (dos s.t)
   ==
 ::
-++  our-key  (shaz (mix %phoenix our-code))
-++  our-code
-  ^-  @t
-  =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
-  %-  crip
-  %+  slag  1
-  %+  scow  %p
-  .^(@p %j /[our]/code/[now]/[our])
-::
 ++  on-path  ((on @ud (pair @da (each page @uvI))) lte)
 ++  make-offer
   |=  =ship
@@ -80,8 +71,7 @@
   ?<  =(0 eny)
   =/  =key-id        [eny (shas eny key)]
   =/  new-key=@      (shaz (mix eny key))
-  =/  cc=acru:ames   (pit:nu:crub:crypto 512 new-key)
-  =/  encrypted-msg  (en:cc sec:ex:cc msg)
+  =/  encrypted-msg  (en:crub:crypto new-key msg)
   [key-id encrypted-msg]
 ::
 ++  decrypt
@@ -97,8 +87,7 @@
   ++  unlock
     |=  [key=@ msg=@]
     ^-  (unit [%egg-any egg-any:gall])
-    =/  cc=acru:ames    (pit:nu:crub:crypto 512 key)
-    =/  res=(unit @ux)  (de:cc sec:ex:cc msg)
+    =/  res=(unit @ux)  (de:crub:crypto key msg)
     ?~  res  ~
     (mole |.(;;([%egg-any egg-any:gall] (cue u.res))))
   --
@@ -131,20 +120,25 @@
   ^-  ^spur
   =/  pat=@t  (spat spur)
   =+  (encrypt pat key eny)
-  /(scot %uv salt)/(scot %uv salted-key)/(scot %uv cyf)
+  :~  (scot %ud crypto-suite)
+      (scot %uv salt)
+      (scot %uv salted-key)
+      (scot %uv cyf)
+  ==
 ::
 ++  decrypt-path
   |=  [=(pole knot) keys=(set @)]
   ^-  (unit spur)
-  ?.  ?=([salt=@ salted-key=@ cyf=@ ~] pole)
+  ?.  ?=([suite=@ salt=@ salted-key=@ cyf=@ ~] pole)
     ~
+  ?~  suite=(slaw %ud suite.pole)        ~
+  ?.  =(1 u.suite)                       ~
   ?~  sal=(slaw %uv salt.pole)           ~
   ?~  ski=(slaw %uv salted-key.pole)     ~
   ?~  msg=(slaw %uv cyf.pole)            ~
   ?~  key=(find-key [u.sal u.ski] keys)  ~
   =/  new-key=@       (shaz (mix u.sal u.key))
-  =/  cc=acru:ames    (pit:nu:crub:crypto 512 new-key)
-  =/  res=(unit @ux)  (de:cc sec:ex:cc u.msg)
+  =/  res=(unit @ux)  (de:crub:crypto new-key u.msg)
   ?~  res  ~
-  (mole |.((stab ;;(@t u.res))))
+  (mole |.([suite.pole (stab ;;(@t u.res))]))
 --
