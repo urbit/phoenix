@@ -12,19 +12,19 @@
     =/  egg-page=page  [%egg-any good-egg]
     ;<  rift=@ud  bind:m  (scry:io @ud /j/rift/(scot %p our.bowl))
     =+  act=(get-act:egg good-egg)
-    =/  raw-path=path
-      /(scot %p our.bowl)/(scot %ud rift)/[dude]/(scot %ud act)
-    =/  kid=(unit key-id)
-      ?~(key ~ `[eny.bowl (shas eny.bowl u.key)])
     =/  =phx-export
-      :+  %phx-export  kid
+      :-  %phx-export
       ?~  key
-        [raw-path egg-page]
-      =/  en-path=path
-        :-  (scot %p our.bowl)
-        %-  encrypt-path:phx
-        [(tail raw-path) u.key eny.bowl]
-      [en-path [%egg-cyf (encrypt:phx (jam egg-page) u.key eny.bowl)]]
+        :_  egg-page
+        /(scot %p our.bowl)/(scot %ud rift)/[dude]/(scot %ud act)
+      =/  good-path=path
+        %-  good-path:phx
+        :*  our.bowl  rift
+            dude      act
+            /
+            u.key  eny.bowl
+        ==
+      [good-path [%egg-cyf (encrypt:phx (jam egg-page) u.key eny.bowl)]]
     =/  dat=@  (jam phx-export)
     =/  cards=(list card:agent:gall)
       =+  dir=(pretty-dir our.bowl rift dude act)

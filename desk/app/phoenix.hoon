@@ -144,9 +144,11 @@
 ++  emit  |=(=card cor(cards [card cards]))
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
 ++  grow
-  |=  [owner=@p =spur =page]
+  |=  [=spur =page]
+  ?>  (valid-path:phx (pave spur))
+  ?>  ?=(egg-cyf page)
   %-  emit
-  [%pass / %grow [(scot %p owner) spur] page]
+  [%pass / %grow spur page]
 ::
 ++  send-query
   |=  =ship
@@ -167,7 +169,6 @@
   ?>  =(our src):bowl
   ~|  [dap.bowl %import-failed spur]
   =/  =ship  (slav %p (head spur))
-  =/  rest=path  (tail spur)
   ?>  ?|  =(our.bowl ship)
           (~(has in guests) ship)
       ==
@@ -178,14 +179,22 @@
     =/  egg-jam=@       (jam egg-page)
     =/  =egg-cyf
       [%egg-cyf (encrypt:phx egg-jam backup-key eny.bowl)]
-    =/  encrypted-path=path
-      (encrypt-path:phx rest backup-key eny.bowl)
+    =/  good-path=path
+      =/  =(pole iota)  (pave spur)
+      ?>  ?=([[%p who=@] [%ud rift=@] [%ta dude=@] [%ud act=@] rest=*] pole)
+      %-  good-path:phx
+      :*  our.bowl    rift.pole
+          dude.pole   act.pole
+          (pout rest.pole)
+          backup-key  eny.bowl
+      ==
+    ?>  (valid-path:phx (pave good-path))
     ~&  >  [dap.bowl %imported spur]
-    (grow ship encrypted-path egg-cyf)
+    (grow good-path egg-cyf)
+  ?>  (valid-path:phx (pave spur))
   ?>  ?=(egg-cyf page)
-  ?>  ?=(^ rest)
   ~&  >  [dap.bowl %imported spur]
-  =.  cor  (grow ship rest page)
+  =.  cor  (grow spur page)
   (wake-offer ship)
 ::
 ++  poke
@@ -293,26 +302,18 @@
     =/  cmd-src=ship   (slav %p cmd-src.pole)
     =/  data-src=ship  ship.sign-arvo
     =/  pax=path       (slag 6 path.sign-arvo)
-    ?.  ?=(^ pax)
-      ~&  >>>  [dap.bowl %bad-keen-path path.sign-arvo]
-      cor
-    =/  owner=ship  (slav %p i.pax)
-    =/  =spur       t.pax
-    ?.  ?|  =(our.bowl owner)
+    ?>  (valid-path:phx (pave pax))
+    =/  owner=ship  (slav %p (head pax))
+    ?>  ?|  =(our.bowl owner)
             (~(has in guests) owner)
         ==
-      ~&  >>>  :*  dap.bowl  %strange-data
-                   cmd-src=cmd-src  data-src=data-src
-                   path.sign-arvo
-               ==
-      cor
     =/  =roar:ames  u.roar.sign-arvo
     ?~  q.dat.roar
       cor
     =/  =page  u.q.dat.roar
     ?>  ?=(egg-cyf page)
-    ~&  >  "{<dap.bowl>}: received from {<data-src>}: [{<owner>} {<spur>}]"
-    =.  cor  (grow owner spur page)
+    ~&  >  "{<dap.bowl>}: received from {<data-src>}: [{<owner>} {<pax>}]"
+    =.  cor  (grow pax page)
     (wake-offer owner)
   ==
 ::
@@ -390,12 +391,14 @@
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@  (jam egg-page)
   =/  =page  `egg-cyf`[%egg-cyf (encrypt:phx egg-jam backup-key eny.bowl)]
-  =/  encrypted-path=path
-    =+  rift=(scot %ud (get-rift:phx our.bowl))
-    =+  act=(scot %ud (get-act:egg good-egg))
-    %-  encrypt-path:phx
-    [/[rift]/[dude]/[act] backup-key eny.bowl]
-  (grow our.bowl encrypted-path page)
+  =/  good-path=path
+    %-  good-path:phx
+    :*  our.bowl  (get-rift:phx our.bowl)
+        dude      (get-act:egg good-egg)
+        /
+        backup-key  eny.bowl
+    ==
+  (grow good-path page)
 ::
 ++  make-keen-path
   |=  [=case =spur]
