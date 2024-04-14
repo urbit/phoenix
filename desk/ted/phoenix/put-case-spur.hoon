@@ -9,8 +9,7 @@
 ;<  =page  bind:m
    (scry:io ,page :(weld /gx/phoenix/page/(scot case) spur /noun))
 |^  ^-  form:m
-    =/  =key-id  =<  key-id  ;;(egg-cyf page)
-    =/  =phx-export  [%phx-export `key-id spur page]
+    =/  =phx-export  [%phx-export spur page]
     =/  dat=@  (jam phx-export)
     =/  =card:agent:gall
       =+  (make-dir-fil spur)
