@@ -127,22 +127,6 @@
       (scot %uv cyf)
   ==
 ::
-++  decrypt-path
-  |=  [=(pole knot) keys=(set @)]
-  ^-  (unit spur)
-  ?.  ?=([suite=@ salt=@ salted-key=@ cyf=@ ~] pole)
-    ~
-  ?~  suite=(slaw %ud suite.pole)        ~
-  ?.  =(1 u.suite)                       ~
-  ?~  sal=(slaw %uv salt.pole)           ~
-  ?~  ski=(slaw %uv salted-key.pole)     ~
-  ?~  msg=(slaw %uv cyf.pole)            ~
-  ?~  key=(find-key [u.sal u.ski] keys)  ~
-  =/  new-key=@       (shaz (mix u.sal u.key))
-  =/  res=(unit @ux)  (de:crub:crypto new-key u.msg)
-  ?~  res  ~
-  (mole |.([suite.pole (stab ;;(@t u.res))]))
-::
 ++  good-path
   |=  [=ship =rift =dude:gall act=@ud rest=path key=@ eny=@uvJ]
   ^-  path
@@ -157,21 +141,17 @@
   ==
 ::
 ++  de-path
-  |=  [=(pole knot) keys=(set @)]
+  |=  [pax=path keys=(set @)]
   ^-  (unit path)
-  ?.  ?=([ship=@ suite=@ salt=@ salted-key=@ cyf=@ ~] pole)
+  =/  =(pole iota)  (pave pax)
+  ?.  ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
     ~
-  ?~  who=(slaw %p ship.pole)            ~
-  ?~  suite=(slaw %ud suite.pole)        ~
-  ?.  =(1 u.suite)                       ~
-  ?~  sal=(slaw %uv salt.pole)           ~
-  ?~  ski=(slaw %uv salted-key.pole)     ~
-  ?~  msg=(slaw %uv cyf.pole)            ~
-  ?~  key=(find-key [u.sal u.ski] keys)  ~
-  =/  new-key=@       (shaz (mix u.sal u.key))
-  =/  res=(unit @ux)  (de:crub:crypto new-key u.msg)
+  ?.  =(1 suite.pole)  ~
+  ?~  key=(find-key [sal.pole ski.pole] keys)  ~
+  =/  new-key=@  (shaz (mix sal.pole u.key))
+  =/  res=(unit @ux)  (de:crub:crypto new-key cyf.pole)
   ?~  res  ~
-  (mole |.([ship.pole suite.pole (stab ;;(@t u.res))]))
+  (mole |.([(scot %p ship.pole) (scot %ud suite.pole) (stab ;;(@t u.res))]))
 ::
 ++  valid-path
   |=  =(pole iota)

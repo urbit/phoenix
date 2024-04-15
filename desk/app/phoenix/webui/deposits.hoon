@@ -116,7 +116,7 @@
       ?~  bak
         ^$(wut t.wut)
       =.  res
-        (~(put in res) [p.i.wut case.i.bak (ppath spur.i.bak) spur.i.bak])
+        (~(put in res) [p.i.wut case.i.bak (de-path:phx spur.i.bak keys) spur.i.bak])
       $(bak t.bak)
     %+  turn  (sort ~(tap in dat) aor)
     |=  [who=ship =case pax=(unit path) raw=path]
@@ -160,13 +160,6 @@
       ::  case
       ;td(align "left"):"{<case>}"
     ==
-  ::
-  ++  ppath
-    |=  pax=path
-    ^-  (unit path)
-    ?~  dep=(decrypt-path:phx (tail pax) keys)
-      ~
-    `[(head pax) u.dep]
   ::
   ++  depositors
     ^-  (set ship)

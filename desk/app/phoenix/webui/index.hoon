@@ -114,7 +114,7 @@
     =/  dat=(list [case de-pax=(unit path) raw=path])
       %+  turn  ~(tap in (make-offer:phx our.bowl))
       |=  [=case raw=path]
-      [case (ppath raw) raw]
+      [case (de-path:phx raw keys) raw]
     %+  turn  (sort dat aor)
     |=  [=case pax=(unit path) raw=path]
     ;tr
@@ -168,13 +168,6 @@
       ::  sources
       ;td(align "center"):"{<~(tap in (bank raw))>}"
     ==
-  ::
-  ++  ppath
-    |=  pax=path
-    ^-  (unit path)
-    ?~  dep=(decrypt-path:phx (tail pax) keys)
-      ~
-    `[(head pax) u.dep]
   ::
   ++  bank
     |=  pax=path

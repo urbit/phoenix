@@ -1,5 +1,5 @@
 /-  spider, *phoenix
-/+  io=strandio, egg, phx=phoenix
+/+  io=strandio, egg, phx=phoenix, phx-put=phoenix-put
 ^-  thread:spider
 |=  arg=vase
 =+  !<([~ =dude:gall key=(unit @)] arg)
@@ -27,8 +27,7 @@
       [good-path [%egg-cyf (encrypt:phx (jam egg-page) u.key eny.bowl)]]
     =/  dat=@  (jam phx-export)
     =/  cards=(list card:agent:gall)
-      =+  dir=(pretty-dir our.bowl rift dude act)
-      =+  fil=(pretty-fil our.bowl rift dude act)
+      =+  (make-dir-fil:phx-put spur.phx-export ?~(key ~ (sy u.key ~)))
       :-  (put dir fil dat)
       ?~  key  ~
       (import-key u.key)^~
@@ -46,28 +45,6 @@
 ++  import-key
   |=  key=@
   ^-  card:agent:gall
-  =/  =cage  [%phoenix-command !>(`command`[%add-keys (silt key ~)])]
+  =/  =cage  [%phoenix-command !>(`command`[%add-keys (sy key ~)])]
   [%pass / %agent [our.bowl %phoenix] %poke cage]
-::
-++  ship-sig
-  |=  =ship
-  ^-  @ta
-  (crip +:(scow %p ship))
-::
-++  pretty-fil
-  |=  [=ship rift=@ud =dude:gall act=@ud]
-  ^-  path
-  =/  rift=@ta  (crip (a-co:co rift))
-  =/  act=@ta   (crip (a-co:co act))
-  :_  /'jam'
-  %-  reel  :_  (cury cat 3)
-  %+  join  '-'
-  `path`/(ship-sig ship)/[rift]/[dude]/[act]
-::
-++  pretty-dir
-  |=  [=ship rift=@ud =dude:gall act=@ud]
-  ^-  path
-  =/  rift=@ta  (crip (a-co:co rift))
-  =/  act=@ta   (crip (a-co:co act))
-  /phoenix/(ship-sig ship)/[rift]/[dude]
 --

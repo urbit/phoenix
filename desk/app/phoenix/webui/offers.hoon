@@ -112,7 +112,7 @@
       |=  [hodler=ship =offer]
       %+  turn  ~(tap in offer)
       |=  [cas=case raw=spur]
-      [hodler cas (ppath raw) raw]
+      [hodler cas (de-path:phx raw keys) raw]
     %+  turn  (sort dat aor)
     |=  [hodler=ship =case pax=(unit path) raw=path]
     ;tr
@@ -147,12 +147,5 @@
       ::  case
       ;td(align "left"):"{<case>}"
     ==
-  ::
-  ++  ppath
-    |=  pax=path
-    ^-  (unit path)
-    ?~  dep=(decrypt-path:phx (tail pax) keys)
-      ~
-    `[(head pax) u.dep]
   --
 --

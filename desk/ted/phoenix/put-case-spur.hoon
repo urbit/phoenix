@@ -1,5 +1,5 @@
 /-  spider, *phoenix
-/+  io=strandio, phx=phoenix
+/+  io=strandio, phx=phoenix, phx-put=phoenix-put
 ^-  thread:spider
 |=  arg=vase
 =+  !<([~ =case =spur] arg)
@@ -12,7 +12,7 @@
     =/  =phx-export  [%phx-export spur page]
     =/  dat=@  (jam phx-export)
     =/  =card:agent:gall
-      =+  (make-dir-fil spur)
+      =+  (make-dir-fil:phx-put spur keys)
       (put dir fil dat)
     ;<  ~  bind:m  (send-raw-card:io card)
     (pure:m !>(%done))
@@ -24,56 +24,4 @@
   =/  =wire  [%sav path]
   =/  =cage  [%drum-put !>([path dat])]
   [%pass wire %agent [our.bowl %hood] %poke cage]
-::
-++  make-dir-fil
-  |=  pax=path
-  =/  who=ship  (slav %p (head pax))
-  |^
-  ^-  [dir=path fil=path]
-  ?~  de-path=(decrypt-path:phx (tail pax) keys)
-    default
-  ?~  rda=(rda u.de-path)
-    default
-  [(pretty-dir who u.rda) (pretty-fil who u.rda)]
-  ::
-  ++  default
-    =+  hax=(pretty-uv (shaz (jam page)))
-    :-  (weld /phoenix/(ship-sig who) (tail pax))
-    /(rap 3 (ship-sig who) '-' hax ~)/jam
-  ::
-  ++  pretty-uv
-    |=  a=@uvI
-    ^-  @ta
-    (crip (weld "0v" ((v-co:co (met 3 a)) a)))
-  ::
-  ++  ship-sig
-    |=  =ship
-    ^-  @ta
-    (crip +:(scow %p ship))
-  ::
-  ++  rda
-    |=  =(pole knot)
-    ^-  (unit [rift=@ud =dude:gall act=@ud])
-    ?.  ?=([rift=@ dude=@ act=@ ~] pole)  ~
-    ?~  rif=(slaw %ud rift.pole)   ~
-    ?~  dud=(slaw %tas dude.pole)  ~
-    ?~  act=(slaw %ud act.pole)    ~
-    `[u.rif u.dud u.act]
-  ::
-  ++  pretty-dir
-    |=  [=ship rift=@ud =dude:gall act=@ud]
-    ^-  path
-    =/  rift=@ta  (crip (a-co:co rift))
-    /phoenix/(ship-sig ship)/[rift]/[dude]
-  ::
-  ++  pretty-fil
-    |=  [=ship rift=@ud =dude:gall act=@ud]
-    ^-  path
-    =/  rift=@ta  (crip (a-co:co rift))
-    =/  act=@ta   (crip (a-co:co act))
-    :_  /'jam'
-    %-  reel  :_  (cury cat 3)
-    %+  join  '-'
-    `path`/(ship-sig ship)/[rift]/[dude]/[act]
-  --
 --
