@@ -12,7 +12,7 @@
     =/  egg-page=page  [%egg-any good-egg]
     ;<  rift=@ud  bind:m  (scry:io @ud /j/rift/(scot %p our.bowl))
     =+  act=(get-act:egg good-egg)
-    =/  =phx-export
+    =/  exp=phx-export
       :-  %phx-export
       ?~  key
         :_  egg-page
@@ -25,9 +25,9 @@
             u.key  eny.bowl
         ==
       [good-path [%egg-cyf (encrypt:phx (jam egg-page) u.key eny.bowl)]]
-    =/  dat=@  (jam phx-export)
+    =/  dat=@  (jam exp)
     =/  cards=(list card:agent:gall)
-      =+  (make-dir-fil:phx-put spur.phx-export ?~(key ~ (sy u.key ~)))
+      =+  (make-dir-fil:phx-put spur.exp page.exp ?~(key ~ (sy u.key ~)))
       :-  (put dir fil dat)
       ?~  key  ~
       (import-key u.key)^~

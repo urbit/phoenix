@@ -12,7 +12,7 @@
     =/  =phx-export  [%phx-export spur page]
     =/  dat=@  (jam phx-export)
     =/  =card:agent:gall
-      =+  (make-dir-fil:phx-put spur keys)
+      =+  (make-dir-fil:phx-put spur page keys)
       (put dir fil dat)
     ;<  ~  bind:m  (send-raw-card:io card)
     (pure:m !>(%done))

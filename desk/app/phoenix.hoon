@@ -377,10 +377,9 @@
   |=  =offer
   ^+  cor
   ?<  =(our src):bowl
-  ~&  >  [dap.bowl src.bowl %offers (sort ~(tap in offer) aor)]
+  ~&  >  [dap.bowl 'received offer from:' src.bowl]
   =.  offers  (~(put by offers) src.bowl offer)
-  =/  msg=cord  %-  crip
-    " offers: {<(sort ~(tap in offer) aor)>}"
+  =/  msg=cord  ' sent an offer'
   (emil (send-hark:phx src.bowl msg))
 ::
 ++  handle-snap
