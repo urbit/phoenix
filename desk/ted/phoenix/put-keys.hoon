@@ -1,5 +1,5 @@
 /-  spider
-/+  io=strandio, phoenix
+/+  io=strandio, phoenix, phx-put=phoenix-put
 ^-  thread:spider
 |=  arg=vase
 =/  m  (strand:rand ,vase)
@@ -14,13 +14,13 @@
 ++  put-keys
   |=  dat=@
   ^-  card:agent:gall
-  =/  ship-sig=@t  (crip +:(scow %p our.bowl))
+  =/  ship-sig=@ta  (pretty-p:phx-put our.bowl)
   =/  dir=path  /phoenix/[ship-sig]/keys
   =/  fil=path
     :_  /'txt'
     %-  reel  :_  (cury cat 3)
     %+  join  '-'
-    `path`/[ship-sig]/keys/(pretty-date:phoenix now.bowl)
+    `path`/[ship-sig]/keys/(pretty-da:phx-put now.bowl)
   =/  =path  (weld dir fil)
   =/  =cage  [%drum-put !>([path dat])]
   [%pass / %agent [our.bowl %hood] %poke cage]

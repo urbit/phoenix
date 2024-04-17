@@ -1,4 +1,4 @@
-::  :phoenix|send ud+1 /~zod/foo/bar/baz ~hodler
+::  :phoenix|send ud+1 /~sampel/foo ~hodler
 ::
 /-  *phoenix
 :-  %say

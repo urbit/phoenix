@@ -1,4 +1,4 @@
-::  :phoenix|restore ud+1 /~zod/foo/bar/baz %dude
+::  :phoenix|restore ud+1 /~sampel/foo %dude
 ::
 /-  *phoenix
 :-  %say

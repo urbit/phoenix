@@ -1,5 +1,5 @@
 ::  :phoenix|put %dude
-::  :phoenix|put ud+1 /~zod/foo/bar/baz
+::  :phoenix|put ud+1 /~sampel/foo
 ::
 /-  *phoenix
 :-  %say

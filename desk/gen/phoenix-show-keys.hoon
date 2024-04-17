@@ -1,4 +1,4 @@
-::  +phoenix!phoenix/show-keys
+::  +phoenix!phoenix-show-keys
 ::
 :-  %say
 |=  [[now=@da @ our=@p ^] ~ ~]

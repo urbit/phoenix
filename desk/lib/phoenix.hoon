@@ -7,19 +7,6 @@
   ^-  @ud
   .^(@ud %j (en-beam [our.bowl %rift da+now.bowl] /(scot %p ship)))
 ::
-++  pretty-date
-  |=  t=@da
-  ^-  @t
-  =+  (yore t)
-  =/  dos   (d-co:co 2)
-  %-  reel  :_  (cury cat 3)
-  %+  join  '-'
-  %-  turn  :_  crip
-  ^-  (list tape)
-  :~  (a-co:co y)  (dos m)  (dos d.t)
-      (dos h.t)  (dos m.t)  (dos s.t)
-  ==
-::
 ++  on-path  ((on @ud (pair @da (each page @uvI))) lte)
 ++  make-offer
   |=  =ship

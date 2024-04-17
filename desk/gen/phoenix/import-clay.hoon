@@ -1,7 +1,6 @@
-::  :phoenix|import-clay /=desk=/zod-0-dude-42/jam
+::  :phoenix|import-clay /=desk=/sampel-0-dude-42/jam
 ::
 /-  *phoenix
-/+  *phoenix
 :-  %say
 |=  $:  [now=@da @ our=@p ^]
         [pax=path ~]

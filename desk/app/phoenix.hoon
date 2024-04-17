@@ -1,38 +1,38 @@
 ::  %phoenix
 ::
-::  :phoenix|add-guest ~zod
-::  :phoenix|del-guest ~zod
+::    keys:
+::  -phoenix!phoenix-put-keys
+::  +phoenix!phoenix-show-keys
 ::
-::  :phoenix|snap %dude
-::  :phoenix|send ud+1 /~zod/foo/bar/baz ~hodler
+::    commands:
 ::  :phoenix|put %dude
-::  :phoenix|import-clay ~zod /foo/bar/baz /=desk=/zod-0-dude-42/jam
-::
+::  :phoenix|snap %dude
 ::  :phoenix|query ~hodler
-::  :phoenix|keen ud+1 /~zod/foo/bar/baz ~hodler
-::  :phoenix|tomb ud+1 /~zod/foo/bar/baz ~hodler
-::  :phoenix|cull ud+1 /~zod/foo/bar/baz ~hodler
-::
+::  :phoenix|add-guest ~sampel
+::  :phoenix|del-guest ~sampel
 ::  :phoenix|add-key 0xdead.beef
 ::  :phoenix|del-key 0xdead.beef
+::  :phoenix|send ud+1 /~sampel/foo ~hodler
+::  :phoenix|keen ud+1 /~sampel/foo ~hodler
+::  :phoenix|tomb ud+1 /~sampel/foo ~hodler
+::  :phoenix|cull ud+1 /~sampel/foo ~hodler
+::  :phoenix|restore ud+1 /~sampel/foo %dude
+::  :phoenix|import-clay /=desk=/sampel-0-dude-42/jam
 ::
-::  :phoenix|restore ud+1 /~zod/foo/bar/baz %dude
-::
-::  +phoenix!phoenix-show-keys
-::  -phoenix!phoenix-put-keys
-::
-::  -phoenix!phoenix-put-dude %dude `.^(@ux %gx /=phoenix=/backup-key/noun)
-::  -phoenix!phoenix-put-desk %desk `.^(@ux %gx /=phoenix=/backup-key/noun)
+::    threads:
 ::  -phoenix!phoenix-put-all `.^(@ux %gx /=phoenix=/backup-key/noun)
+::  -phoenix!phoenix-put-desk %desk `.^(@ux %gx /=phoenix=/backup-key/noun)
+::  -phoenix!phoenix-put-dude %dude `.^(@ux %gx /=phoenix=/backup-key/noun)
 ::
 ::    scrys:
+::  .^(@ux %gx /=phoenix=/backup-key/noun)
 ::  .^((set @ux) %gx /=phoenix=/keys/noun)
 ::  .^((set ship) %gx /=phoenix=/guests/noun)
 ::  .^((set ship) %gx /=phoenix=/depositors/noun)
-::  .^(@ux %gx /=phoenix=/backup-key/noun)
-::  .^((map ship (set [spur case])) %gx /=phoenix=/offers/noun)
-::  .^((set [path case]) %gx /=phoenix=/offer/(scot %p our)/noun)
-::  .^(egg-any:gall %gx /=phoenix=/egg-any/(scot %p our)/dude/(scot ud+42)/noun)
+::  .^((map ship (set [case spur])) %gx /=phoenix=/offers/noun)
+::  .^((set [case spur]) %gx /=phoenix=/offer/(scot %p our)/noun)
+::  .^(page %gx (en-beam [our %phoenix da+now] :(weld /page/(scot case) spur /noun)))
+::  .^(egg-any:gall %gx (en-beam [our %phoenix da+now] :(weld /egg-any/(scot case) spur /noun)))
 ::
 /-  *phoenix
 /+  phoenix, egg, default-agent, dbug, verb, rudder
@@ -312,7 +312,7 @@
       cor
     =/  =page  u.q.dat.roar
     ?>  ?=(egg-cyf page)
-    ~&  >  "{<dap.bowl>}: received from {<data-src>}: [{<owner>} {<pax>}]"
+    ::  ~&  >  "{<dap.bowl>}: received from {<data-src>}: [{<owner>} {<pax>}]"
     =.  cor  (grow pax page)
     (wake-offer owner)
   ==
@@ -377,9 +377,9 @@
   |=  =offer
   ^+  cor
   ?<  =(our src):bowl
-  ~&  >  [dap.bowl 'received offer from:' src.bowl]
+  =/  msg=cord  (crip " {<~(wyt in offer)>} backups available")
+  ~&  >  [dap.bowl src.bowl msg]
   =.  offers  (~(put by offers) src.bowl offer)
-  =/  msg=cord  ' sent an offer'
   (emil (send-hark:phx src.bowl msg))
 ::
 ++  handle-snap

@@ -1,4 +1,4 @@
-::  :phoenix|add-guest ~zod
+::  :phoenix|add-guest ~sampel
 ::
 /-  *phoenix
 :-  %say

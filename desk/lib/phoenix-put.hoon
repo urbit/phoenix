@@ -2,6 +2,18 @@
 |%
 ++  pretty-p   |=(=@p `@ta`(crip +:(scow %p p)))
 ++  pretty-ud  |=(=@ud `@ta`(crip (a-co:co ud)))
+++  pretty-da
+  |=  t=@da
+  ^-  @ta
+  =+  (yore t)
+  =/  dos   (d-co:co 2)
+  %-  reel  :_  (cury cat 3)
+  %+  join  '-'
+  %-  turn  :_  crip
+  ^-  (list tape)
+  :~  (a-co:co y)  (dos m)  (dos d.t)
+      (dos h.t)  (dos m.t)  (dos s.t)
+  ==
 ::
 ++  make-dir-fil
   |=  [pax=path =page keys=(set @)]
