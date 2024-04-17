@@ -308,7 +308,7 @@
       cor
     =/  =page  u.q.dat.roar
     ::  ~&  >  "{<dap.bowl>}: received from {<data-src>}: [{<owner>} {<pax>}]"
-    ?>  ?=(can-grow pax page)
+    ?>  (can-grow pax page)
     (emil (grow pax page) (wake-offer owner))
   ==
 ::
