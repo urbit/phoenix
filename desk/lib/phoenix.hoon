@@ -1,5 +1,5 @@
 /-  *phoenix, hark
-/+  egg
+/+  egg, *phoenix-gall
 ::
 |_  =bowl:gall
 ++  get-rift
@@ -7,7 +7,28 @@
   ^-  @ud
   .^(@ud %j (en-beam [our.bowl %rift da+now.bowl] /(scot %p ship)))
 ::
-++  on-path  ((on @ud (pair @da (each page @uvI))) lte)
+++  restore-sky
+  |=  fam=farm:gall
+  ^-  (list [spur page])
+  =/  sky=(map path fans:gall)  (farm-to-sky fam)
+  =/  sly=(list [pax=path fan=fans:gall])  ~(tap by sky)
+  =|  tmp=(set [rev=@ud spur page])
+  |-
+  ?~  sly
+    %-  turn  :_  tail
+    %+  sort  ~(tap in tmp)
+    |=([[a=@ud *] [b=@ud *]] (lth a b))
+  =.  tmp
+    %-  ~(gas in tmp)
+    ^-  (list [rev=@ud path page])
+    %+  murn  (tap:on-path fan.i.sly)
+    |=  [rev=@ud wen=@da wut=(each page @uvI)]
+    ?-  -.wut
+      %|  ~
+      %&  `[rev pax.i.sly p.wut]
+    ==
+  $(sly t.sly)
+::
 ++  make-offer
   |=  =ship
   ^-  offer
@@ -141,7 +162,8 @@
   (mole |.([(scot %p ship.pole) (scot %ud suite.pole) (stab ;;(@t u.res))]))
 ::
 ++  valid-path
-  |=  =(pole iota)
+  |=  =path
+  =/  =(pole iota)  (pave path)
   ^-  ?
   ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
 --

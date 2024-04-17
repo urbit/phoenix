@@ -4,7 +4,7 @@
 ::  -phoenix!phoenix-put-keys
 ::  +phoenix!phoenix-show-keys
 ::
-::    commands:
+::    pokes:
 ::  :phoenix|put %dude
 ::  :phoenix|snap %dude
 ::  :phoenix|query ~hodler
@@ -35,7 +35,8 @@
 ::  .^(egg-any:gall %gx (en-beam [our %phoenix da+now] :(weld /egg-any/(scot case) spur /noun)))
 ::
 /-  *phoenix
-/+  phoenix, egg, default-agent, dbug, verb, rudder
+/+  phoenix, egg, phx-gal=phoenix-gall,
+    default-agent, dbug, verb, rudder
 /~  pages  (page:rudder records-0 command)  /app/phoenix/webui
 =>
   |%
@@ -100,7 +101,7 @@
       |=  [=path =fans:gall]
       ?~  path  ~
       ?~  who=(slaw %p i.path)  ~
-      ?.  %+  any:on-path:phx  fans
+      ?.  %+  any:on-path:phx-gal  fans
           |=  [rev=@ud wen=@da wut=(each page @uvI)]
           -.wut
         ~
@@ -143,25 +144,26 @@
 ++  abet  [(flop cards) state]
 ++  emit  |=(=card cor(cards [card cards]))
 ++  emil  |=(caz=(list card) cor(cards (welp (flop caz) cards)))
-++  grow
+++  grow  |=([=spur =page] `card`[%pass / %grow spur page])
+++  can-grow
   |=  [=spur =page]
-  ?>  (valid-path:phx (pave spur))
-  ?>  ?=(egg-cyf page)
-  %-  emit
-  [%pass / %grow spur page]
+  ^-  ?
+  ?.  (valid-path:phx spur)  |
+  ?.  ?=(egg-cyf page)       |
+  =/  =ship  (slav %p (head spur))
+  |(=(our.bowl ship) (~(has in guests) ship))
 ::
 ++  send-query
   |=  =ship
-  %-  emit
+  ^-  card
   =/  =cage  [%phoenix-command !>([%query our.bowl])]
   [%pass /query %agent [ship %phoenix] %poke cage]
 ::
 ++  wake-offer
   |=  =ship
-  ^+  cor
-  ?:  =(our.bowl ship)
-    cor
-  (emit [%pass /wake/offer/(scot %p ship) %arvo %b %wait now.bowl])
+  ^-  (list card)
+  ?:  =(our.bowl ship)  ~
+  [%pass /wake/offer/(scot %p ship) %arvo %b %wait now.bowl]^~
 ::
 ++  handle-import
   |=  [=spur =page]
@@ -188,14 +190,12 @@
           (pout rest.pole)
           backup-key  eny.bowl
       ==
-    ?>  (valid-path:phx (pave good-path))
+    ?>  (can-grow good-path egg-cyf)
     ~&  >  [dap.bowl %imported spur]
-    (grow good-path egg-cyf)
-  ?>  (valid-path:phx (pave spur))
-  ?>  ?=(egg-cyf page)
+    (emit (grow good-path egg-cyf))
+  ?>  (can-grow spur page)
   ~&  >  [dap.bowl %imported spur]
-  =.  cor  (grow spur page)
-  (wake-offer ship)
+  (emil (grow spur page) (wake-offer ship))
 ::
 ++  poke
   |=  [=mark =vase]
@@ -299,22 +299,17 @@
       ~|([%bad-sign-arvo sign-arvo] !!)
     ?~  roar.sign-arvo
       cor
-    =/  cmd-src=ship   (slav %p cmd-src.pole)
-    =/  data-src=ship  ship.sign-arvo
-    =/  pax=path       (slag 6 path.sign-arvo)
-    ?>  (valid-path:phx (pave pax))
+    ::  =/  cmd-src=ship   (slav %p cmd-src.pole)
+    ::  =/  data-src=ship  ship.sign-arvo
+    =/  pax=path    (slag 6 path.sign-arvo)
     =/  owner=ship  (slav %p (head pax))
-    ?>  ?|  =(our.bowl owner)
-            (~(has in guests) owner)
-        ==
     =/  =roar:ames  u.roar.sign-arvo
     ?~  q.dat.roar
       cor
     =/  =page  u.q.dat.roar
-    ?>  ?=(egg-cyf page)
     ::  ~&  >  "{<dap.bowl>}: received from {<data-src>}: [{<owner>} {<pax>}]"
-    =.  cor  (grow pax page)
-    (wake-offer owner)
+    ?>  ?=(can-grow pax page)
+    (emil (grow pax page) (wake-offer owner))
   ==
 ::
 ++  handle-put
@@ -343,7 +338,7 @@
     ?:  =(our.bowl ship)
       ~&  >  (sort ~(tap in (make-offer:phx our.bowl)) aor)
       cor
-    (send-query ship)
+    (emit (send-query ship))
   ?>  =(src.bowl ship)
   (send-offer src.bowl)
 ::
@@ -397,7 +392,8 @@
         /
         backup-key  eny.bowl
     ==
-  (grow good-path page)
+  ?>  (can-grow good-path page)
+  (emit (grow good-path page))
 ::
 ++  make-keen-path
   |=  [=case =spur]
@@ -436,9 +432,7 @@
     ?>  ?|  =(our src):bowl
             =(owner src.bowl)
         ==
-    =.  cor
-      (emit [%pass / %tomb case spur])
-    (wake-offer owner)
+    (emil [%pass / %tomb case spur] (wake-offer owner))
   ?>  =(our src):bowl
   %-  emit
   =/  =cage  [%phoenix-command !>([%tomb case spur where])]
@@ -451,9 +445,7 @@
     ?>  ?|  =(our src):bowl
             =(owner src.bowl)
         ==
-    =.  cor
-      (emit [%pass / %cull case spur])
-    (wake-offer owner)
+    (emil [%pass / %cull case spur] (wake-offer owner))
   ?>  =(our src):bowl
   %-  emit
   =/  =cage  [%phoenix-command !>([%cull case spur where])]
@@ -464,20 +456,27 @@
   ?>  =(our src):bowl
   ?>  =(%egg-any mark)
   =+  !<(=egg-any:gall vase)
-  ?-    -.egg-any
-      ?(%15 %16)
-    ?>  ?=(%live -.+.egg-any)
-    =+  ;;(old=versioned-state q.+.old-state.+.egg-any)
-    ?-    -.old
-        %0
-      =.  keys  (~(uni in keys) keys.old)
-      =.  cor
-        %-  emil
-        =/  =cage  [%phoenix-command !>([%query our.bowl])]
-        %+  turn  ~(tap in ~(key by offers.old))
-        |=  =ship
-        [%pass /query %agent [ship %phoenix] %poke cage]
-      cor
-    ==
+  =/  =egg:gall  (fresh-egg:phx-gal egg-any)
+  ?>  ?=(%live -.egg)
+  =+  ;;(old=versioned-state q.+.old-state.egg)
+  ?-    -.old
+      %0
+    =.  keys    (~(uni in keys) keys.old)
+    =.  guests  (~(uni in guests) guests.old)
+    =.  cor
+      %-  emil
+      (turn :_(send-query ~(tap in ~(key by offers.old))))
+    ::
+    =/  dat=(list (pair spur page))
+      (restore-sky:phx sky.egg)
+    =|  wakes=(set ship)
+    |-  ^+  cor
+    ?~  dat
+      (emil (zing (turn ~(tap in wakes) wake-offer)))
+    ?.  (can-grow p.i.dat q.i.dat)
+      $(dat t.dat)
+    =.  wakes  (~(put in wakes) (slav %p (head p.i.dat)))
+    =.  cor    (emit (grow i.dat))
+    $(dat t.dat)
   ==
 --
