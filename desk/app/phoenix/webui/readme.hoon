@@ -80,12 +80,16 @@
         
         retrieve a backup from another ship using `keen`.
         ;br;
+        tomb deletes a backup (tombstone).
+        ;br;
 
-        to restore from a snapshot that you have the key for, enter the agent name to poke that agent with the cage:
+        to restore from a snapshot that you have the key for, enter an agent name to poke that agent with the cage:
         ;br;
         `[%egg-any !>(egg-any:gall)]`
         ;br;
         agents that choose to support restore functionality should handle a poke with that cage.
+        ;br;
+        see +on-egg-any in /app/phoenix/hoon for an example.
         ;br;
 
         to allow a ship to store backups on your ship, they must be a whitelisted guest:

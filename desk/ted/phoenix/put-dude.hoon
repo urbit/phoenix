@@ -18,7 +18,7 @@
         :_  egg-page
         /(scot %p our.bowl)/(scot %ud rift)/[dude]/(scot %ud act)
       =/  good-path=path
-        %-  good-path:phx
+        %-  make-good-path:phx
         :*  our.bowl  rift
             dude      act
             /
