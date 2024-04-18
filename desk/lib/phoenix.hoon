@@ -7,7 +7,7 @@
   ^-  @ud
   .^(@ud %j (en-beam [our.bowl %rift da+now.bowl] /(scot %p ship)))
 ::
-++  restore-sky
+++  recover-sky
   |=  fam=farm:gall
   ^-  (list [spur page])
   =/  sky=(map path fans:gall)  (farm-to-sky fam)
@@ -135,7 +135,7 @@
       (scot %uv cyf)
   ==
 ::
-++  good-path
+++  make-good-path
   |=  [=ship =rift =dude:gall act=@ud rest=path key=@ eny=@uvJ]
   ^-  path
   =/  =spur   [(scot %ud rift) dude (scot %ud act) rest]

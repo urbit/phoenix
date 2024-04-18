@@ -168,12 +168,8 @@
 ++  handle-import
   |=  [=spur =page]
   ^+  cor
-  ?>  =(our src):bowl
   ~|  [dap.bowl %import-failed spur]
   =/  =ship  (slav %p (head spur))
-  ?>  ?|  =(our.bowl ship)
-          (~(has in guests) ship)
-      ==
   ?:  &(=(our.bowl ship) ?=([%egg-any *] page))
     =+  ;;(raw=egg-any:gall q.page)
     =/  good-egg=egg-any:gall  (cook:egg raw)
@@ -184,7 +180,7 @@
     =/  good-path=path
       =/  =(pole iota)  (pave spur)
       ?>  ?=([[%p who=@] [%ud rift=@] [%ta dude=@] [%ud act=@] rest=*] pole)
-      %-  good-path:phx
+      %-  make-good-path:phx
       :*  our.bowl    rift.pole
           dude.pole   act.pole
           (pout rest.pole)
@@ -241,7 +237,7 @@
       ==
     ==
   ::
-     %handle-http-request
+      %handle-http-request
     ?>  =(our src):bowl
     =;  out=(quip card _+.state)
       =.  +.state  +.out
@@ -292,7 +288,7 @@
     ?>  ?=([%behn %wake *] sign-arvo)
     ?^  error.sign-arvo
       cor
-    (send-offer (slav %p ship.pole))
+    (emit (send-offer (slav %p ship.pole)))
   ::
       [%keen cmd-src=@ ~]
     ?.  ?=([%ames %tune *] sign-arvo)
@@ -334,23 +330,25 @@
 ::
 ++  handle-query
   |=  =ship
+  ^+  cor
   ?:  =(our src):bowl
     ?:  =(our.bowl ship)
       ~&  >  (sort ~(tap in (make-offer:phx our.bowl)) aor)
       cor
     (emit (send-query ship))
   ?>  =(src.bowl ship)
-  (send-offer src.bowl)
+  (emit (send-offer src.bowl))
 ::
 ++  send-offer
   |=  =ship
+  ^-  card
   =/  =offer  (make-offer:phx ship)
   =/  =cage  [%phoenix-offer !>(offer)]
-  %-  emit
   [%pass /offer %agent [ship %phoenix] %poke cage]
 ::
 ++  handle-restore
   |=  [=case =spur =dude:gall]
+  ^+  cor
   =+  [our=(scot %p our.bowl) now=(scot %da now.bowl)]
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
     ~&  >>>  [dap.bowl 'restore failed: not running:' dude]
@@ -386,7 +384,7 @@
   =/  egg-jam=@  (jam egg-page)
   =/  =page  `egg-cyf`[%egg-cyf (encrypt:phx egg-jam backup-key eny.bowl)]
   =/  good-path=path
-    %-  good-path:phx
+    %-  make-good-path:phx
     :*  our.bowl  (get-rift:phx our.bowl)
         dude      (get-act:egg good-egg)
         /
@@ -403,7 +401,6 @@
 ++  handle-send
   |=  [=case =spur where=ship]
   ^+  cor
-  ?>  =(our src):bowl
   ?<  =(our.bowl where)
   ?~  (pluck:phx case spur)
     ~&  >>  [dap.bowl %not-found case spur]
@@ -414,6 +411,7 @@
 ::
 ++  handle-keen
   |=  [=case =spur where=ship]
+  ^+  cor
   =/  owner=ship  (slav %p (head spur))
   ?>  ?|  =(our src):bowl
           ?&  =(where src.bowl)
@@ -427,6 +425,7 @@
 ::
 ++  handle-tomb
   |=  [=case =spur where=ship]
+  ^+  cor
   =/  owner=ship  (slav %p (head spur))
   ?:  =(where our.bowl)
     ?>  ?|  =(our src):bowl
@@ -440,6 +439,7 @@
 ::
 ++  handle-cull
   |=  [=case =spur where=ship]
+  ^+  cor
   =/  owner=ship  (slav %p (head spur))
   ?:  =(where our.bowl)
     ?>  ?|  =(our src):bowl
@@ -453,6 +453,7 @@
 ::
 ++  on-egg-any
   |=  [=mark =vase]
+  ^+  cor
   ?>  =(our src):bowl
   ?>  =(%egg-any mark)
   =+  !<(=egg-any:gall vase)
@@ -468,7 +469,7 @@
       (turn :_(send-query ~(tap in ~(key by offers.old))))
     ::
     =/  dat=(list (pair spur page))
-      (restore-sky:phx sky.egg)
+      (recover-sky:phx sky.egg)
     =|  wakes=(set ship)
     |-  ^+  cor
     ?~  dat
