@@ -147,7 +147,6 @@
       meta=data:meta
   ==
 ::
-+$  group-ui  [group saga=(unit saga:e)]
 ::  $cabal: metadata representing a $sect or role
 ::
 ++  cabal
@@ -284,9 +283,6 @@
 ::
 +$  init  [=time =group]
 ::
-::  $groups-ui: map for frontend to display groups
-+$  groups-ui
-  (map flag group-ui)
 +$  groups
   (map flag group)
 +$  net-groups

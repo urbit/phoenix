@@ -35,8 +35,8 @@
 ::  .^(egg-any:gall %gx (en-beam [our %phoenix da+now] :(weld /egg-any/(scot case) spur /noun)))
 ::
 /-  *phoenix
-/+  phoenix, egg, phx-gal=phoenix-gall,
-    default-agent, dbug, verb, rudder
+/+  default-agent, dbug, verb, rudder,
+    phoenix, egg=phoenix-egg-utils, gal=phoenix-gall-utils
 /~  pages  (page:rudder records-0 command)  /app/phoenix/webui
 =>
   |%
@@ -46,7 +46,7 @@
   --
 =|  state-0
 =*  state  -
-%+  verb  &
+%+  verb  |
 %-  agent:dbug
 ^-  agent:gall
 =<
@@ -101,7 +101,7 @@
       |=  [=path =fans:gall]
       ?~  path  ~
       ?~  who=(slaw %p i.path)  ~
-      ?.  %+  any:on-path:phx-gal  fans
+      ?.  %+  any:on-path:gal  fans
           |=  [rev=@ud wen=@da wut=(each page @uvI)]
           -.wut
         ~
@@ -259,7 +259,8 @@
   |=  [=(pole knot) =sign-arvo]
   ^+  cor
   ?+    pole  ~&([dap.bowl %strange-arvo-wire `path`pole] cor)
-    [%sav *]  cor
+    [%sav *]         cor
+    [%eyre %bind ~]  cor
   ::
       [%jael %pubs ~]
     ?>  ?=([%jael %public-keys *] sign-arvo)
@@ -457,7 +458,7 @@
   ?>  =(our src):bowl
   ?>  =(%egg-any mark)
   =+  !<(=egg-any:gall vase)
-  =/  =egg:gall  (fresh-egg:phx-gal egg-any)
+  =/  =egg:gall  (fresh-egg:gal egg-any)
   ?>  ?=(%live -.egg)
   =+  ;;(old=versioned-state q.+.old-state.egg)
   ?-    -.old

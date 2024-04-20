@@ -7,7 +7,7 @@
   ^-  @ta
   =+  (yore t)
   =/  dos   (d-co:co 2)
-  %-  reel  :_  (cury cat 3)
+  %+  rap  3
   %+  join  '-'
   %-  turn  :_  crip
   ^-  (list tape)
@@ -63,7 +63,7 @@
   ::
       [[%p ship=@] [%ud rift=@] [%ta dude=@] [%ud act=@] rest=*]
     :_  /'jam'
-    %-  reel  :_  (cury cat 3)
+    %+  rap  3
     %+  join  '-'
     ^-  path
     :*  (pretty-p ship.pole)  (pretty-ud rift.pole)
@@ -74,7 +74,7 @@
   ::
       [[%p ship=@] [%ud suite=@] [%ud rift=@] [%ta dude=@] [%ud act=@] rest=*]
     :_  /'jam'
-    %-  reel  :_  (cury cat 3)
+    %+  rap  3
     %+  join  '-'
     ^-  path
     :*  (pretty-p ship.pole)  (pretty-ud rift.pole)

@@ -1,5 +1,5 @@
 /-  *phoenix, hark
-/+  egg, *phoenix-gall
+/+  egg=phoenix-egg-utils, *phoenix-gall-utils
 ::
 |_  =bowl:gall
 ++  get-rift

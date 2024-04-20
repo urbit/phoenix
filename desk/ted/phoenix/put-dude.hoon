@@ -1,5 +1,5 @@
 /-  spider, *phoenix
-/+  io=strandio, egg, phx=phoenix, phx-put=phoenix-put
+/+  io=strandio, phx=phoenix, egg=phoenix-egg-utils, phx-put=phoenix-put-utils
 ^-  thread:spider
 |=  arg=vase
 =+  !<([~ =dude:gall key=(unit @)] arg)

@@ -1,5 +1,5 @@
 /-  spider
-/+  io=strandio, phoenix, phx-put=phoenix-put
+/+  io=strandio, phx-put=phoenix-put-utils
 ^-  thread:spider
 |=  arg=vase
 =/  m  (strand:rand ,vase)
@@ -18,7 +18,7 @@
   =/  dir=path  /phoenix/[ship-sig]/keys
   =/  fil=path
     :_  /'txt'
-    %-  reel  :_  (cury cat 3)
+    %+  rap  3
     %+  join  '-'
     `path`/[ship-sig]/keys/(pretty-da:phx-put now.bowl)
   =/  =path  (weld dir fil)

@@ -1,5 +1,5 @@
 /-  spider, *phoenix
-/+  io=strandio, phx=phoenix, phx-put=phoenix-put
+/+  io=strandio, phx-put=phoenix-put-utils
 ^-  thread:spider
 |=  arg=vase
 =+  !<([~ =case =spur] arg)

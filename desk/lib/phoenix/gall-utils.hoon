@@ -1,13 +1,13 @@
+^|
+=,  gall
 |%
 ++  on-path  ((on @ud (pair @da (each page @uvI))) lte)
 ++  farm-to-sky
-  =,  gall
   |=  =farm
   ^-  (map path fans)
   (~(run-plot of-farm farm) (bake tail ,plot))
 ::
 ++  fresh-egg
-  =,  gall
   |=  =egg-any
   |^  ^-  egg
   ?-  -.egg-any
@@ -49,7 +49,6 @@
   --
 ::
 ++  of-farm
-  =,  gall
   |_  =farm
   ++  key-coops
     |=  pos=path
