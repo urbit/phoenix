@@ -76,9 +76,9 @@
 ::
 ++  encrypt
   |=  [msg=@ key=@ eny=@uvJ]
-  ^-  [key-id cyf=@]
+  ^-  [=key-id cyf=@]
   ?<  =(0 eny)
-  =/  =key-id        [eny (shas eny key)]
+  =/  =key-id        [current-suite eny (shas eny key)]
   =/  new-key=@      (shaz (mix eny key))
   =/  encrypted-msg  (en:crub:crypto new-key msg)
   [key-id encrypted-msg]
@@ -87,11 +87,14 @@
   |=  [[=key-id msg=@] keys=(set @)]
   |^  ^-  (unit page)
       ^-  (unit [%egg-any egg-any:gall])
-      ?~  key=(find-key key-id keys)
-        ~&  >>>  [dap.bowl %no-key-match]
-        ~
-      =/  new-key=@  (shaz (mix salt.key-id u.key))
-      (unlock new-key msg)
+      ?-    -.key-id
+          %'1'
+        ?~  key=(find-key key-id keys)
+          ~&  >>>  [dap.bowl %no-key-match]
+          ~
+        =/  new-key=@  (shaz (mix salt.key-id u.key))
+        (unlock new-key msg)
+      ==
   ::
   ++  unlock
     |=  [key=@ msg=@]
@@ -102,15 +105,18 @@
   --
 ::
 ++  find-key
-  |=  [key-id keys=(set @)]
+  |=  [=key-id keys=(set @)]
   ^-  (unit @)
-  =/  keys=(list @)  ~(tap in keys)
-  |-
-  ?~  keys
-    ~
-  ?:  =(salted-key (shas salt i.keys))
-    `i.keys
-  $(keys t.keys)
+  ?-    -.key-id
+      %'1'
+    =/  keys=(list @)  ~(tap in keys)
+    |-
+    ?~  keys
+      ~
+    ?:  =(salted-key.key-id (shas salt.key-id i.keys))
+      `i.keys
+    $(keys t.keys)
+  ==
 ::
 ++  send-hark
   |=  [who=ship msg=cord]
@@ -129,10 +135,13 @@
   ^-  ^spur
   =/  pat=@t  (spat spur)
   =+  (encrypt pat key eny)
-  :~  (scot %ud crypto-suite)
-      (scot %uv salt)
-      (scot %uv salted-key)
-      (scot %uv cyf)
+  ?-    -.key-id
+      %'1'
+    :~  -.key-id
+        (scot %uv salt.key-id)
+        (scot %uv salted-key.key-id)
+        (scot %uv cyf)
+    ==
   ==
 ::
 ++  make-good-path
@@ -141,29 +150,35 @@
   =/  =spur   [(scot %ud rift) dude (scot %ud act) rest]
   =/  pat=@t  (spat spur)
   =+  (encrypt pat key eny)
-  :~  (scot %p ship)
-      (scot %ud crypto-suite)
-      (scot %uv salt)
-      (scot %uv salted-key)
-      (scot %uv cyf)
+  ?-    -.key-id
+      %'1'
+    :~  (scot %p ship)
+        -.key-id
+        (scot %uv salt.key-id)
+        (scot %uv salted-key.key-id)
+        (scot %uv cyf)
+    ==
   ==
 ::
 ++  de-path
   |=  [pax=path keys=(set @)]
   ^-  (unit path)
   =/  =(pole iota)  (pave pax)
-  ?.  ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
-    ~
-  ?.  =(1 suite.pole)  ~
-  ?~  key=(find-key [sal.pole ski.pole] keys)  ~
-  =/  new-key=@  (shaz (mix sal.pole u.key))
-  =/  res=(unit @ux)  (de:crub:crypto new-key cyf.pole)
-  ?~  res  ~
-  (mole |.([(scot %p ship.pole) (scot %ud suite.pole) (stab ;;(@t u.res))]))
+  ?+    pole  ~
+      [[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~]
+    ?.  =(%'1' (scot %ud suite.pole))  ~
+    ?~  key=(find-key [%'1' sal.pole ski.pole] keys)  ~
+    =/  new-key=@  (shaz (mix sal.pole u.key))
+    =/  res=(unit @ux)  (de:crub:crypto new-key cyf.pole)
+    ?~  res  ~
+    (mole |.([(scot %p ship.pole) (scot %ud suite.pole) (stab ;;(@t u.res))]))
+  ==
 ::
 ++  valid-path
   |=  =path
   =/  =(pole iota)  (pave path)
   ^-  ?
-  ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
+  ?&  ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
+      =(%'1' (scot %ud suite.pole))
+  ==
 --

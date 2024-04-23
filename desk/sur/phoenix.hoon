@@ -1,29 +1,32 @@
 |%
-++  crypto-suite  1
+++  current-suite  %'1'
++$  key-id
+  $%  [%'1' salt=@ salted-key=@]
+  ==
 ::
-+$  offer       (set [case spur])
-+$  key-id      [salt=@ salted-key=@]
-+$  egg-cyf     [%egg-cyf =key-id cyf=@]
 +$  phx-export  [%phx-export =spur =page]
++$  egg-cyf     [%egg-cyf =key-id cyf=@]
+::
++$  offer  (set [case spur])
 ::
 +$  command
-  $%  [%add-guest =ship]              ::  permit a ship to save
-      [%del-guest =ship]              ::  remove save permission
+  $%  [%add-guest =ship]                       ::  permit a ship to save
+      [%del-guest =ship]                       ::  remove save permission
     ::
-      [%snap =dude:gall]              ::  take snapshot
-      [%send =case =spur where=ship]  ::  command ship to keen
+      [%snap =dude:gall]                       ::  take snapshot
+      [%send =case =spur where=ship]           ::  command ship to keen
       [%put arg=$@(=dude:gall [=case =spur])]  ::  save to put
-      [%import =spur =page]           ::  import a page
+      [%import =spur =page]                    ::  import a page
     ::
-      [%query =ship]                  ::  request for offers
-      [%keen =case =spur where=ship]  ::  keen
-      [%tomb =case =spur where=ship]  ::  tombstone
-      [%cull =case =spur where=ship]  ::  cull ud+0 to case
+      [%query =ship]                           ::  request for offers
+      [%keen =case =spur where=ship]           ::  keen
+      [%tomb =case =spur where=ship]           ::  tombstone
+      [%cull =case =spur where=ship]           ::  cull ud+0 to case
     ::
-      [%add-keys keys=(set @)]        ::  add encryption keys
-      [%del-keys keys=(set @)]        ::  del encryption keys
+      [%add-keys keys=(set @)]                 ::  add encryption keys
+      [%del-keys keys=(set @)]                 ::  del encryption keys
     ::
-      [%restore =case =spur =dude:gall]     ::  poke an agent with egg-any
+      [%restore =case =spur =dude:gall]        ::  poke an agent with &egg-any
   ==
 ::
 +$  records-0
