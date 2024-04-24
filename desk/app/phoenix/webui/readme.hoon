@@ -65,6 +65,12 @@
         <pier>/.urb/put/phoenix/<ship>/
         ;br;
 
+        to allow a ship to store backups on your ship, they must be a whitelisted guest:
+        :phoenix|add-guest ~sampel
+        ;br;
+        guests can be managed on the `guests` page.
+        ;br;
+
         snapshots can be sent over the network to a ship that has whitelisted you by entering that ship in the send field.
         ;br;
         should you breach, ships holding your backups will notify you that your backups are available when you come back online.
@@ -90,14 +96,6 @@
         agents that choose to support restore functionality should handle a poke with that cage.
         ;br;
         see +on-egg-any in /app/phoenix/hoon for an example.
-        ;br;
-
-        to allow a ship to store backups on your ship, they must be a whitelisted guest:
-        :phoenix|add-guest ~sampel
-        ;br;
-        guests can be managed on the `guests` page.
-        ;br;
-
       ==  ::  body
     ==    ::  html
   --

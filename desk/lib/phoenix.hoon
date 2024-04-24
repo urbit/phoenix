@@ -72,7 +72,8 @@
   =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@      (jam egg-page)
-  [%egg-cyf (encrypt egg-jam key eny)]
+  =+  (encrypt egg-jam key eny)
+  [%egg-cyf cyf]
 ::
 ++  encrypt
   |=  [msg=@ key=@ eny=@uvJ]
@@ -181,4 +182,13 @@
   ?&  ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
       =(%'1' (scot %ud suite.pole))
   ==
+::
+++  get-kid
+  |=  =path
+  =/  =(pole iota)  (pave path)
+  ^-  (unit key-id)
+  ?.  ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
+    ~
+  ?.  =(%'1' (scot %ud suite.pole))  ~
+  `[%'1' sal.pole ski.pole]
 --

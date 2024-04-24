@@ -5,7 +5,7 @@
   ==
 ::
 +$  phx-export  [%phx-export =spur =page]
-+$  egg-cyf     [%egg-cyf =key-id cyf=@]
++$  egg-cyf     [%egg-cyf cyf=@]
 ::
 +$  offer  (set [case spur])
 ::

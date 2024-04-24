@@ -24,7 +24,8 @@
             /
             u.key  eny.bowl
         ==
-      [good-path [%egg-cyf (encrypt:phx (jam egg-page) u.key eny.bowl)]]
+      =+  (encrypt:phx (jam egg-page) u.key eny.bowl)
+      [good-path [%egg-cyf cyf]]
     =/  dat=@  (jam exp)
     =/  cards=(list card:agent:gall)
       =+  (make-dir-fil:phx-put spur.exp page.exp ?~(key ~ (sy u.key ~)))

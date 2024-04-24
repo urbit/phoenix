@@ -113,10 +113,11 @@
       ``noun+!>(u.page)
     ::
         [%x %egg-any case=@ spur=*]
-      ?~  cas=(de-case case.pole)  ~
+      ?~  cas=(de-case case.pole)          ~
+      ?~  kid=(get-kid:phx spur.pole)      ~
       ?~  dat=(pluck:phx u.cas spur.pole)  ~
       =+  ;;(egg-cyf u.dat)
-      ?~  egg-page=(decrypt:phx [key-id cyf] keys)
+      ?~  egg-page=(decrypt:phx [u.kid cyf] keys)
         ~
       =+  ;;(=egg-any:gall q.u.egg-page)
       ``noun+!>(egg-any)
@@ -175,8 +176,8 @@
     =/  good-egg=egg-any:gall  (cook:egg raw)
     =/  egg-page=^page  [%egg-any good-egg]
     =/  egg-jam=@       (jam egg-page)
-    =/  =egg-cyf
-      [%egg-cyf (encrypt:phx egg-jam backup-key eny.bowl)]
+    =+  (encrypt:phx egg-jam backup-key eny.bowl)
+    =/  =egg-cyf  [%egg-cyf cyf]
     =/  good-path=path
       =/  =(pole iota)  (pave spur)
       ?>  ?=([[%p who=@] [%ud rift=@] [%ta dude=@] [%ud act=@] rest=*] pole)
@@ -354,12 +355,15 @@
   ?.  .^(? %gu /[our]/[dude]/[now]/$)
     ~&  >>>  [dap.bowl 'restore failed: not running:' dude]
     cor
+  ?~  kid=(get-kid:phx spur)
+    ~&  >>>  [dap.bowl 'restore failed: no key found:' spur]
+    cor
   =/  dat=(unit page)  (pluck:phx case spur)
   ?~  dat
     ~&  >>>  [dap.bowl 'restore failed: not found:' case spur]
     cor
   =+  ;;(egg-cyf u.dat)
-  ?~  egg-page=(decrypt:phx [key-id cyf] keys)
+  ?~  egg-page=(decrypt:phx [u.kid cyf] keys)
     ~&  >>>  [dap.bowl 'restore-failed: no decryption result']
     cor
   %-  emit
@@ -383,7 +387,8 @@
   =/  good-egg=egg-any:gall  (cook:egg raw)
   =/  egg-page=page  [%egg-any good-egg]
   =/  egg-jam=@  (jam egg-page)
-  =/  =page  `egg-cyf`[%egg-cyf (encrypt:phx egg-jam backup-key eny.bowl)]
+  =+  (encrypt:phx egg-jam backup-key eny.bowl)
+  =/  =egg-cyf  [%egg-cyf cyf]
   =/  good-path=path
     %-  make-good-path:phx
     :*  our.bowl  (get-rift:phx our.bowl)
@@ -391,8 +396,8 @@
         /
         backup-key  eny.bowl
     ==
-  ?>  (can-grow good-path page)
-  (emit (grow good-path page))
+  ?>  (can-grow good-path egg-cyf)
+  (emit (grow good-path egg-cyf))
 ::
 ++  make-keen-path
   |=  [=case =spur]
