@@ -23,6 +23,7 @@
 ::  -phoenix!phoenix-put-all-desks `.^(@ux %gx /=phoenix=/backup-key/noun)
 ::  -phoenix!phoenix-put-desk %desk `.^(@ux %gx /=phoenix=/backup-key/noun)
 ::  -phoenix!phoenix-put-dude %dude `.^(@ux %gx /=phoenix=/backup-key/noun)
+::  -phoenix!phoenix-put-case-spur ud+1 /~sampel/foo
 ::
 ::    scrys:
 ::  .^(@ux %gx /=phoenix=/backup-key/noun)
