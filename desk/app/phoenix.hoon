@@ -20,7 +20,7 @@
 ::  :phoenix|import-clay /=desk=/sampel-0-dude-42/jam
 ::
 ::    threads:
-::  -phoenix!phoenix-put-all `.^(@ux %gx /=phoenix=/backup-key/noun)
+::  -phoenix!phoenix-put-all-desks `.^(@ux %gx /=phoenix=/backup-key/noun)
 ::  -phoenix!phoenix-put-desk %desk `.^(@ux %gx /=phoenix=/backup-key/noun)
 ::  -phoenix!phoenix-put-dude %dude `.^(@ux %gx /=phoenix=/backup-key/noun)
 ::
