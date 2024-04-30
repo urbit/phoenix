@@ -1,9 +1,9 @@
 :~
   title+'phoenix'
-  info+'phoenix'
-  color+0x7a.ffff
+  info+'agent backup & restore'
+  color+0xff.0000
   version+[0 0 0]
-  website+'~'
+  website+'https://github.com/urbit/phoenix'
   license+'MIT'
   site+/apps/phoenix
 ==
