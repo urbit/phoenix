@@ -54,6 +54,14 @@ the general usage pattern looks like:
 * restore from a snapshot
 
 
+## %phoenix as a developer tool
+
+`%phoenix` can be used to:
+* save and inject state while testing
+* test state migrations with real data
+* debug data from live ships
+
+
 ##  encryption
 
 `+on-init`, `%phoenix` creates a a `backup-key` derived from your private key (`/j/vein`).  
