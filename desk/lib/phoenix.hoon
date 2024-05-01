@@ -65,20 +65,11 @@
   ?.  ?=(%& -.q.u.wut)  ~
   `p.q.u.wut
 ::
-++  snap
-  |=  [=dude:gall key=@ eny=@uvJ]
-  ^-  page
-  =/  raw=egg-any:gall  (snap:egg [our.bowl dude da+now.bowl])
-  =/  good-egg=egg-any:gall  (cook:egg raw)
-  =/  egg-page=page  [%egg-any good-egg]
-  =/  egg-jam=@      (jam egg-page)
-  =+  (encrypt egg-jam key eny)
-  [%egg-cyf cyf]
-::
 ++  encrypt
   |=  [msg=@ key=@ eny=@uvJ]
   ^-  [=key-id cyf=@]
   ?<  =(0 eny)
+  =.  eny  (shaz (cat 3 eny msg))
   =/  =key-id        [current-suite eny (shas eny key)]
   =/  new-key=@      (shaz (mix eny key))
   =/  encrypted-msg  (en:crub:crypto new-key msg)
@@ -182,13 +173,4 @@
   ?&  ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
       =(%'1' (scot %ud suite.pole))
   ==
-::
-++  get-kid
-  |=  =path
-  =/  =(pole iota)  (pave path)
-  ^-  (unit key-id)
-  ?.  ?=([[%p ship=@] [%ud suite=@] [%uv sal=@] [%uv ski=@] [%uv cyf=@] ~] pole)
-    ~
-  ?.  =(%'1' (scot %ud suite.pole))  ~
-  `[%'1' sal.pole ski.pole]
 --
